@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Building, Gavel, Building2, Scale } from 'lucide-react';
+import { Home, Building, Gavel, Building2, Hammer, Heart } from 'lucide-react';
 
 const Industries = () => {
   const industries = [
@@ -55,24 +55,41 @@ const Industries = () => {
       ]
     },
     {
-      icon: <Building2 className="h-12 w-12" />,
-      title: "Real Estate & Broker Marketing",
-      description: "Comprehensive paid media solutions for real estate professionals and brokerages.",
+      icon: <Hammer className="h-12 w-12" />,
+      title: "Roofers Marketing",
+      description: "Specialized paid media campaigns for roofing contractors and home improvement companies.",
       challenges: [
-        "Market cycle sensitivity",
-        "Local inventory variations",
-        "Buyer/seller dual targeting",
-        "High-value transaction optimization"
+        "Seasonal demand fluctuations",
+        "Emergency vs. planned service targeting",
+        "Local competition and market saturation",
+        "High-value project optimization"
       ],
       solutions: [
-        "Market-adaptive campaign strategies",
-        "Inventory-based targeting optimization",
-        "Dual-funnel campaign management",
-        "Transaction value optimization"
+        "Weather-based campaign optimization",
+        "Emergency response ad scheduling",
+        "Local market dominance strategies",
+        "Project value optimization campaigns"
       ]
     },
     {
-      icon: <Scale className="h-12 w-12" />,
+      icon: <Heart className="h-12 w-12" />,
+      title: "Addiction Treatment Centers",
+      description: "Compliant and compassionate paid media strategies for addiction treatment and recovery centers.",
+      challenges: [
+        "Strict advertising compliance requirements",
+        "Sensitive audience targeting",
+        "Insurance and payment complexities",
+        "Crisis intervention timing"
+      ],
+      solutions: [
+        "Compliance-first campaign structures",
+        "Compassionate messaging frameworks",
+        "Insurance-based targeting optimization",
+        "Crisis response campaign management"
+      ]
+    },
+    {
+      icon: <Building className="h-12 w-12" />,
       title: "Franchise & Multi-location Marketing",
       description: "Scalable paid media systems for franchise networks and multi-location businesses.",
       challenges: [

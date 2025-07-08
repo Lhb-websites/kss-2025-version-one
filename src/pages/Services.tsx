@@ -101,14 +101,14 @@ const Services = () => {
       ]
     },
     {
-      industry: "Dental & Medspa",
-      challenge: "Multi-location dental marketing agency needed compliant campaigns with local optimization.",
-      solution: "Implemented Growth Ops with compliance-first approach and local market strategies.",
+      industry: "Roofers Marketing",
+      challenge: "Roofing contractor marketing agency needed seasonal optimization and emergency response campaigns.",
+      solution: "Deployed Full Ops package with weather-based optimization and emergency response systems.",
       results: [
-        "Achieved 100% compliance across all campaigns",
-        "Increased local market share by 45%",
-        "Reduced patient acquisition cost by 32%",
-        "Scaled to 25 new locations"
+        "Increased emergency leads by 65% during storm season",
+        "Reduced cost per qualified lead by 40%",
+        "Improved project conversion rate by 35%",
+        "Expanded to 3 new service territories"
       ]
     }
   ];

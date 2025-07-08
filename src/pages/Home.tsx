@@ -108,7 +108,7 @@ const Home = () => {
               { icon: <Building className="h-12 w-12" />, name: "Medspas" },
               { icon: <Gavel className="h-12 w-12" />, name: "Legal" },
               { icon: <Building2 className="h-12 w-12" />, name: "Dental" },
-              { icon: <Scale className="h-12 w-12" />, name: "Real Estate" }
+              { icon: <Scale className="h-12 w-12" />, name: "Roofers" }
             ].map((industry, index) => (
               <div key={index} className="text-center">
                 <div className="bg-blue-50 rounded-full p-6 mb-4 mx-auto w-24 h-24 flex items-center justify-center text-blue-900 hover:bg-blue-100 transition-colors">
