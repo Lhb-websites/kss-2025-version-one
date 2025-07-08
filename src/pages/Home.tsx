@@ -204,7 +204,7 @@ const Home = () => {
           
           <div className="text-center mt-12">
             <Link
-              to="/packages#packages"
+              to="/packages#home"
               className="bg-teal-500 text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-teal-600 transition-colors"
             >
               View Full Pricing Details
