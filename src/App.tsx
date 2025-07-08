@@ -9,6 +9,7 @@ import Services from './pages/Services';
 import Packages from './pages/Packages';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/packages" element={<Packages />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
           </Routes>
         </main>
         <Footer />

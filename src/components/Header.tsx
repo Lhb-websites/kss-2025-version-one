@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Target } from 'lucide-react';
+import { Menu, X, Target, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isContactDropdownOpen, setIsContactDropdownOpen] = useState(false);
   const location = useLocation();
 
   const navigation = [
@@ -13,7 +14,6 @@ const Header = () => {
     { name: 'Services', href: '/services' },
     { name: 'Packages', href: '/packages' },
     { name: 'Resources', href: '/resources' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -44,6 +44,40 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
+            
+            {/* Contact Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsContactDropdownOpen(!isContactDropdownOpen)}
+                className={`flex items-center text-sm font-medium transition-colors hover:text-blue-900 ${
+                  isActive('/contact') || isActive('/faq')
+                    ? 'text-blue-900 border-b-2 border-blue-900'
+                    : 'text-gray-700'
+                }`}
+              >
+                Contact
+                <ChevronDown className={`h-4 w-4 ml-1 transition-transform ${isContactDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {isContactDropdownOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                  <Link
+                    to="/contact"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-900"
+                    onClick={() => setIsContactDropdownOpen(false)}
+                  >
+                    Contact Us
+                  </Link>
+                  <Link
+                    to="/faq"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-900"
+                    onClick={() => setIsContactDropdownOpen(false)}
+                  >
+                    FAQ
+                  </Link>
+                </div>
+              )}
+            </div>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -86,6 +120,28 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              <Link
+                to="/contact"
+                className={`block px-3 py-2 text-base font-medium transition-colors ${
+                  isActive('/contact')
+                    ? 'text-blue-900 bg-blue-50'
+                    : 'text-gray-700 hover:text-blue-900'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact Us
+              </Link>
+              <Link
+                to="/faq"
+                className={`block px-3 py-2 text-base font-medium transition-colors ${
+                  isActive('/faq')
+                    ? 'text-blue-900 bg-blue-50'
+                    : 'text-gray-700 hover:text-blue-900'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                FAQ
+              </Link>
               <a
                 href="https://tidycal.com/kaizenstrategy"
                 target="_blank"

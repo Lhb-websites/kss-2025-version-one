@@ -156,53 +156,6 @@ const Packages = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get answers to common questions about our packages and services.
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto space-y-6">
-            {[
-              {
-                question: "How quickly can you get started?",
-                answer: "We typically begin onboarding within 48 hours of signing. Full integration and optimization usually takes 7-14 days depending on the complexity of your current setup."
-              },
-              {
-                question: "What if I need to upgrade or downgrade my package?",
-                answer: "We offer flexible month-to-month agreements. You can upgrade or downgrade at any time with 30 days notice. We'll help you choose the right package as your agency grows."
-              },
-              {
-                question: "Do you work with specific industries only?",
-                answer: "While we specialize in home builders, legal, dental, real estate, and franchise marketing, we work with agencies in many other verticals. Contact us to discuss your specific industry needs."
-              },
-              {
-                question: "How do you ensure data security and client confidentiality?",
-                answer: "We maintain strict security protocols including signed NDAs, secure access management, and industry-standard data protection practices. All client data remains confidential and secure."
-              },
-              {
-                question: "What reporting and communication can I expect?",
-                answer: "All packages include regular reporting and communication. Growth Ops includes weekly calls, Full Ops includes bi-weekly audits, and Scale Partner includes priority access with multiple touch points per week."
-              },
-              {
-                question: "Can you help train my existing team?",
-                answer: "Yes! The Scale Partner package includes comprehensive team training and SOP creation. We can also provide training as an add-on service for other packages."
-              }
-            ].map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                <p className="text-gray-600">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-blue-900 text-white">
@@ -211,16 +164,24 @@ const Packages = () => {
             Ready to Let Go of Execution and Scale Smarter?
           </h2>
           <p className="text-xl mb-8 text-blue-100">
-            Click below to book a free strategy consultation.
+            Click below to book a free strategy consultation or check our FAQ for common questions.
           </p>
-          <a
-            href="https://tidycal.com/kaizenstrategy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-teal-500 text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-teal-600 transition-colors inline-block"
-          >
-            Let's Get Started →
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://tidycal.com/kaizenstrategy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-teal-500 text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-teal-600 transition-colors inline-block"
+            >
+              Let's Get Started →
+            </a>
+            <Link
+              to="/faq"
+              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-white hover:text-blue-900 transition-colors"
+            >
+              View FAQ
+            </Link>
+          </div>
         </div>
       </section>
     </div>

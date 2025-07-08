@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Calendar, Clock, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Calendar, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -34,32 +35,6 @@ const Contact = () => {
     });
   };
 
-  const faqs = [
-    {
-      question: "What's the typical onboarding timeline?",
-      answer: "Most clients are fully onboarded within 7-14 days. We start with a comprehensive audit, then implement tracking and optimization systems, and finally begin active campaign management."
-    },
-    {
-      question: "Do you require long-term contracts?",
-      answer: "No, we work on month-to-month agreements. We believe in earning your business each month through results, not locking you into long-term contracts."
-    },
-    {
-      question: "How do you handle client communication?",
-      answer: "We integrate seamlessly with your existing client communication processes. We can work behind the scenes or participate in client calls as needed, depending on your preference."
-    },
-    {
-      question: "What tools and platforms do you work with?",
-      answer: "We work with all major platforms including Google Ads, Meta Ads, GA4, GTM, Looker Studio, and integrate with popular project management tools like Slack, ClickUp, and Asana."
-    },
-    {
-      question: "How do you ensure data security?",
-      answer: "We maintain strict security protocols including signed NDAs, secure access management, and industry-standard data protection practices. All client data remains confidential."
-    },
-    {
-      question: "What if our agency has unique requirements?",
-      answer: "We specialize in customizing our approach to fit each agency's unique needs. During our initial consultation, we'll discuss your specific requirements and create a tailored solution."
-    }
-  ];
 
   return (
     <div className="bg-white">
@@ -264,31 +239,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get answers to common questions about our services and partnership process.
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-start">
-                  <MessageCircle className="h-5 w-5 text-blue-900 mt-0.5 mr-2 flex-shrink-0" />
-                  {faq.question}
-                </h3>
-                <p className="text-gray-600 ml-7">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-blue-900 text-white">
@@ -297,7 +247,7 @@ const Contact = () => {
             Ready to Scale Your Agency?
           </h2>
           <p className="text-xl mb-8 text-blue-100">
-            Don't let operational bottlenecks hold back your growth. Let's discuss how we can help.
+            Don't let operational bottlenecks hold back your growth. Let's discuss how we can help or check our FAQ for common questions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -314,6 +264,12 @@ const Contact = () => {
             >
               Email Us Instead
             </a>
+            <Link
+              to="/faq"
+              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-white hover:text-blue-900 transition-colors"
+            >
+              View FAQ
+            </Link>
           </div>
         </div>
       </section>
