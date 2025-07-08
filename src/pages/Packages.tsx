@@ -1,5 +1,6 @@
 import React from 'react';
-import { CheckCircle, X, Star } from 'lucide-react';
+import { CheckCircle, X, Star, Target } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Packages = () => {
   const packages = [
@@ -156,6 +157,102 @@ const Packages = () => {
         </div>
       </section>
 
+      {/* Additional Info Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose Our Packages?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Flexible, scalable solutions designed specifically for growing agencies.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="bg-blue-900 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">No Long-Term Contracts</h3>
+              <p className="text-gray-600">Month-to-month agreements that grow with your agency. No lock-ins, just results.</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-blue-900 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Star className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Proven Track Record</h3>
+              <p className="text-gray-600">Average 38% CPA reduction and 2.3x revenue growth across all client agencies.</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-blue-900 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Industry Expertise</h3>
+              <p className="text-gray-600">Specialized knowledge in high-growth verticals like home builders, legal, and medical.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Package Comparison
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choose the right level of support for your agency's current needs.
+            </p>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full bg-white rounded-lg shadow-lg overflow-hidden">
+              <thead className="bg-blue-900 text-white">
+                <tr>
+                  <th className="px-6 py-4 text-left">Features</th>
+                  <th className="px-6 py-4 text-center">Growth Ops</th>
+                  <th className="px-6 py-4 text-center">Full Ops</th>
+                  <th className="px-6 py-4 text-center">Scale Partner</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr>
+                  <td className="px-6 py-4 font-medium text-gray-900">Account Management</td>
+                  <td className="px-6 py-4 text-center">25-50 accounts</td>
+                  <td className="px-6 py-4 text-center">50-100 accounts</td>
+                  <td className="px-6 py-4 text-center">100+ accounts</td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 font-medium text-gray-900">Strategy Calls</td>
+                  <td className="px-6 py-4 text-center">Weekly</td>
+                  <td className="px-6 py-4 text-center">Bi-weekly</td>
+                  <td className="px-6 py-4 text-center">2x/week</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-medium text-gray-900">Team Training</td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><CheckCircle className="h-5 w-5 text-green-500 mx-auto" /></td>
+                </tr>
+                <tr className="bg-gray-50">
+                  <td className="px-6 py-4 font-medium text-gray-900">Custom Dashboards</td>
+                  <td className="px-6 py-4 text-center">1 template</td>
+                  <td className="px-6 py-4 text-center">Up to 2</td>
+                  <td className="px-6 py-4 text-center">Custom built</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-medium text-gray-900">SOP Creation</td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><X className="h-5 w-5 text-red-500 mx-auto" /></td>
+                  <td className="px-6 py-4 text-center"><CheckCircle className="h-5 w-5 text-green-500 mx-auto" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-blue-900 text-white">
