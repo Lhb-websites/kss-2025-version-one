@@ -108,7 +108,7 @@ const Home = () => {
               { icon: <Building className="h-12 w-12" />, name: "Medspas" },
               { icon: <Gavel className="h-12 w-12" />, name: "Legal" },
               { icon: <Building2 className="h-12 w-12" />, name: "Dental" },
-              { icon: <Scale className="h-12 w-12" />, name: "Roofers" }
+              { icon: <Scale className="h-12 w-12" />, name: "Real Estate" }
             ].map((industry, index) => (
               <div key={index} className="text-center">
                 <div className="bg-blue-50 rounded-full p-6 mb-4 mx-auto w-24 h-24 flex items-center justify-center text-blue-900 hover:bg-blue-100 transition-colors">
@@ -204,7 +204,7 @@ const Home = () => {
           
           <div className="text-center mt-12">
             <Link
-              to="/packages"
+              to="/packages#pricing"
               className="bg-teal-500 text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-teal-600 transition-colors"
             >
               View Full Pricing Details
