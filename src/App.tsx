@@ -10,6 +10,8 @@ import Packages from './pages/Packages';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Resources from './pages/Resources';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Scroll to top component
 function ScrollToTop() {
@@ -54,6 +56,8 @@ function App() {
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

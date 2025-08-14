@@ -1,29 +1,54 @@
 import React from 'react';
-import { Target, Mail, Linkedin } from 'lucide-react';
+import { Target, Mail, Linkedin, Phone, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <footer className="bg-blue-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <Target className="h-8 w-8 text-teal-400" />
               <span className="text-xl font-bold">KaizenStrategy</span>
             </div>
             <p className="text-blue-100 mb-4">
-              We Build Ad Engines for Agencies Ready to Scale.
+              Embedded paid media operations for niche marketing agencies managing 50+ clients. We handle execution, attribution, and reporting so your team can scale without growing headcount.
             </p>
-            <div className="flex space-x-4">
+            <div className="space-y-2 text-blue-100">
+              <div className="flex items-center space-x-2">
+                <Phone className="h-5 w-5 text-teal-400" />
+                <a href="tel:+19342215466" className="hover:text-white transition-colors" title="Call KaizenStrategy">
+                  Call Us: +1 (934) 221-5466
+                </a>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Mail className="h-5 w-5 text-teal-400" />
+                <a href="mailto:hello@kaizenstrategy.com" className="hover:text-white transition-colors" title="Email KaizenStrategy">
+                  hello@kaizenstrategy.com
+                </a>
+              </div>
+              <div className="flex items-start space-x-2">
+                <MapPin className="h-5 w-5 text-teal-400 mt-0.5" />
+                <span>
+                  Casper, Wyoming, USA
+                </span>
+              </div>
+            </div>
+            <div className="flex space-x-4 mt-4">
               <a
                 href="mailto:hello@kaizenstrategy.com"
                 className="text-blue-100 hover:text-white transition-colors"
+                aria-label="Email KaizenStrategy"
+                title="Email KaizenStrategy"
               >
                 <Mail className="h-6 w-6" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/kaizenstrategy-solutions-llc"
                 className="text-blue-100 hover:text-white transition-colors"
+                aria-label="KaizenStrategy on LinkedIn"
+                title="KaizenStrategy on LinkedIn"
               >
                 <Linkedin className="h-6 w-6" />
               </a>
@@ -52,6 +77,23 @@ const Footer = () => {
               <li>Franchise Marketing</li>
             </ul>
           </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Research</h3>
+            <ul className="space-y-2 text-blue-100">
+              <li>
+                <a
+                  href="https://research.kaizenstrategy.us"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                  title="Visit KaizenStrategy Research"
+                >
+                  Research Portal
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="border-t border-blue-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
@@ -59,12 +101,12 @@ const Footer = () => {
             © 2025 KaizenStrategy Solutions LLC. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-blue-100 hover:text-white text-sm">
+            <Link to="/privacy-policy" className="text-blue-100 hover:text-white text-sm">
               Privacy Policy
-            </a>
-            <a href="#" className="text-blue-100 hover:text-white text-sm">
+            </Link>
+            <Link to="/terms-of-service" className="text-blue-100 hover:text-white text-sm">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
