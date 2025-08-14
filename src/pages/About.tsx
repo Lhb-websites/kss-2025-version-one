@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { User, Target, TrendingUp, Award } from 'lucide-react';
 
 const About = () => {
+  const [imageError, setImageError] = useState(false);
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -93,8 +94,22 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
               <div className="text-center mb-8">
-                <div className="bg-blue-900 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4">
-                  <User className="h-12 w-12 text-white" />
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 ring-2 ring-blue-900">
+                  {!imageError ? (
+                    <img
+                      src="/hanslacida-strategist-researcher.png"
+                      alt="Hanzel Lacida - Strategist & Researcher"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      width="96"
+                      height="96"
+                      onError={() => setImageError(true)}
+                    />
+                  ) : (
+                    <div className="bg-blue-900 w-full h-full flex items-center justify-center">
+                      <User className="h-12 w-12 text-white" />
+                    </div>
+                  )}
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Hanzel Lacida</h3>
                 <p className="text-lg text-blue-900 font-medium">Founder & Lead Strategist</p>
@@ -147,51 +162,11 @@ const About = () => {
           </div>
           
           <div className="space-y-12">
-            {[
-              {
-                step: "01",
-                title: "Discovery & Audit",
-                description: "We start with a comprehensive audit of your current paid media operations, identifying bottlenecks, opportunities, and areas for immediate improvement.",
-                details: [
-                  "Account structure analysis",
-                  "Performance benchmarking",
-                  "Tool and workflow assessment",
-                  "Team capabilities evaluation"
-                ]
-              },
-              {
-                step: "02",
-                title: "Strategy & Planning",
-                description: "Based on our audit findings, we develop a customized strategy that aligns with your agency's goals and growth trajectory.",
-                details: [
-                  "Custom growth roadmap",
-                  "Integration planning",
-                  "Team coordination setup",
-                  "Success metrics definition"
-                ]
-              },
-              {
-                step: "03",
-                title: "Implementation & Integration",
-                description: "We seamlessly integrate with your existing workflows and begin executing optimized campaigns across all client accounts.",
-                details: [
-                  "Account migration and setup",
-                  "Tracking and attribution implementation",
-                  "Team training and onboarding",
-                  "Workflow optimization"
-                ]
-              },
-              {
-                step: "04",
-                title: "Optimization & Scaling",
-                description: "Continuous monitoring, optimization, and strategic guidance to ensure sustained growth and performance improvements.",
-                details: [
-                  "Daily performance monitoring",
-                  "Weekly optimization cycles",
-                  "Monthly strategic reviews",
-                  "Quarterly scaling assessments"
-                ]
-              }
+            {[ 
+              { step: "01", title: "Discovery & Audit", description: "We start with a comprehensive audit of your current paid media operations, identifying bottlenecks, opportunities, and areas for immediate improvement.", details: ["Account structure analysis", "Performance benchmarking", "Tool and workflow assessment", "Team capabilities evaluation"] },
+              { step: "02", title: "Strategy & Planning", description: "Based on our audit findings, we develop a customized strategy that aligns with your agency's goals and growth trajectory.", details: ["Custom growth roadmap", "Integration planning", "Team coordination setup", "Success metrics definition"] },
+              { step: "03", title: "Implementation & Integration", description: "We seamlessly integrate with your existing workflows and begin executing optimized campaigns across all client accounts.", details: ["Account migration and setup", "Tracking and attribution implementation", "Team training and onboarding", "Workflow optimization"] },
+              { step: "04", title: "Optimization & Scaling", description: "Continuous monitoring, optimization, and strategic guidance to ensure sustained growth and performance improvements.", details: ["Daily performance monitoring", "Weekly optimization cycles", "Monthly strategic reviews", "Quarterly scaling assessments"] }
             ].map((process, index) => (
               <div key={index} className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
                 <div className="flex-shrink-0">
