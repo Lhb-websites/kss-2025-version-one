@@ -98,7 +98,7 @@ const About = () => {
                   {!imageError ? (
                     <img
                       src="/hanslacida-strategist-researcher.png"
-                      alt="Hanzel Lacida - Strategist & Researcher"
+                      alt="Hans Lacida - Strategist & Researcher"
                       className="w-full h-full object-cover"
                       loading="lazy"
                       width="96"
@@ -111,7 +111,7 @@ const About = () => {
                     </div>
                   )}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Hanzel Lacida</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Hans Lacida</h3>
                 <p className="text-lg text-blue-900 font-medium">Founder & Lead Strategist</p>
               </div>
               

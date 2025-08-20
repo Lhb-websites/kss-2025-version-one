@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Mail, Linkedin, Phone, MapPin } from 'lucide-react';
+import { Mail, Linkedin, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <Target className="h-8 w-8 text-teal-400" />
+              <img src="https://i.ibb.co/ZzsQVC7x/ksslogo.png" alt="KaizenStrategy logo" className="h-8 w-8" />
               <span className="text-xl font-bold">KaizenStrategy</span>
             </div>
             <p className="text-blue-100 mb-4">
@@ -49,6 +49,8 @@ const Footer = () => {
                 className="text-blue-100 hover:text-white transition-colors"
                 aria-label="KaizenStrategy on LinkedIn"
                 title="KaizenStrategy on LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Linkedin className="h-6 w-6" />
               </a>

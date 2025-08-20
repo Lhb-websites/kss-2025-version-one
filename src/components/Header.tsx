@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Target, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +24,7 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <Target className="h-8 w-8 text-blue-900" />
+              <img src="https://i.ibb.co/ZzsQVC7x/ksslogo.png" alt="KaizenStrategy logo" className="h-8 w-8" />
               <span className="text-xl font-bold text-blue-900">KaizenStrategy</span>
             </Link>
           </div>
