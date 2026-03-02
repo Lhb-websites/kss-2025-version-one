@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Agency vs In-House PPC: How Operators Think About Risk, Control, and Scale</title>
+
+  <meta name="description" content="A practical, operator-level comparison of agency vs in-house PPC. Understand the real tradeoffs in control, risk, and scaling paid acquisition so you don’t build a fragile lead generation system.">
+  <link rel="canonical" href="https://paidsearchpod.kaizenstrategy.us/insights/agency-vs-inhouse-ppc/">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Agency vs In-House PPC: How Operators Think About Risk, Control, and Scale",
+    "description": "An operator-level breakdown of when to run PPC through an agency versus building in-house, and how each model behaves when you try to scale paid acquisition.",
+    "author": {
+      "@type": "Person",
+      "name": "Dexter Lacida"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "PaidSearchPod"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://paidsearchpod.kaizenstrategy.us/insights/agency-vs-inhouse-ppc/"
+    }
+  }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+  <div class="min-h-screen">
+
+    <!-- Top bar / breadcrumb -->
+    <header class="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
+      <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between gap-4">
+        <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-800 hover:text-slate-900">
+          <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-xs font-bold text-white">
+            PS
+          </span>
+          <span>PaidSearchPod</span>
+        </a>
+        <nav class="flex items-center gap-4 text-xs sm:text-sm text-slate-500">
+          <a href="/insights/" class="hover:text-slate-900">Insights</a>
+          <a href="/pages/google-ads-coaching/" class="inline-flex items-center gap-1 rounded-full border border-slate-900 px-3 py-1 text-slate-900 text-xs font-semibold hover:bg-slate-900 hover:text-white transition">
+            Book a call
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+
+      <article class="bg-white shadow-sm shadow-slate-100 rounded-2xl border border-slate-100 px-5 py-6 sm:px-8 sm:py-8">
+
+        <!-- Heading -->
+        <header class="mb-8 sm:mb-10">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700 mb-3">
+            Paid Ads Acquisition Insight
+          </p>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-slate-900">
+            Agency vs In-House PPC: The Real Tradeoff Most Teams Don’t Model
+          </h1>
+          <p class="mt-4 text-sm text-slate-500">
+            By <span class="font-medium text-slate-700">Dexter Lacida</span> • PaidSearchPod
+          </p>
+          <p class="mt-4 text-sm sm:text-base text-slate-600">
+            Most debates about <strong>agency vs in-house PPC</strong> fixate on fees and hourly rates.
+            Operators don’t think this way. We care about how each model behaves when you try to scale,
+            where risk concentrates, and how easy it is to recover when your paid funnel stalls.
+          </p>
+        </header>
+
+        <!-- Who this is for -->
+        <section aria-label="Who this is for" class="mb-10">
+          <div class="rounded-2xl border border-sky-100 bg-sky-50/50 px-4 py-4 sm:px-5 sm:py-5">
+            <h2 class="text-sm font-semibold text-sky-900 mb-3">
+              Who this insight is for
+            </h2>
+            <ul class="space-y-2 text-sm text-sky-900">
+              <li class="flex gap-2">
+                <span class="mt-[6px] h-1.5 w-1.5 rounded-full bg-sky-500"></span>
+                <span>Founders who feel “held hostage” by an agency but aren’t sure they’re ready to hire in-house.</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="mt-[6px] h-1.5 w-1.5 rounded-full bg-sky-500"></span>
+                <span>Marketing leaders under pressure to cut fees while still hitting pipeline targets.</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="mt-[6px] h-1.5 w-1.5 rounded-full bg-sky-500"></span>
+                <span>Agencies and operators who want a cleaner way to explain the tradeoffs to clients.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 1: The wrong question -->
+        <section aria-labelledby="wrong-question" class="mb-10">
+          <h2 id="wrong-question" class="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
+            1. “Which is cheaper?” is the wrong starting question
+          </h2>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            On paper, the comparison seems simple:
+          </p>
+          <ul class="mb-4 space-y-2 text-sm sm:text-base text-slate-700">
+            <li>• Agency: 10–20% of media spend, or a flat fee.</li>
+            <li>• In-house: salary, benefits, tools, and overhead.</li>
+          </ul>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            But the real cost of your paid acquisition decision is not fees.
+            It’s how much <strong>control, context, and survivability</strong> you build into your system
+            when performance inevitably swings — and it will.
+          </p>
+          <p class="text-sm sm:text-base text-slate-700">
+            As an operator, I’ve seen “cheap” agency models quietly cap companies at low six-figure ARR,
+            and “expensive” in-house builds that never achieve stability. The game is not saving 5% on fees.
+            The game is building a system that can scale without blowing up your cash flow.
+          </p>
+        </section>
+
+        <!-- Section 2: Operator framework -->
+        <section aria-labelledby="operator-framework" class="mb-10">
+          <h2 id="operator-framework" class="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
+            2. An operator framework: four levers to compare agency vs in-house
+          </h2>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            Instead of “agency vs in-house?”, I use a four-lever model:
+          </p>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Lever 1: Time-to-performance
+              </h3>
+              <p class="text-sm text-slate-700">
+                How quickly can we reach a baseline of profitable, repeatable performance?
+                Agencies with deep pattern recognition usually win here — but only if your offer fits their experience.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Lever 2: Depth of context
+              </h3>
+              <p class="text-sm text-slate-700">
+                Who lives in the product, sales calls, and customer objections daily?
+                In-house teams can wire PPC more tightly into the rest of the business if you staff them correctly.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Lever 3: Control &amp; governance
+              </h3>
+              <p class="text-sm text-slate-700">
+                Who owns the strategy, the account, and the final say on risk?
+                Strong governance is possible in both models — but only if someone internally is accountable.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Lever 4: Resilience under stress
+              </h3>
+              <p class="text-sm text-slate-700">
+                When performance drops, can you diagnose and course-correct quickly?
+                This is where the wrong model at the wrong stage can freeze decision-making for months.
+              </p>
+            </div>
+          </div>
+
+          <p class="mt-4 text-sm sm:text-base text-slate-700">
+            Once you see these levers clearly, you stop asking “Should we fire the agency?”
+            and start asking “Which configuration gives us the highest resilience per dollar of spend right now?”.
+          </p>
+        </section>
+
+        <!-- Section 3: When agencies break -->
+        <section aria-labelledby="when-agencies-break" class="mb-10">
+          <h2 id="when-agencies-break" class="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
+            3. When agencies break: the three failure patterns I see most
+          </h2>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            Agencies are not inherently bad. But they <em>are</em> designed to optimise for scale on their side,
+            not necessarily depth on your side. That creates three predictable failure patterns:
+          </p>
+
+          <div class="space-y-5">
+            <div class="rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-4">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Pattern #1: “Deck, not diagnosis”
+              </h3>
+              <p class="text-sm text-slate-700">
+                You get beautiful reports, but shallow root-cause analysis.
+                When performance swings, explanations sound like weather reports:
+                “competition increased,” “auction volatility,” “seasonality.”
+                No one is mapping specific changes in keywords, audiences, or offers to specific financial outcomes.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-4">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Pattern #2: Incentives misaligned with stability
+              </h3>
+              <p class="text-sm text-slate-700">
+                Percentage-of-spend retainers subtly reward higher budgets, not healthier unit economics.
+                Even well-meaning teams will feel pressure to “make a case” for higher spend
+                before the underlying acquisition system is ready.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-4">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Pattern #3: Context trapped in the agency
+              </h3>
+              <p class="text-sm text-slate-700">
+                Over time, all the pattern recognition, testing history, and channel intuition live inside the agency team.
+                If you churn them, your new partner or hire is effectively starting from a partial reset.
+                That’s a huge hidden cost that rarely shows up on an invoice.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 4: When in-house breaks -->
+        <section aria-labelledby="when-inhouse-breaks" class="mb-10">
+          <h2 id="when-inhouse-breaks" class="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
+            4. When in-house breaks: the hidden operational debt
+          </h2>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            In-house is not automatically safer. Without a clear operating model, you can end up with the
+            worst of both worlds: high fixed cost and low adaptability.
+          </p>
+
+          <div class="space-y-5">
+            <div class="rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-4">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Risk #1: Single-operator fragility
+              </h3>
+              <p class="text-sm text-slate-700">
+                Many companies hire one “PPC person” and hand them everything from strategy to reporting to landing pages.
+                If that person leaves or stalls out, you lose your acquisition engine and your internal memory in one move.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-4">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Risk #2: No external reference points
+              </h3>
+              <p class="text-sm text-slate-700">
+                Great in-house teams still benchmark against other accounts and markets.
+                Without external pattern recognition, your team can spend months optimising a fundamentally weak strategy.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-4">
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                Risk #3: Politics over performance
+              </h3>
+              <p class="text-sm text-slate-700">
+                When your PPC lead reports into a larger marketing org, internal incentives can distort decision-making:
+                protecting pet campaigns, avoiding hard resets, or resisting uncomfortable but necessary experiments.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: Stage-based guidance -->
+        <section aria-labelledby="stage-guidance" class="mb-10">
+          <h2 id="stage-guidance" class="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
+            5. A stage-based model for choosing (and sequencing) your setup
+          </h2>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            Instead of treating this as a binary choice, I map companies across three stages:
+          </p>
+
+          <div class="rounded-2xl border border-slate-100 bg-slate-50/70 px-4 py-4 sm:px-5 sm:py-5 space-y-4">
+            <div>
+              <h3 class="text-sm font-semibold text-slate-900 mb-1">
+                Stage 1: Proof-of-Channel (&lt;$20k/month in spend)
+              </h3>
+              <p class="text-sm text-slate-700">
+                Goal: validate that Google Ads can produce qualified pipeline at all.
+                A specialised agency or fractional operator is often the fastest way to get to signal — if you own the accounts and data.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-slate-900 mb-1">
+                Stage 2: Systemisation ($20k–$80k/month in spend)
+              </h3>
+              <p class="text-sm text-slate-700">
+                Goal: turn wins into a predictable acquisition system.
+                This is where hybrid models shine: keep agency-level pattern recognition, but start building in-house ownership of tracking,
+                landing pages, and capital allocation.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-slate-900 mb-1">
+                Stage 3: Scale &amp; integration ($80k+/month in spend)
+              </h3>
+              <p class="text-sm text-slate-700">
+                Goal: integrate PPC with sales, product, and finance to support aggressive growth.
+                Here, in-house leadership with targeted external support (for audits, experimentation, and training) often becomes the
+                most resilient model.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 6: Diagnostic questions -->
+        <section aria-labelledby="diagnostic-questions" class="mb-10">
+          <h2 id="diagnostic-questions" class="text-xl sm:text-2xl font-semibold text-slate-900 mb-3">
+            6. Diagnostic: is your current model helping or hurting your ability to scale?
+          </h2>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            Use these questions with your team, agency, or board to evaluate your setup without blame:
+          </p>
+
+          <ul class="space-y-2 text-sm sm:text-base text-slate-800">
+            <li>1. Who inside the company can explain, in detail, why performance changed in the last 60 days?</li>
+            <li>2. If your current partner or key employee left, what exactly would you lose — and what would you keep?</li>
+            <li>3. Do you have written capital allocation rules for paid media, or are budget changes mostly reactive?</li>
+            <li>4. How quickly can you run a new test from idea → live → decision, and who owns each step?</li>
+            <li>5. Where does “truth” about performance live — in an agency deck, a platform dashboard, or your own CRM and finance data?</li>
+          </ul>
+
+          <p class="mt-4 text-sm sm:text-base text-slate-700">
+            Strong setups have clear, internal answers to these questions — regardless of whether execution is external, internal, or hybrid.
+          </p>
+        </section>
+
+        <!-- CTA -->
+        <section aria-labelledby="cta" class="border-t border-slate-100 pt-6 mt-4">
+          <h2 id="cta" class="text-lg sm:text-xl font-semibold text-slate-900 mb-3">
+            If you want an operator to help you design the right model
+          </h2>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            I work with founders, marketing leaders, and agencies to design acquisition setups that can survive real-world volatility —
+            not just look tidy in a slide deck. That often means rethinking the agency vs in-house decision through a risk and resilience lens,
+            not a fee-comparison lens.
+          </p>
+          <p class="text-sm sm:text-base text-slate-700 mb-4">
+            If you’re at a crossroads with your current setup and want a second set of operator eyes on it,
+            you can see how I work with teams here:
+          </p>
+          <a
+            href="/pages/google-ads-coaching/"
+            class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-slate-400/40 hover:bg-slate-800 transition"
+          >
+            View Google Ads Coaching &rarr;
+          </a>
+          <p class="mt-3 text-xs text-slate-500">
+            On the call, we’ll map your current acquisition model, identify where risk is concentrated,
+            and outline options for moving toward a more resilient setup — with or without me involved long-term.
+          </p>
+        </section>
+
+      </article>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
+
