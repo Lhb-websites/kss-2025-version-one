@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChiroFlow – More Booked Patients From Google</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Bebas Neue', 'sans-serif'],
+            body: ['DM Sans', 'sans-serif'],
+            mono: ['DM Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              black: '#0A0A0A',
+              white: '#F5F2EC',
+              cream: '#EDE8DF',
+              lime: '#C8F53A',
+              'lime-dark': '#A8D020',
+              slate: '#1C1C1C',
+              mid: '#2E2E2E',
+              muted: '#6B6B6B',
+              border: '#2A2A2A',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #0A0A0A;
+      color: #F5F2EC;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+    .font-mono-custom { font-family: 'DM Mono', monospace; }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(200,245,58,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,245,58,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .lime-glow {
+      box-shadow: 0 0 40px rgba(200,245,58,0.15), 0 0 80px rgba(200,245,58,0.05);
+    }
+
+    .btn-primary {
+      background: #C8F53A;
+      color: #0A0A0A;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.1);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .btn-primary:hover::after { transform: translateX(0); }
+    .btn-primary:hover {
+      background: #D4FF40;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(200,245,58,0.3);
+    }
+    .btn-primary:active { transform: translateY(0px); }
+
+    .btn-ghost {
+      border: 1px solid #2A2A2A;
+      color: #F5F2EC;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+      border-color: #C8F53A;
+      color: #C8F53A;
+    }
+
+    .card-dark {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .card-dark:hover {
+      border-color: #C8F53A;
+      transform: translateY(-2px);
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C8F53A;
+      background: rgba(200,245,58,0.08);
+      border: 1px solid rgba(200,245,58,0.2);
+      padding: 4px 12px;
+      border-radius: 2px;
+    }
+
+    .section-divider {
+      border-color: #1E1E1E;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeUp 0.7s ease forwards; }
+    .delay-100 { animation-delay: 0.1s; opacity: 0; }
+    .delay-200 { animation-delay: 0.2s; opacity: 0; }
+    .delay-300 { animation-delay: 0.3s; opacity: 0; }
+    .delay-400 { animation-delay: 0.4s; opacity: 0; }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .pulse-dot { animation: pulse-dot 2s ease infinite; }
+
+    /* Sticky mobile CTA */
+    .sticky-cta {
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta { display: flex; }
+    }
+
+    .number-accent {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      line-height: 1;
+      color: rgba(200,245,58,0.08);
+      position: absolute;
+      top: -10px;
+      left: -8px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 48px;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .arrow-right::after {
+      content: '→';
+      margin-left: 8px;
+      transition: margin-left 0.2s ease;
+    }
+    .btn-primary:hover .arrow-right::after,
+    a:hover .arrow-right::after {
+      margin-left: 12px;
+    }
+
+    hr { border-color: #1E1E1E; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-brand-black/90 backdrop-blur-sm border-b border-brand-border">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 bg-brand-lime rounded-sm flex items-center justify-center">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7L6 11L12 3" stroke="#0A0A0A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="font-display text-xl text-brand-white tracking-wider">CHIROFLOW</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#system" class="text-sm text-brand-muted hover:text-brand-white transition-colors">How It Works</a>
+      <a href="#results" class="text-sm text-brand-muted hover:text-brand-white transition-colors">Results</a>
+      <a href="#fit" class="text-sm text-brand-muted hover:text-brand-white transition-colors">Is This You?</a>
+    </div>
+    <a href="https://tidycal.com/hanslacida/execution-fit-call-chiro-flow" target="_blank" rel="noopener" class="btn-primary px-5 py-2.5 text-sm rounded-sm">Book Strategy Call</a>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO — ABOVE THE FOLD
+═══════════════════════════════════════════ -->
+<section class="hero-grid relative min-h-screen flex flex-col justify-center pt-24 pb-16 overflow-hidden">
+
+  <!-- Lime orb -->
+  <div class="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
+       style="background: radial-gradient(circle, rgba(200,245,58,0.07) 0%, transparent 70%); transform: translate(30%, -30%);"></div>
+
+  <div class="max-w-6xl mx-auto px-6 w-full">
+    <div class="max-w-4xl">
+
+      <!-- Eyebrow tag -->
+      <div class="animate-fade-up mb-6">
+        <span class="tag">Patient Acquisition System for Chiropractors</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-display text-[68px] md:text-[100px] lg:text-[120px] leading-none text-brand-white mb-6 animate-fade-up delay-100">
+        GET MORE<br>
+        BOOKED<br>
+        <span class="text-brand-lime">PATIENTS</span><br>
+        FROM GOOGLE
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg md:text-xl text-brand-muted max-w-xl leading-relaxed mb-10 animate-fade-up delay-200">
+        We build and manage a complete patient acquisition system for chiropractic clinics — Google Ads, landing pages, and call tracking, all working together.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-up delay-300">
+        <a href="https://tidycal.com/hanslacida/execution-fit-call-chiro-flow" target="_blank" rel="noopener" class="btn-primary px-8 py-4 text-base rounded-sm text-center inline-flex items-center justify-center gap-2">
+          <span>Book Strategy Call</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://tidycal.com/hanslacida/execution-fit-call-chiro-flow" target="_blank" rel="noopener" class="btn-ghost px-8 py-4 text-base rounded-sm text-center">
+          See If This Fits Your Clinic
+        </a>
+      </div>
+
+      <!-- Proof strip -->
+      <div class="flex flex-wrap gap-6 animate-fade-up delay-400">
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-brand-lime pulse-dot"></div>
+          <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Built for Chiropractors</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-brand-lime pulse-dot" style="animation-delay:0.7s"></div>
+          <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Focused on Booked Patients, Not Clicks</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-brand-lime pulse-dot" style="animation-delay:1.4s"></div>
+          <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Works With Your Existing Clinic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MARQUEE / SOCIAL PROOF BAR
+═══════════════════════════════════════════ -->
+<div class="border-y border-brand-border bg-brand-slate py-4 overflow-hidden">
+  <div class="marquee-track">
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Google Ads Management</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Conversion-Focused Landing Pages</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Call Tracking & Attribution</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Google Business Profile Optimization</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Speed-to-Lead Systems</span>
+    <span class="text-brand-lime">✦</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Google Ads Management</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Conversion-Focused Landing Pages</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Call Tracking & Attribution</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Google Business Profile Optimization</span>
+    <span class="text-brand-lime">✦</span>
+    <span class="font-mono-custom text-xs text-brand-muted uppercase tracking-widest">Speed-to-Lead Systems</span>
+    <span class="text-brand-lime">✦</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PROBLEM SECTION
+═══════════════════════════════════════════ -->
+<section class="py-28 max-w-6xl mx-auto px-6">
+  <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+    <div>
+      <span class="tag mb-6 inline-block">The Problem</span>
+      <h2 class="font-display text-5xl md:text-6xl lg:text-7xl text-brand-white leading-none mb-8">
+        MOST CLINICS ARE<br>
+        <span style="color: #C8F53A;">LEAVING PATIENTS</span><br>
+        ON THE TABLE
+      </h2>
+      <p class="text-brand-muted leading-relaxed max-w-md">
+        The demand for chiropractic care has never been higher. People are searching on Google right now. The gap isn't demand — it's your acquisition system.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <!-- Problem items -->
+      <div class="card-dark p-6 rounded-sm flex items-start gap-5">
+        <div class="w-10 h-10 rounded-sm bg-red-950 border border-red-900 flex items-center justify-center flex-shrink-0">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-brand-white mb-1">You show up on Google but don't convert</p>
+          <p class="text-sm text-brand-muted">Clicks are coming in. Booked appointments are not. The middle of the funnel is broken.</p>
+        </div>
+      </div>
+
+      <div class="card-dark p-6 rounded-sm flex items-start gap-5">
+        <div class="w-10 h-10 rounded-sm bg-red-950 border border-red-900 flex items-center justify-center flex-shrink-0">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-brand-white mb-1">You tried ads but they didn't work</p>
+          <p class="text-sm text-brand-muted">Ads without the right system around them burn money. You need more than just clicks.</p>
+        </div>
+      </div>
+
+      <div class="card-dark p-6 rounded-sm flex items-start gap-5">
+        <div class="w-10 h-10 rounded-sm bg-red-950 border border-red-900 flex items-center justify-center flex-shrink-0">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-brand-white mb-1">Missed calls and slow follow-ups</p>
+          <p class="text-sm text-brand-muted">Patients are ready to book. But they call, no one answers, and they move to the next clinic.</p>
+        </div>
+      </div>
+
+      <div class="card-dark p-6 rounded-sm flex items-start gap-5">
+        <div class="w-10 h-10 rounded-sm bg-red-950 border border-red-900 flex items-center justify-center flex-shrink-0">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 4L14 14M14 4L4 14" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-brand-white mb-1">Too much reliance on referrals</p>
+          <p class="text-sm text-brand-muted">Referrals are unpredictable. You can't scale a clinic on word-of-mouth alone.</p>
+        </div>
+      </div>
+
+      <!-- Callout -->
+      <div class="p-6 rounded-sm" style="background: rgba(200,245,58,0.05); border: 1px solid rgba(200,245,58,0.2);">
+        <p class="font-semibold text-brand-lime">The demand exists. Your system is the problem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="max-w-6xl mx-auto px-6">
+
+
+<!-- ═══════════════════════════════════════════
+     SOLUTION — SYSTEM SECTION
+═══════════════════════════════════════════ -->
+<section id="system" class="py-28 max-w-6xl mx-auto px-6">
+
+  <div class="text-center mb-16">
+    <span class="tag mb-6 inline-block">The Solution</span>
+    <h2 class="font-display text-5xl md:text-7xl text-brand-white leading-none mb-6">
+      WE INSTALL A<br>
+      <span style="color: #C8F53A;">PATIENT ACQUISITION</span><br>
+      SYSTEM
+    </h2>
+    <p class="text-brand-muted max-w-lg mx-auto">
+      This isn't a campaign. It's a complete system — built specifically to turn Google searches into booked chiropractic appointments.
+    </p>
+  </div>
+
+  <!-- System components grid -->
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+
+    <div class="card-dark p-7 rounded-sm relative overflow-hidden">
+      <span class="number-accent">01</span>
+      <div class="w-10 h-10 rounded-sm bg-brand-lime flex items-center justify-center mb-5">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5" stroke="#0A0A0A" stroke-width="1.8"/><path d="M12 12L16 16" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h3 class="font-semibold text-brand-white mb-2">Google Ads</h3>
+      <p class="text-sm text-brand-muted leading-relaxed">Capture high-intent searches from patients actively looking for a chiropractor near them.</p>
+    </div>
+
+    <div class="card-dark p-7 rounded-sm relative overflow-hidden">
+      <span class="number-accent">02</span>
+      <div class="w-10 h-10 rounded-sm bg-brand-lime flex items-center justify-center mb-5">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="3" width="14" height="12" rx="1.5" stroke="#0A0A0A" stroke-width="1.8"/><path d="M6 8h6M6 11h4" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <h3 class="font-semibold text-brand-white mb-2">Landing Pages</h3>
+      <p class="text-sm text-brand-muted leading-relaxed">Conversion-focused pages that turn ad traffic into actual phone calls and booked appointments.</p>
+    </div>
+
+    <div class="card-dark p-7 rounded-sm relative overflow-hidden">
+      <span class="number-accent">03</span>
+      <div class="w-10 h-10 rounded-sm bg-brand-lime flex items-center justify-center mb-5">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l2.5 6.5L9 8l2 4 1.5-3H15" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="font-semibold text-brand-white mb-2">Call Tracking</h3>
+      <p class="text-sm text-brand-muted leading-relaxed">Know exactly where every patient came from. Decisions based on real data, not guessing.</p>
+    </div>
+
+    <div class="card-dark p-7 rounded-sm relative overflow-hidden">
+      <span class="number-accent">04</span>
+      <div class="w-10 h-10 rounded-sm bg-brand-lime flex items-center justify-center mb-5">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.134 2 2 5.134 2 9s3.134 7 7 7 7-3.134 7-7-3.134-7-7-7z" stroke="#0A0A0A" stroke-width="1.8"/><path d="M9 6v3l2 2" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h3 class="font-semibold text-brand-white mb-2">GBP Optimization</h3>
+      <p class="text-sm text-brand-muted leading-relaxed">Turn Google Maps and local search into a consistent source of patient inquiries.</p>
+    </div>
+
+    <div class="card-dark p-7 rounded-sm relative overflow-hidden md:col-span-2 lg:col-span-1">
+      <span class="number-accent">05</span>
+      <div class="w-10 h-10 rounded-sm bg-brand-lime flex items-center justify-center mb-5">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 9l4 4 10-8" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="font-semibold text-brand-white mb-2">Speed-to-Lead</h3>
+      <p class="text-sm text-brand-muted leading-relaxed">The fastest clinics win. We help you respond faster and close more patients before they go elsewhere.</p>
+    </div>
+
+  </div>
+
+  <!-- System statement -->
+  <div class="text-center">
+    <p class="font-display text-2xl md:text-3xl text-brand-white">This is not marketing.</p>
+    <p class="font-display text-2xl md:text-3xl" style="color: #C8F53A;">This is a patient flow system.</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════
+     OUTCOMES SECTION
+═══════════════════════════════════════════ -->
+<section id="results" class="py-28" style="background: #0D0D0D;">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <span class="tag mb-6 inline-block">What You Get</span>
+        <h2 class="font-display text-5xl md:text-7xl text-brand-white leading-none">
+          WHAT THIS<br>
+          LOOKS LIKE IN<br>
+          <span style="color: #C8F53A;">YOUR CLINIC</span>
+        </h2>
+      </div>
+
+      <div class="space-y-6">
+        <div class="flex items-start gap-5">
+          <div class="w-8 h-8 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-brand-white text-lg mb-1">More inbound calls from Google</p>
+            <p class="text-brand-muted text-sm">Your phone rings with people who searched, found you, and clicked to call. Warm intent, ready to book.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-5">
+          <div class="w-8 h-8 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-brand-white text-lg mb-1">Consistent booked appointments each week</p>
+            <p class="text-brand-muted text-sm">Not a random influx. A predictable, repeatable flow of new patients every week.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-5">
+          <div class="w-8 h-8 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-brand-white text-lg mb-1">Less reliance on referrals</p>
+            <p class="text-brand-muted text-sm">Referrals are great — but not when they're your only source. Build a system that runs in parallel.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-5">
+          <div class="w-8 h-8 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-brand-white text-lg mb-1">Clear tracking of where patients come from</p>
+            <p class="text-brand-muted text-sm">No more guessing. You'll know exactly which ads, pages, and keywords are driving revenue.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CREDIBILITY
+═══════════════════════════════════════════ -->
+<section class="py-28 max-w-6xl mx-auto px-6">
+  <div class="text-center mb-16">
+    <span class="tag mb-6 inline-block">Our Approach</span>
+    <h2 class="font-display text-5xl md:text-6xl text-brand-white leading-none">
+      BUILT FOR<br>
+      <span style="color: #C8F53A;">PERFORMANCE</span>,<br>
+      NOT THEORY
+    </h2>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="card-dark p-7 rounded-sm text-center">
+      <div class="font-display text-5xl text-brand-lime mb-3">01</div>
+      <p class="font-semibold text-brand-white mb-2">Google Ads Specialists</p>
+      <p class="text-sm text-brand-muted">Not generalists. We operate Google Ads systems day in, day out.</p>
+    </div>
+    <div class="card-dark p-7 rounded-sm text-center">
+      <div class="font-display text-5xl text-brand-lime mb-3">02</div>
+      <p class="font-semibold text-brand-white mb-2">Local Service Focus</p>
+      <p class="text-sm text-brand-muted">Built for clinics in real communities, not e-commerce or national brands.</p>
+    </div>
+    <div class="card-dark p-7 rounded-sm text-center">
+      <div class="font-display text-5xl text-brand-lime mb-3">03</div>
+      <p class="font-semibold text-brand-white mb-2">No Fluff Reporting</p>
+      <p class="text-sm text-brand-muted">We show you what matters — calls, bookings, and cost per patient acquired.</p>
+    </div>
+    <div class="card-dark p-7 rounded-sm text-center">
+      <div class="font-display text-5xl text-brand-lime mb-3">04</div>
+      <p class="font-semibold text-brand-white mb-2">Revenue-First Decisions</p>
+      <p class="text-sm text-brand-muted">We optimize for booked patients, not impressions or click-through rates.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+
+<!-- ═══════════════════════════════════════════
+     QUALIFICATION FILTER
+═══════════════════════════════════════════ -->
+<section id="fit" class="py-28" style="background: #0D0D0D;">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-16">
+      <span class="tag mb-6 inline-block">Who This Is For</span>
+      <h2 class="font-display text-5xl md:text-6xl text-brand-white leading-none">
+        IS THIS<br>
+        <span style="color: #C8F53A;">THE RIGHT FIT?</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+      <!-- Good fit -->
+      <div class="rounded-sm p-8" style="background: rgba(200,245,58,0.04); border: 1px solid rgba(200,245,58,0.2);">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-sm bg-brand-lime flex items-center justify-center">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L6 11L12 3" stroke="#0A0A0A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="font-semibold text-brand-lime uppercase tracking-widest text-sm font-mono-custom">This IS for you if...</span>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3 text-brand-white">
+            <span class="text-brand-lime mt-1 flex-shrink-0">→</span>
+            <span>You're an established chiropractic clinic already seeing patients</span>
+          </li>
+          <li class="flex items-start gap-3 text-brand-white">
+            <span class="text-brand-lime mt-1 flex-shrink-0">→</span>
+            <span>You want consistent, predictable new patient growth</span>
+          </li>
+          <li class="flex items-start gap-3 text-brand-white">
+            <span class="text-brand-lime mt-1 flex-shrink-0">→</span>
+            <span>You and your team answer calls and care about follow-up</span>
+          </li>
+          <li class="flex items-start gap-3 text-brand-white">
+            <span class="text-brand-lime mt-1 flex-shrink-0">→</span>
+            <span>You're ready to invest in a system, not just run an ad</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Not a fit -->
+      <div class="card-dark rounded-sm p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 rounded-sm bg-red-950 border border-red-900 flex items-center justify-center">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3L11 11M11 3L3 11" stroke="#f87171" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="font-semibold text-red-400 uppercase tracking-widest text-sm font-mono-custom">This is NOT for you if...</span>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3 text-brand-muted">
+            <span class="text-red-500 mt-1 flex-shrink-0">✗</span>
+            <span>You're a brand new clinic with no existing patient base or budget</span>
+          </li>
+          <li class="flex items-start gap-3 text-brand-muted">
+            <span class="text-red-500 mt-1 flex-shrink-0">✗</span>
+            <span>You want to manage ads yourself or do it DIY</span>
+          </li>
+          <li class="flex items-start gap-3 text-brand-muted">
+            <span class="text-red-500 mt-1 flex-shrink-0">✗</span>
+            <span>You're looking for the cheapest possible ad option</span>
+          </li>
+          <li class="flex items-start gap-3 text-brand-muted">
+            <span class="text-red-500 mt-1 flex-shrink-0">✗</span>
+            <span>You're not willing to follow up with inbound leads quickly</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════
+     HOW WE WORK
+═══════════════════════════════════════════ -->
+<section class="py-28 max-w-6xl mx-auto px-6">
+
+  <div class="text-center mb-16">
+    <span class="tag mb-6 inline-block">The Offer</span>
+    <h2 class="font-display text-5xl md:text-6xl text-brand-white leading-none">
+      HOW WE<br>
+      <span style="color: #C8F53A;">WORK</span>
+    </h2>
+  </div>
+
+  <div class="max-w-3xl mx-auto">
+    <div class="card-dark rounded-sm overflow-hidden">
+      <div class="p-8 border-b border-brand-border">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-display text-3xl text-brand-white">Patient Flow System</h3>
+          <span class="tag">Complete Package</span>
+        </div>
+        <p class="text-brand-muted">Everything you need to turn Google into a consistent patient source.</p>
+      </div>
+
+      <div class="p-8">
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-center gap-4">
+            <div class="w-6 h-6 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="text-brand-white">Google Ads management (setup, optimization, ongoing management)</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <div class="w-6 h-6 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="text-brand-white">Conversion-focused landing pages built for your clinic</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <div class="w-6 h-6 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="text-brand-white">Full call tracking and attribution setup</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <div class="w-6 h-6 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="text-brand-white">Google Business Profile optimization</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <div class="w-6 h-6 rounded-sm bg-brand-lime flex items-center justify-center flex-shrink-0">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#0A0A0A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="text-brand-white">Speed-to-lead system to capture more patients</span>
+          </li>
+        </ul>
+
+        <div class="p-5 rounded-sm mb-8" style="background: rgba(200,245,58,0.05); border: 1px solid rgba(200,245,58,0.2);">
+          <p class="text-brand-lime font-semibold">We don't run ads in isolation.</p>
+          <p class="text-brand-muted text-sm mt-1">We build the full system that turns traffic into booked patients — then manage it so you don't have to think about it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CTA / BOOK SECTION
+═══════════════════════════════════════════ -->
+<section id="book" class="py-28 relative overflow-hidden" style="background: #0A0A0A;">
+
+  <!-- Lime background glow -->
+  <div class="absolute inset-0 pointer-events-none"
+       style="background: radial-gradient(ellipse at 50% 50%, rgba(200,245,58,0.06) 0%, transparent 70%);"></div>
+
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+    <span class="tag mb-8 inline-block">Get Started</span>
+    <h2 class="font-display text-6xl md:text-8xl text-brand-white leading-none mb-6">
+      READY TO GET<br>
+      MORE BOOKED<br>
+      <span style="color: #C8F53A;">PATIENTS?</span>
+    </h2>
+    <p class="text-brand-muted text-lg max-w-xl mx-auto mb-10">
+      Book a free strategy call. We'll review your current setup, show you where patients are being lost, and map out exactly what needs to happen next.
+    </p>
+
+    <!-- What happens on the call -->
+    <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12 text-sm text-brand-muted">
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 rounded-full bg-brand-lime flex items-center justify-center flex-shrink-0">
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Review your current setup</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 rounded-full bg-brand-lime flex items-center justify-center flex-shrink-0">
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Show where patients are being lost</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 rounded-full bg-brand-lime flex items-center justify-center flex-shrink-0">
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#0A0A0A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span>Map your next steps</span>
+      </div>
+    </div>
+
+    <!-- CTA button (large) -->
+    <a href="https://tidycal.com/hanslacida/execution-fit-call-chiro-flow" target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-3 px-10 py-5 text-lg rounded-sm lime-glow">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M7 6h6M7 10h6M7 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Book Your Strategy Call</span>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9H15M15 9L11 5M15 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <!-- Simple form below -->
+    <div class="mt-10 text-brand-muted text-sm">
+      <p class="mb-4">Or fill in your details and we'll reach out:</p>
+      <div class="max-w-md mx-auto grid grid-cols-2 gap-3">
+        <input type="text" placeholder="Clinic Name"
+               class="col-span-2 bg-transparent border border-brand-border rounded-sm px-4 py-3 text-brand-white placeholder-brand-muted text-sm focus:outline-none focus:border-brand-lime transition-colors">
+        <input type="text" placeholder="Your Name"
+               class="bg-transparent border border-brand-border rounded-sm px-4 py-3 text-brand-white placeholder-brand-muted text-sm focus:outline-none focus:border-brand-lime transition-colors">
+        <input type="tel" placeholder="Phone"
+               class="bg-transparent border border-brand-border rounded-sm px-4 py-3 text-brand-white placeholder-brand-muted text-sm focus:outline-none focus:border-brand-lime transition-colors">
+        <select class="col-span-2 bg-brand-black border border-brand-border rounded-sm px-4 py-3 text-brand-muted text-sm focus:outline-none focus:border-brand-lime transition-colors appearance-none">
+          <option value="">Current Monthly Ad Spend</option>
+          <option>Not running ads yet</option>
+          <option>Under $1,000/mo</option>
+          <option>$1,000–$3,000/mo</option>
+          <option>$3,000–$5,000/mo</option>
+          <option>$5,000+/mo</option>
+        </select>
+        <a href="https://tidycal.com/hanslacida/execution-fit-call-chiro-flow" target="_blank" rel="noopener" class="col-span-2 btn-primary py-3 rounded-sm text-sm text-center">
+          Book Your Call Now →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="border-t border-brand-border py-10">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 bg-brand-lime rounded-sm flex items-center justify-center">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6L5 9.5L10.5 2.5" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="font-display text-lg text-brand-white tracking-wider">CHIROFLOW</span>
+    </div>
+    <p class="font-mono-custom text-xs text-brand-muted">Patient Acquisition Systems for Chiropractic Clinics</p>
+    <p class="font-mono-custom text-xs text-brand-muted">© 2025 Kaizen Strategy Solution LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     STICKY MOBILE CTA
+═══════════════════════════════════════════ -->
+<div class="sticky-cta fixed bottom-0 left-0 right-0 z-50 p-4" style="background: linear-gradient(to top, #0A0A0A 60%, transparent);">
+  <a href="https://tidycal.com/hanslacida/execution-fit-call-chiro-flow" target="_blank" rel="noopener" class="btn-primary w-full py-4 rounded-sm text-center text-base flex items-center justify-center gap-2">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 2.5h3l1.5 4-2 1.2A10 10 0 008.3 12l2-1.5 4 1.5V15A12 12 0 012.5 2.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    Book Free Strategy Call
+  </a>
+</div>
+
+</body>
+</html>
