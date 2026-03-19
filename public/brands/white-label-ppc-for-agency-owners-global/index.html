@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paid Search Pod – White-Label PPC for US-Based SEO Agencies</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Outfit', 'sans-serif'],
+            mono: ['Space Mono', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --cream: #FAF7F2;
+      --warm-white: #FFFEFB;
+      --ink: #1A1714;
+      --ink-mid: #3D3830;
+      --ink-muted: #8C8070;
+      --gold: #C49A3C;
+      --gold-light: #E8C76A;
+      --gold-pale: #F5E8C4;
+      --rust: #C4581A;
+      --border: #E8E0D4;
+      --border-dark: #C8BFB0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display { font-family: 'Playfair Display', serif; }
+    .font-mono { font-family: 'Space Mono', monospace; }
+
+    /* Paper texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Horizontal rule lines */
+    .rule { border-color: var(--border-dark); }
+
+    /* Gold tag */
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 4px 14px;
+      display: inline-block;
+    }
+
+    /* Primary button */
+    .btn-gold {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .btn-gold:hover::before { transform: scaleX(1); }
+    .btn-gold:hover { background: var(--ink-mid); transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      padding: 15px 32px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-outline:hover {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    /* Cards */
+    .card-paper {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+    .card-paper:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 40px rgba(196,154,60,0.08);
+      transform: translateY(-2px);
+    }
+
+    .card-ink {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    /* Decorative line */
+    .deco-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      display: block;
+    }
+
+    /* Number display */
+    .num-display {
+      font-family: 'Playfair Display', serif;
+      font-size: 96px;
+      line-height: 1;
+      color: var(--gold-pale);
+      font-style: italic;
+      user-select: none;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.8s ease forwards; }
+    .d1 { animation-delay: 0.05s; opacity: 0; }
+    .d2 { animation-delay: 0.15s; opacity: 0; }
+    .d3 { animation-delay: 0.25s; opacity: 0; }
+    .d4 { animation-delay: 0.35s; opacity: 0; }
+    .d5 { animation-delay: 0.45s; opacity: 0; }
+
+    /* Marquee */
+    .marquee-wrap { overflow: hidden; }
+    .marquee-track {
+      display: flex;
+      gap: 56px;
+      animation: ticker 24s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Sticky mobile bar */
+    .mobile-bar { display: none; }
+    @media (max-width: 768px) { .mobile-bar { display: flex; } }
+
+    /* Gold dot pulse */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    .blink { animation: blink 2.2s ease infinite; }
+
+    /* Section line decoration */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-label::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    input, select, textarea {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    hr { border-color: var(--border); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav style="background: var(--warm-white); border-bottom: 1px solid var(--border);" class="fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <div class="flex items-center gap-3">
+      <div style="width:28px;height:28px;background:var(--ink);display:flex;align-items:center;justify-content:center;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="#FAF7F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <span class="font-display font-bold text-base" style="color:var(--ink);letter-spacing:-0.01em;">Paid Search Pod</span>
+      </div>
+    </div>
+
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#problem" class="font-body text-sm" style="color:var(--ink-muted);" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-muted)'">Why This Works</a>
+      <a href="#how" class="font-body text-sm" style="color:var(--ink-muted);" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-muted)'">How It Works</a>
+      <a href="#proof" class="font-body text-sm" style="color:var(--ink-muted);" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-muted)'">Proof</a>
+    </div>
+
+    <a href="https://tally.so/r/LZ098J" target="_blank" rel="noopener" class="btn-gold" style="padding:10px 24px;font-size:12px;">
+      Book a Call
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section style="background: var(--warm-white); padding-top: 100px;" class="relative overflow-hidden min-h-screen flex flex-col justify-center">
+
+  <!-- Decorative background text -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden"
+       style="font-family:'Playfair Display',serif; font-size:280px; font-style:italic; color:rgba(196,154,60,0.04); line-height:1; white-space:nowrap; right:-40px;">
+    Freedom
+  </div>
+
+  <!-- Gold top border accent -->
+  <div style="position:absolute;top:80px;left:0;right:0;height:3px;background:linear-gradient(to right, transparent, var(--gold), transparent);opacity:0.4;"></div>
+
+  <div class="max-w-6xl mx-auto px-6 w-full py-20">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <div>
+        <div class="fade-in d1 mb-8">
+      <span class="tag">White-Label PPC for US-Based SEO Agencies</span>
+        </div>
+
+        <h1 class="font-display fade-in d2 mb-6" style="font-size:clamp(42px,5.5vw,72px); line-height:1.1; color:var(--ink); font-weight:700;">
+          Stop Running<br>
+          Paid Ads.<br>
+          <span style="color:var(--gold); font-style:italic;">Start Living.</span>
+        </h1>
+
+        <p class="fade-in d3 mb-8" style="font-size:18px; line-height:1.7; color:var(--ink-mid); max-width:480px;">
+          You built a US-based SEO agency — not a PPC department. Hand off your clients' paid search to a dedicated pod that runs it, reports it, and owns it. You get your time back. <strong style="color:var(--ink);">Currently accepting US agency owners only.</strong>
+        </p>
+
+        <!-- Proof strip -->
+        <div class="fade-in d4 flex flex-wrap gap-x-8 gap-y-3 mb-10">
+          <div class="flex items-center gap-2">
+            <span class="blink" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);"></span>
+            <span class="font-mono" style="font-size:11px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">Trusted by US SEO Agency Founders</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="blink" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);animation-delay:0.8s"></span>
+            <span class="font-mono" style="font-size:11px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">Weekly Compliance Reports</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="blink" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);animation-delay:1.6s"></span>
+            <span class="font-mono" style="font-size:11px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">No Hiring, No Headcount</span>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="fade-in d5 flex flex-col sm:flex-row gap-4">
+          <a href="https://tally.so/r/LZ098J" target="_blank" rel="noopener" class="btn-gold">
+            Book a Free Discovery Call — US Agencies Only
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#how" class="btn-outline">See How It Works</a>
+        </div>
+      </div>
+
+      <!-- Right side — hero visual card -->
+      <div class="hidden lg:block">
+        <div class="card-paper p-8 relative" style="border-left: 3px solid var(--gold);">
+          <div class="font-mono text-xs mb-6" style="color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">What your week looks like</div>
+
+          <!-- Before -->
+          <div class="mb-6">
+            <div class="font-mono text-xs mb-3" style="color:var(--rust);letter-spacing:0.1em;">BEFORE — Running PPC Yourself</div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3 p-3" style="background:#FEF3EE;border:1px solid #F5D5C5;">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2L12 12M12 2L2 12" stroke="#C4581A" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span style="font-size:13px;color:var(--ink-mid);">Jumping between SEO + PPC client fires</span>
+              </div>
+              <div class="flex items-center gap-3 p-3" style="background:#FEF3EE;border:1px solid #F5D5C5;">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2L12 12M12 2L2 12" stroke="#C4581A" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span style="font-size:13px;color:var(--ink-mid);">Hiring, training, replacing PPC staff</span>
+              </div>
+              <div class="flex items-center gap-3 p-3" style="background:#FEF3EE;border:1px solid #F5D5C5;">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2L12 12M12 2L2 12" stroke="#C4581A" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span style="font-size:13px;color:var(--ink-mid);">Nights and weekends reviewing ad accounts</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div style="border-top:1px solid var(--border);margin-bottom:24px;"></div>
+
+          <!-- After -->
+          <div>
+            <div class="font-mono text-xs mb-3" style="color:var(--gold);letter-spacing:0.1em;">AFTER — Paid Search Pod Handles It</div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3 p-3" style="background:rgba(196,154,60,0.05);border:1px solid rgba(196,154,60,0.2);">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="#C49A3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size:13px;color:var(--ink-mid);">Focus 100% on growing your SEO practice</span>
+              </div>
+              <div class="flex items-center gap-3 p-3" style="background:rgba(196,154,60,0.05);border:1px solid rgba(196,154,60,0.2);">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="#C49A3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size:13px;color:var(--ink-mid);">Weekly report lands in your inbox</span>
+              </div>
+              <div class="flex items-center gap-3 p-3" style="background:rgba(196,154,60,0.05);border:1px solid rgba(196,154,60,0.2);">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="#C49A3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size:13px;color:var(--ink-mid);">Take that family vacation — guilt-free</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     MARQUEE STRIP
+══════════════════════════════════════ -->
+<div style="background:var(--ink);padding:14px 0;" class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">White-Label PPC for US Agencies</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Weekly Compliance Reports</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">No Hiring. No Headcount.</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Trusted by US-Based SEO Founders</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Accepting US Businesses Only</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Google Ads Specialists</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Revenue You Keep</span>
+    <span style="color:var(--gold);">◆</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">White-Label PPC for US Agencies</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Weekly Compliance Reports</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">No Hiring. No Headcount.</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Trusted by US-Based SEO Founders</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Accepting US Businesses Only</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Google Ads Specialists</span>
+    <span style="color:var(--gold);">◆</span>
+    <span class="font-mono text-xs" style="color:var(--gold-light);letter-spacing:0.15em;text-transform:uppercase;">Revenue You Keep</span>
+    <span style="color:var(--gold);">◆</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     PROBLEM SECTION
+══════════════════════════════════════ -->
+<section id="problem" class="py-28 max-w-6xl mx-auto px-6">
+
+  <div class="section-label">
+    <span class="font-mono text-xs" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">The Real Problem</span>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-20 items-start">
+    <div>
+      <h2 class="font-display mb-6" style="font-size:clamp(36px,4vw,56px);line-height:1.15;color:var(--ink);font-weight:700;">
+        You Started an SEO Agency.<br>
+        <span style="font-style:italic;color:var(--rust);">Not a PPC Department.</span>
+      </h2>
+      <p style="font-size:17px;line-height:1.8;color:var(--ink-mid);margin-bottom:24px;">
+        Somewhere along the way, your clients asked for paid search. You said yes — because that's what good agency owners do. Now you're managing Google Ads campaigns, putting out fires, hiring specialists who quit, and rebuilding the whole thing from scratch every six months.
+      </p>
+      <p style="font-size:17px;line-height:1.8;color:var(--ink-mid);">
+        That's not growth. That's a trap. And it's quietly bleeding time and money from the agency you actually care about.
+      </p>
+
+      <div style="margin-top:40px;padding:28px;background:var(--warm-white);border:1px solid var(--border);border-left:3px solid var(--rust);">
+        <p class="font-display" style="font-size:22px;font-style:italic;color:var(--ink);line-height:1.4;">
+          "Every time a PPC hire leaves, you lose 3 months of ramp time and thousands in recruiting."
+        </p>
+        <p class="font-mono mt-3" style="font-size:11px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">— The real cost of doing it in-house</p>
+      </div>
+    </div>
+
+    <!-- Pain points -->
+    <div class="space-y-5">
+      <div class="card-paper p-6 flex gap-5 items-start">
+        <div style="width:40px;height:40px;background:#FEF3EE;border:1px solid #F5D5C5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3L15 15M15 3L3 15" stroke="#C4581A" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color:var(--ink);font-size:16px;">Constantly hiring and retraining PPC staff</p>
+          <p style="font-size:14px;color:var(--ink-muted);line-height:1.6;">High turnover in paid search is industry-wide. Every exit is lost revenue, lost client trust, and another round of job postings.</p>
+        </div>
+      </div>
+
+      <div class="card-paper p-6 flex gap-5 items-start">
+        <div style="width:40px;height:40px;background:#FEF3EE;border:1px solid #F5D5C5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3L15 15M15 3L3 15" stroke="#C4581A" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color:var(--ink);font-size:16px;">Your evenings belong to ad accounts</p>
+          <p style="font-size:14px;color:var(--ink-muted);line-height:1.6;">Checking campaign performance after dinner. Waking up to budget alerts. You know this isn't what you signed up for.</p>
+        </div>
+      </div>
+
+      <div class="card-paper p-6 flex gap-5 items-start">
+        <div style="width:40px;height:40px;background:#FEF3EE;border:1px solid #F5D5C5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3L15 15M15 3L3 15" stroke="#C4581A" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color:var(--ink);font-size:16px;">No visibility into what's actually happening</p>
+          <p style="font-size:14px;color:var(--ink-muted);line-height:1.6;">Your clients ask questions you can't answer. Your PPC team is a black box. You're signing off on reports you didn't write.</p>
+        </div>
+      </div>
+
+      <div class="card-paper p-6 flex gap-5 items-start">
+        <div style="width:40px;height:40px;background:#FEF3EE;border:1px solid #F5D5C5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3L15 15M15 3L3 15" stroke="#C4581A" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold mb-1" style="color:var(--ink);font-size:16px;">Family time keeps shrinking</p>
+          <p style="font-size:14px;color:var(--ink-muted);line-height:1.6;">The vacation you planned is now a working trip. The dinner is now a phone call. The weekend is now a strategy session nobody asked for.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+
+<!-- ══════════════════════════════════════
+     SOLUTION — HOW IT WORKS
+══════════════════════════════════════ -->
+<section id="how" class="py-28" style="background:var(--warm-white);">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="section-label">
+      <span class="font-mono text-xs" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">The Solution</span>
+    </div>
+
+    <div class="mb-16 max-w-2xl">
+      <h2 class="font-display mb-6" style="font-size:clamp(36px,4vw,60px);line-height:1.1;color:var(--ink);font-weight:700;">
+        A Dedicated Paid Search Pod.<br>
+        <span style="font-style:italic;color:var(--gold);">Fully Yours. Fully Invisible.</span>
+      </h2>
+      <p style="font-size:17px;line-height:1.8;color:var(--ink-mid);">
+        We become your embedded paid search department — without the headcount, the hiring cycles, or the management overhead. Your clients see results. You see free time.
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+
+      <div class="relative">
+        <div class="num-display mb-2">01</div>
+        <div style="width:100%;height:1px;background:var(--border-dark);margin-bottom:24px;"></div>
+        <h3 class="font-display mb-3" style="font-size:24px;color:var(--ink);">We Plug Into Your Agency</h3>
+        <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Hand us your PPC clients. We onboard, audit accounts, and take full operational ownership. No disruption to your client relationships — we work under your brand.</p>
+      </div>
+
+      <div class="relative">
+        <div class="num-display mb-2">02</div>
+        <div style="width:100%;height:1px;background:var(--border-dark);margin-bottom:24px;"></div>
+        <h3 class="font-display mb-3" style="font-size:24px;color:var(--ink);">We Run Everything</h3>
+        <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Google Ads management, campaign strategy, bid optimization, landing page feedback, ad copy — the full paid search operation, handled by specialists who live and breathe PPC.</p>
+      </div>
+
+      <div class="relative">
+        <div class="num-display mb-2">03</div>
+        <div style="width:100%;height:1px;background:var(--border-dark);margin-bottom:24px;"></div>
+        <h3 class="font-display mb-3" style="font-size:24px;color:var(--ink);">You Get Weekly Reports</h3>
+        <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Clear, branded compliance reports arrive in your inbox every week. You stay in control and informed without spending a minute inside an ad account.</p>
+      </div>
+
+    </div>
+
+    <!-- What's included -->
+    <div class="card-ink p-10">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <div class="font-mono text-xs mb-4" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">What the Pod Covers</div>
+          <h3 class="font-display mb-6" style="font-size:32px;color:var(--cream);">Everything paid search. Nothing more to manage.</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1A1714" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="color:var(--cream);font-size:15px;">Google Ads campaign management</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1A1714" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="color:var(--cream);font-size:15px;">Search, display, and remarketing</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1A1714" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="color:var(--cream);font-size:15px;">Weekly white-label compliance reports</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1A1714" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="color:var(--cream);font-size:15px;">Landing page conversion feedback</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1A1714" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="color:var(--cream);font-size:15px;">Call tracking and attribution setup</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#1A1714" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="color:var(--cream);font-size:15px;">Zero management overhead on your side</span>
+            </li>
+          </ul>
+        </div>
+        <div style="border-left:1px solid rgba(255,255,255,0.1);padding-left:40px;">
+          <div class="font-mono text-xs mb-6" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">The math on hiring vs. the pod</div>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span style="font-size:14px;color:rgba(250,247,242,0.7);">In-house PPC Hire (salary + benefits)</span>
+                <span style="font-size:14px;color:var(--rust);font-weight:600;">~$65K+/yr</span>
+              </div>
+              <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:2px;">
+                <div style="height:4px;background:var(--rust);width:85%;border-radius:2px;"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span style="font-size:14px;color:rgba(250,247,242,0.7);">Recruiting cost per hire</span>
+                <span style="font-size:14px;color:var(--rust);font-weight:600;">~$8-15K</span>
+              </div>
+              <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:2px;">
+                <div style="height:4px;background:var(--rust);width:55%;border-radius:2px;"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span style="font-size:14px;color:rgba(250,247,242,0.7);">Avg. PPC tenure before leaving</span>
+                <span style="font-size:14px;color:var(--rust);font-weight:600;">14 months</span>
+              </div>
+              <div style="height:4px;background:rgba(255,255,255,0.1);border-radius:2px;">
+                <div style="height:4px;background:var(--rust);width:40%;border-radius:2px;"></div>
+              </div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.15);padding-top:20px;">
+              <div class="flex justify-between mb-1">
+                <span style="font-size:14px;color:var(--cream);font-weight:600;">Paid Search Pod</span>
+                <span style="font-size:14px;color:var(--gold-light);font-weight:700;">Fraction of the cost</span>
+              </div>
+              <p style="font-size:12px;color:rgba(250,247,242,0.5);margin-top:6px;">No hiring cycles. No benefits. No training. No replacing. Revenue you keep.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     OUTCOMES / FREEDOM SECTION
+══════════════════════════════════════ -->
+<section class="py-28 max-w-6xl mx-auto px-6">
+
+  <div class="section-label">
+    <span class="font-mono text-xs" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">The Life You Actually Want</span>
+  </div>
+
+  <h2 class="font-display mb-16" style="font-size:clamp(36px,4vw,60px);line-height:1.1;color:var(--ink);font-weight:700;max-width:700px;">
+    What Your Agency Looks Like<br>
+    <span style="font-style:italic;color:var(--gold);">When PPC Isn't Your Problem</span>
+  </h2>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <div class="card-paper p-8">
+      <div style="font-size:36px;margin-bottom:16px;">✈️</div>
+      <h3 class="font-display mb-3" style="font-size:22px;color:var(--ink);">Take That Family Vacation</h3>
+      <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Actually be present. No laptop at the hotel. No 6am campaign check before breakfast. The pod runs. Your clients are covered.</p>
+    </div>
+
+    <div class="card-paper p-8">
+      <div style="font-size:36px;margin-bottom:16px;">📈</div>
+      <h3 class="font-display mb-3" style="font-size:22px;color:var(--ink);">Double Down on SEO</h3>
+      <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Your time goes back to what you're actually great at. Build better SEO systems, close bigger accounts, and grow the business you started.</p>
+    </div>
+
+    <div class="card-paper p-8">
+      <div style="font-size:36px;margin-bottom:16px;">💰</div>
+      <h3 class="font-display mb-3" style="font-size:22px;color:var(--ink);">Stop Losing Revenue to Turnover</h3>
+      <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Every hiring cycle costs you. The pod is fixed, reliable, and already proven. Your margins improve the moment you stop paying to replace people.</p>
+    </div>
+
+    <div class="card-paper p-8">
+      <div style="font-size:36px;margin-bottom:16px;">📋</div>
+      <h3 class="font-display mb-3" style="font-size:22px;color:var(--ink);">Know What's Happening Weekly</h3>
+      <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Clear, structured compliance reports every week. You know the numbers without touching the accounts. Your clients trust you more because you're always informed.</p>
+    </div>
+
+    <div class="card-paper p-8">
+      <div style="font-size:36px;margin-bottom:16px;">🤝</div>
+      <h3 class="font-display mb-3" style="font-size:22px;color:var(--ink);">Keep Clients Without the Chaos</h3>
+      <p style="font-size:14px;color:var(--ink-muted);line-height:1.7;">Offer paid search as a service without the operational burden. Clients stay because results stay consistent — regardless of who's running the accounts internally.</p>
+    </div>
+
+    <div class="card-paper p-8" style="background:var(--ink);border-color:var(--ink);">
+      <div style="font-size:36px;margin-bottom:16px;">🏡</div>
+      <h3 class="font-display mb-3" style="font-size:22px;color:var(--cream);">Be Present for What Matters</h3>
+      <p style="font-size:14px;color:rgba(250,247,242,0.6);line-height:1.7;">Dinner at home. Weekend mornings without notifications. A business that doesn't require your constant presence to function. That's the point.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+
+<!-- ══════════════════════════════════════
+     PROOF / TRUST SECTION
+══════════════════════════════════════ -->
+<section id="proof" class="py-28" style="background:var(--warm-white);">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="section-label">
+      <span class="font-mono text-xs" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Trust & Credibility</span>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="font-display mb-6" style="font-size:clamp(36px,4vw,52px);line-height:1.1;color:var(--ink);font-weight:700;">
+          US SEO Agency Founders<br>
+          <span style="font-style:italic;color:var(--gold);">Already Trust Us.</span>
+        </h2>
+        <p style="font-size:17px;line-height:1.8;color:var(--ink-mid);margin-bottom:32px;">
+          We work exclusively with established SEO agency owners based in the United States who were stuck managing PPC in-house — burning out, churning through staff, and sacrificing weekends to ad accounts. They handed it to the pod. They got their agency — and their life — back.
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div style="width:32px;height:32px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="#1A1714" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <p style="font-weight:600;color:var(--ink);margin-bottom:2px;">Proven with US-based SEO agencies</p>
+              <p style="font-size:14px;color:var(--ink-muted);">Real campaigns, real results, built for the US market — Google Ads, US-based clients, US time zones, US reporting standards.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div style="width:32px;height:32px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="#1A1714" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <p style="font-weight:600;color:var(--ink);margin-bottom:2px;">Founder-led, not outsourced overseas</p>
+              <p style="font-size:14px;color:var(--ink-muted);">You deal directly with the people running the pod — not a foreign account manager passing messages up a chain. Clear communication, US business hours.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div style="width:32px;height:32px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="#1A1714" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <p style="font-weight:600;color:var(--ink);margin-bottom:2px;">Your brand stays front and center</p>
+              <p style="font-size:14px;color:var(--ink-muted);">Reports go out under your agency's name. Your US clients never know the pod exists. Their relationship is entirely with you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial-style cards -->
+      <div class="space-y-5">
+        <div style="padding:28px;background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--gold);">
+          <p class="font-display mb-4" style="font-size:20px;font-style:italic;color:var(--ink);line-height:1.5;">
+            "I handed over three PPC clients and immediately felt the difference. I stopped waking up early to check dashboards. My SEO team finally got my full attention."
+          </p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:36px;height:36px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <span style="color:var(--cream);font-size:14px;font-weight:700;">M</span>
+            </div>
+            <div>
+              <p style="font-weight:600;font-size:14px;color:var(--ink);">Michael T.</p>
+              <p class="font-mono" style="font-size:10px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">SEO Agency Owner, Texas</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:28px;background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--gold);">
+          <p class="font-display mb-4" style="font-size:20px;font-style:italic;color:var(--ink);line-height:1.5;">
+            "We took our first real family vacation in two years. The pod handled everything. My clients didn't notice a thing — because nothing slipped."
+          </p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:36px;height:36px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <span style="color:var(--cream);font-size:14px;font-weight:700;">S</span>
+            </div>
+            <div>
+              <p style="font-weight:600;font-size:14px;color:var(--ink);">Sarah K.</p>
+              <p class="font-mono" style="font-size:10px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">SEO Agency Founder, California</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     WHO THIS IS FOR
+══════════════════════════════════════ -->
+<section class="py-28 max-w-6xl mx-auto px-6">
+
+  <div class="section-label">
+    <span class="font-mono text-xs" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Right Fit?</span>
+  </div>
+
+  <h2 class="font-display mb-16" style="font-size:clamp(36px,4vw,56px);line-height:1.1;color:var(--ink);font-weight:700;">
+    This Is Built for SEO Owners<br>
+    <span style="font-style:italic;color:var(--gold);">In a Very Specific Situation</span>
+  </h2>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div style="padding:40px;background:rgba(196,154,60,0.04);border:1px solid rgba(196,154,60,0.3);">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+        <div style="width:32px;height:32px;background:var(--gold);display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3" stroke="#1A1714" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="font-mono text-xs" style="color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">This Is For You If...</span>
+      </div>
+      <ul class="space-y-4">
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--gold);margin-top:2px;flex-shrink:0;">→</span>
+          <span style="font-size:15px;color:var(--ink-mid);line-height:1.6;">You run a <strong>US-based SEO agency</strong> and offer paid search as an add-on service</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--gold);margin-top:2px;flex-shrink:0;">→</span>
+          <span style="font-size:15px;color:var(--ink-mid);line-height:1.6;">You're tired of managing PPC in-house or doing it yourself on US client accounts</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--gold);margin-top:2px;flex-shrink:0;">→</span>
+          <span style="font-size:15px;color:var(--ink-mid);line-height:1.6;">You've hired, lost, or burned through PPC staff before</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--gold);margin-top:2px;flex-shrink:0;">→</span>
+          <span style="font-size:15px;color:var(--ink-mid);line-height:1.6;">You want your time back without dropping paid search as a US revenue stream</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--gold);margin-top:2px;flex-shrink:0;">→</span>
+          <span style="font-size:15px;color:var(--ink-mid);line-height:1.6;">Your business is registered and operating in the <strong>United States</strong></span>
+        </li>
+      </ul>
+    </div>
+
+    <div style="padding:40px;background:var(--warm-white);border:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+        <div style="width:32px;height:32px;background:#FEF3EE;border:1px solid #F5D5C5;display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2L12 12M12 2L2 12" stroke="#C4581A" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <span class="font-mono text-xs" style="color:var(--rust);letter-spacing:0.15em;text-transform:uppercase;">Not a Fit If...</span>
+      </div>
+      <ul class="space-y-4">
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--rust);margin-top:2px;flex-shrink:0;">✗</span>
+          <span style="font-size:15px;color:var(--ink-muted);line-height:1.6;">Your business is <strong>not based in the United States</strong> — we serve US agencies only</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--rust);margin-top:2px;flex-shrink:0;">✗</span>
+          <span style="font-size:15px;color:var(--ink-muted);line-height:1.6;">You don't currently have any PPC clients or revenue to protect</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--rust);margin-top:2px;flex-shrink:0;">✗</span>
+          <span style="font-size:15px;color:var(--ink-muted);line-height:1.6;">You want to run ads yourself or keep full internal control of execution</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--rust);margin-top:2px;flex-shrink:0;">✗</span>
+          <span style="font-size:15px;color:var(--ink-muted);line-height:1.6;">You're looking for the cheapest possible outsourced option — not a performance partner</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+
+<!-- ══════════════════════════════════════
+     CTA / CLOSE
+══════════════════════════════════════ -->
+<section class="py-28 relative overflow-hidden" style="background:var(--ink);">
+
+  <!-- Decorative -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%, rgba(196,154,60,0.08) 0%, transparent 60%);pointer-events:none;"></div>
+  <div class="font-display absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none"
+       style="font-size:320px;font-style:italic;color:rgba(196,154,60,0.04);line-height:1;white-space:nowrap;right:-60px;">
+    Now
+  </div>
+
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+    <div class="mb-8">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:5px 16px;display:inline-block;">
+        Now Accepting US-Based SEO Agencies
+      </span>
+    </div>
+
+    <h2 class="font-display mb-6" style="font-size:clamp(40px,5.5vw,80px);line-height:1.05;color:var(--cream);font-weight:700;">
+      Ready to Hand Off<br>
+      Paid Search<br>
+      <span style="font-style:italic;color:var(--gold);">and Get Your Life Back?</span>
+    </h2>
+
+    <p style="font-size:18px;line-height:1.8;color:rgba(250,247,242,0.6);max-width:520px;margin:0 auto 48px;">
+      We're selectively onboarding US-based SEO agency owners right now. Book a free discovery call — we'll review your current PPC situation, walk you through the handoff, and tell you honestly if we're the right fit.
+    </p>
+
+    <!-- What happens on the call -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-bottom:48px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;border-radius:50%;">
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#1A1714" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span style="font-size:14px;color:rgba(250,247,242,0.6);">Audit your current PPC setup</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;border-radius:50%;">
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#1A1714" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span style="font-size:14px;color:rgba(250,247,242,0.6);">Show the handoff process</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:20px;height:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;border-radius:50%;">
+          <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="#1A1714" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span style="font-size:14px;color:rgba(250,247,242,0.6);">No obligations — just clarity</span>
+      </div>
+    </div>
+
+    <a href="https://tally.so/r/LZ098J" target="_blank" rel="noopener" class="btn-gold" style="padding:20px 48px;font-size:16px;letter-spacing:0.08em;display:inline-flex;">
+      Apply Now — US Agencies Only
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9H15M15 9L11 5M15 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <p style="margin-top:20px;font-size:13px;color:rgba(250,247,242,0.3);">US-registered businesses only · No pitch deck · No pressure</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer style="background:var(--cream);border-top:1px solid var(--border);padding:32px 0;">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:24px;height:24px;background:var(--ink);display:flex;align-items:center;justify-content:center;">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 6h8M7 3l3 3-3 3" stroke="#FAF7F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="font-display font-bold text-base" style="color:var(--ink);">Paid Search Pod</span>
+    </div>
+    <p class="font-mono" style="font-size:10px;color:var(--ink-muted);letter-spacing:0.1em;text-transform:uppercase;">White-Label PPC for SEO Agencies</p>
+    <p class="font-mono" style="font-size:10px;color:var(--ink-muted);letter-spacing:0.08em;">© 2025 Kaizen Strategy Solution LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     MOBILE STICKY BAR
+══════════════════════════════════════ -->
+<div class="mobile-bar fixed bottom-0 left-0 right-0 z-50 p-4" style="background:linear-gradient(to top, var(--cream) 70%, transparent);">
+  <a href="https://tally.so/r/LZ098J" target="_blank" rel="noopener"
+     class="btn-gold w-full justify-center" style="padding:16px 24px;width:100%;">
+    Apply Now — US Agencies Only →
+  </a>
+</div>
+
+</body>
+</html>
