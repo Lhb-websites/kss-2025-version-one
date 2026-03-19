@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KaizenStrategy — Private Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Editorial+New:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Fallback: use Cormorant as primary display -->
+  <style>
+    :root {
+      --black:   #0C0C0B;
+      --off:     #131312;
+      --surface: #181817;
+      --line:    #222221;
+      --line2:   #2C2C2A;
+      --muted:   #4A4A47;
+      --mid:     #7A7A75;
+      --light:   #B8B8B0;
+      --cream:   #E8E4DC;
+      --white:   #F2EFE8;
+      --gold:    #B8963C;
+      --gold2:   #D4AF55;
+      --gold-dim:#3A2E12;
+      --rust:    #8B3A1A;
+      --green:   #2A5C3A;
+      --green2:  #3D8A55;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ── */
+    .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Layout helpers ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 640px) { .container { padding: 0 24px; } }
+
+    hr.rule { border: none; border-top: 1px solid var(--line); margin: 0; }
+    hr.rule-gold { border: none; border-top: 1px solid var(--gold-dim); margin: 0; }
+
+    /* ── Mono label ── */
+    .label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .label-gold {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── Status dot ── */
+    .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green2);
+      animation: pulse-g 2.5s ease infinite;
+    }
+    .dot-dim {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+    @keyframes pulse-g {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(61,138,85,0.5); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(61,138,85,0); }
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--gold2);
+      color: var(--black);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line2);
+      color: var(--mid);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      cursor: pointer;
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .btn-enter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 11px 22px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-enter:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+    }
+
+    /* ── Stat block ── */
+    .stat-num {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Holding card ── */
+    .holding-card {
+      background: var(--off);
+      border: 1px solid var(--line);
+      transition: border-color 0.2s ease;
+    }
+    .holding-card:hover { border-color: var(--line2); }
+
+    /* ── Principle item ── */
+    .principle {
+      border-top: 1px solid var(--line);
+      padding: 36px 0;
+    }
+
+    /* ── Fade in animation ── */
+    @keyframes up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .up { animation: up 0.8s ease forwards; opacity: 0; }
+    .up.d1 { animation-delay: 0.05s; }
+    .up.d2 { animation-delay: 0.15s; }
+    .up.d3 { animation-delay: 0.25s; }
+    .up.d4 { animation-delay: 0.38s; }
+    .up.d5 { animation-delay: 0.52s; }
+
+    /* ── Vertical text ── */
+    .vert {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 2px; }
+
+    /* ── Section spacing ── */
+    section { padding: 96px 0; }
+    @media (max-width: 768px) { section { padding: 64px 0; } }
+
+    a { text-decoration: none; }
+
+    /* ── Coming soon card ── */
+    .soon-card {
+      background: repeating-linear-gradient(
+        45deg,
+        var(--off),
+        var(--off) 10px,
+        var(--black) 10px,
+        var(--black) 20px
+      );
+      border: 1px solid var(--line);
+    }
+
+    /* ── Gold line accent ── */
+    .gold-line {
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     NAV
+═══════════════════════════════════ -->
+<nav style="border-bottom: 1px solid var(--line); position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(12,12,11,0.95); backdrop-filter: blur(12px);">
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;">
+
+    <div style="display:flex; align-items:center; gap:16px;">
+      <span class="label" style="color:var(--white); font-size:13px; letter-spacing:0.18em;">KAIZEN<span style="color:var(--gold);">STRATEGY</span></span>
+      <span class="label" style="color:var(--line2);">|</span>
+      <span class="label">Private Portfolio</span>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:28px;">
+      <a href="#portfolio" class="label" style="transition:color 0.2s;" onmouseover="this.style.color='#B8963C'" onmouseout="this.style.color='var(--muted)'">Portfolio</a>
+      <a href="#operating" class="label" style="transition:color 0.2s;" onmouseover="this.style.color='#B8963C'" onmouseout="this.style.color='var(--muted)'">Principles</a>
+      <a href="#contact" class="label" style="transition:color 0.2s;" onmouseover="this.style.color='#B8963C'" onmouseout="this.style.color='var(--muted)'">Contact</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section style="padding-top: 160px; padding-bottom: 80px; min-height: 100vh; display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;">
+
+  <!-- Background K letterform -->
+  <div style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:600px;font-weight:300;color:rgba(255,255,255,0.015);line-height:1;pointer-events:none;user-select:none;font-style:italic;">K</div>
+
+  <!-- Horizontal gold line top -->
+  <div style="position:absolute;top:80px;left:0;right:0;height:1px;background:linear-gradient(to right, transparent 0%, var(--gold-dim) 30%, var(--gold-dim) 70%, transparent 100%);"></div>
+
+  <div class="container">
+
+    <!-- Top metadata row -->
+    <div class="up d1" style="display:flex; align-items:center; gap:32px; margin-bottom:72px;">
+      <span class="label">Est. 2024</span>
+      <span style="width:40px;height:1px;background:var(--line2);display:inline-block;"></span>
+      <span class="label">Privately Held</span>
+      <span style="width:40px;height:1px;background:var(--line2);display:inline-block;"></span>
+      <span class="label">US Market</span>
+    </div>
+
+    <!-- Main headline -->
+    <h1 class="up d2 serif" style="font-size:clamp(56px, 8vw, 120px); font-weight:300; line-height:1.0; letter-spacing:-0.02em; color:var(--white); margin-bottom:40px; max-width:800px;">
+      Systems that<br>
+      generate<br>
+      <em style="color:var(--gold); font-style:italic;">demand.</em>
+    </h1>
+
+    <div class="up d3" style="max-width:560px; margin-bottom:56px;">
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:13px; line-height:1.9; color:var(--mid); font-weight:300;">
+        KaizenStrategy is a privately held portfolio of focused growth systems. We don't take many clients. We don't need to. Each product under this structure solves one problem — precisely, quietly, and at scale.
+      </p>
+    </div>
+
+    <!-- CTA row -->
+    <div class="up d4" style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:96px;">
+      <a href="#portfolio" class="btn-primary">
+        View Portfolio
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Inquire</a>
+    </div>
+
+    <!-- Stats row -->
+    <div class="up d5" style="border-top:1px solid var(--line); padding-top:48px; display:grid; grid-template-columns:repeat(4, 1fr); gap:40px;">
+
+      <div>
+        <div class="label" style="margin-bottom:12px;">Ad Spend Managed</div>
+        <div class="stat-num serif">$6M<span style="font-size:28px;color:var(--gold);">+</span></div>
+      </div>
+
+      <div>
+        <div class="label" style="margin-bottom:12px;">Peak ROAS</div>
+        <div class="stat-num serif">20<span style="font-size:28px;color:var(--gold);">×</span></div>
+      </div>
+
+      <div>
+        <div class="label" style="margin-bottom:12px;">Active Holdings</div>
+        <div class="stat-num serif">2</div>
+      </div>
+
+      <div>
+        <div class="label" style="margin-bottom:12px;">Primary Market</div>
+        <div class="stat-num serif" style="font-size:36px;">United<br>States</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ═══════════════════════════════════
+     OPERATING PHILOSOPHY
+═══════════════════════════════════ -->
+<section id="operating">
+  <div class="container">
+
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:80px; align-items:start;">
+
+      <!-- Left label -->
+      <div>
+        <div class="label-gold" style="margin-bottom:16px;">On how we operate</div>
+        <div class="gold-line"></div>
+      </div>
+
+      <!-- Right content -->
+      <div>
+        <p class="serif" style="font-size:clamp(20px,2.5vw,30px); font-weight:300; line-height:1.65; color:var(--cream); margin-bottom:40px; font-style:italic;">
+          Most growth fails not from lack of effort, but from poor sequencing. Capital deployed before signal is clear. Teams built before systems exist. Channels opened before demand is validated.
+        </p>
+        <p style="font-size:13px; line-height:1.9; color:var(--mid); margin-bottom:24px; max-width:640px;">
+          We operate differently. Each product in this portfolio is designed to work upstream of noise — finding where real demand exists, then building the infrastructure to capture it.
+        </p>
+        <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:640px;">
+          We are not an agency. We are not a consultancy. We are a small, private collection of demand systems — each built once, built right, and operated with discipline.
+        </p>
+      </div>
+    </div>
+
+    <!-- Principles -->
+    <div style="margin-top:80px;">
+
+      <div class="principle" style="display:grid; grid-template-columns:220px 1fr; gap:80px; align-items:start;">
+        <div class="label-gold">— 001</div>
+        <div>
+          <h3 class="serif" style="font-size:24px; font-weight:400; color:var(--white); margin-bottom:12px; font-style:italic;">One problem. One system.</h3>
+          <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:560px;">No product in this portfolio attempts to solve more than one revenue problem. Depth is the strategy. Breadth is the trap.</p>
+        </div>
+      </div>
+
+      <div class="principle" style="display:grid; grid-template-columns:220px 1fr; gap:80px; align-items:start;">
+        <div class="label-gold">— 002</div>
+        <div>
+          <h3 class="serif" style="font-size:24px; font-weight:400; color:var(--white); margin-bottom:12px; font-style:italic;">Signal before capital.</h3>
+          <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:560px;">We never scale what hasn't been validated. Every system in this portfolio is tested before it is sold. We know it works because we built it to work.</p>
+        </div>
+      </div>
+
+      <div class="principle" style="display:grid; grid-template-columns:220px 1fr; gap:80px; align-items:start;">
+        <div class="label-gold">— 003</div>
+        <div>
+          <h3 class="serif" style="font-size:24px; font-weight:400; color:var(--white); margin-bottom:12px; font-style:italic;">Quiet. Disciplined. Real.</h3>
+          <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:560px;">We don't sell promises or templates. We deliver results and move on. The work speaks. We do not need to.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ═══════════════════════════════════
+     PORTFOLIO
+═══════════════════════════════════ -->
+<section id="portfolio">
+  <div class="container">
+
+    <div style="display:flex; align-items:baseline; gap:24px; margin-bottom:64px;">
+      <h2 class="serif" style="font-size:clamp(32px,4vw,52px); font-weight:300; color:var(--white); font-style:italic;">The portfolio.</h2>
+      <span class="label" style="margin-bottom:4px;">4 holdings · 2 active · 2 coming soon</span>
+    </div>
+
+    <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:560px; margin-bottom:64px;">
+      Each holding is a focused growth system built for a specific operator. Access is by inquiry or direct engagement. Not every product is publicly listed.
+    </p>
+
+    <!-- ── HOLDING 1: Paid Search Pod ── -->
+    <div class="holding-card" style="margin-bottom:20px;">
+      <div style="padding:40px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <span class="dot"></span>
+        <span class="label-gold">Active · Accepting Engagements</span>
+        <span style="margin-left:auto;" class="label">001</span>
+      </div>
+      <div style="padding:40px;">
+        <div style="display:grid; grid-template-columns:1fr auto; gap:40px; align-items:start; flex-wrap:wrap;">
+          <div>
+            <h3 class="serif" style="font-size:clamp(28px,3vw,44px); font-weight:300; color:var(--white); margin-bottom:16px; font-style:italic;">Paid Search Pod</h3>
+            <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:540px; margin-bottom:32px;">
+              A done-for-you Google Ads system for SEO agencies and founders. Strategy, execution, and reporting — without hiring. The pod plugs in. Revenue follows. Built for US operators.
+            </p>
+            <!-- Mini stats -->
+            <div style="display:flex; gap:48px; margin-bottom:36px; flex-wrap:wrap;">
+              <div>
+                <div class="label" style="margin-bottom:8px;">Managed</div>
+                <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">$6M<span style="color:var(--gold);font-size:20px;">+</span></div>
+              </div>
+              <div>
+                <div class="label" style="margin-bottom:8px;">Peak ROAS</div>
+                <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">20<span style="color:var(--gold);font-size:20px;">×</span></div>
+              </div>
+              <div>
+                <div class="label" style="margin-bottom:8px;">Market</div>
+                <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">US</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px; flex-wrap:wrap;">
+              <a href="https://tally.so/r/LZ098J" target="_blank" rel="noopener" class="btn-enter">
+                Enter Pod →
+              </a>
+              <a href="#contact" class="btn-ghost">Inquire</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HOLDING 2: ChiroFlow ── -->
+    <div class="holding-card" style="margin-bottom:20px;">
+      <div style="padding:40px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <span class="dot"></span>
+        <span class="label-gold">Active · Accepting Engagements</span>
+        <span style="margin-left:auto;" class="label">002</span>
+      </div>
+      <div style="padding:40px;">
+        <div style="display:grid; grid-template-columns:1fr auto; gap:40px; align-items:start;">
+          <div>
+            <h3 class="serif" style="font-size:clamp(28px,3vw,44px); font-weight:300; color:var(--white); margin-bottom:16px; font-style:italic;">ChiroFlow</h3>
+            <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:540px; margin-bottom:32px;">
+              A complete patient acquisition system for chiropractic clinics. Google Ads, conversion landing pages, call tracking, and GBP optimization — built to turn local searches into booked appointments. US clinics only.
+            </p>
+            <div style="display:flex; gap:48px; margin-bottom:36px; flex-wrap:wrap;">
+              <div>
+                <div class="label" style="margin-bottom:8px;">Vertical</div>
+                <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">Chiro</div>
+              </div>
+              <div>
+                <div class="label" style="margin-bottom:8px;">Focus</div>
+                <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">Google</div>
+              </div>
+              <div>
+                <div class="label" style="margin-bottom:8px;">Market</div>
+                <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">US</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:14px; flex-wrap:wrap;">
+              <a href="https://kaizenstrategy.us/brands/chiroflow" target="_blank" rel="noopener" class="btn-enter">
+                Enter ChiroFlow →
+              </a>
+              <a href="#contact" class="btn-ghost">Inquire</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HOLDING 3: JunkRemovalAds ── -->
+    <div class="holding-card" style="margin-bottom:20px;">
+      <div style="padding:40px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <span class="dot"></span>
+        <span class="label-gold">Active · Accepting Engagements</span>
+        <span style="margin-left:auto;" class="label">003</span>
+      </div>
+      <div style="padding:40px;">
+        <div>
+          <h3 class="serif" style="font-size:clamp(28px,3vw,44px); font-weight:300; color:var(--white); margin-bottom:16px; font-style:italic;">JunkRemovalAds</h3>
+          <p style="font-size:13px; line-height:1.9; color:var(--mid); max-width:540px; margin-bottom:32px;">
+            A purpose-built Google Ads system for junk removal operators across the US. High-intent local search capture, conversion-optimized landing pages, and call tracking — built specifically for the junk removal vertical.
+          </p>
+          <div style="display:flex; gap:48px; margin-bottom:36px; flex-wrap:wrap;">
+            <div>
+              <div class="label" style="margin-bottom:8px;">Vertical</div>
+              <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">Junk</div>
+            </div>
+            <div>
+              <div class="label" style="margin-bottom:8px;">Focus</div>
+              <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">Google</div>
+            </div>
+            <div>
+              <div class="label" style="margin-bottom:8px;">Market</div>
+              <div class="serif" style="font-size:28px; font-weight:300; color:var(--white);">US</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="https://junkremovalads.com" target="_blank" rel="noopener" class="btn-enter">
+              Enter JunkRemovalAds →
+            </a>
+            <a href="#contact" class="btn-ghost">Inquire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMING SOON 1 ── -->
+    <div class="soon-card" style="margin-bottom:20px; opacity:0.7;">
+      <div style="padding:40px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <span class="dot-dim"></span>
+        <span class="label">In Development · 2026-27</span>
+        <span style="margin-left:auto;" class="label">004</span>
+      </div>
+      <div style="padding:40px;">
+        <h3 class="serif" style="font-size:clamp(28px,3vw,44px); font-weight:300; color:var(--muted); margin-bottom:16px; font-style:italic;">Undisclosed</h3>
+        <p style="font-size:13px; line-height:1.9; color:var(--muted); max-width:540px; margin-bottom:32px;">
+          The next KaizenStrategy holding is in development. Each launch is deliberate. Each problem is real. Each system is tested before it ships. Details withheld.
+        </p>
+        <span class="label" style="border:1px solid var(--line2); padding:8px 16px; color:var(--muted);">Coming 2025</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ═══════════════════════════════════
+     CONTACT
+═══════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:80px; align-items:start;">
+
+      <div>
+        <div class="label-gold" style="margin-bottom:16px;">Contact</div>
+        <div class="gold-line"></div>
+      </div>
+
+      <div style="max-width:640px;">
+        <h2 class="serif" style="font-size:clamp(28px,3.5vw,48px); font-weight:300; color:var(--white); margin-bottom:24px; font-style:italic; line-height:1.2;">Serious operators<br>inquire directly.</h2>
+        <p style="font-size:13px; line-height:1.9; color:var(--mid); margin-bottom:40px;">
+          We don't run intake forms. If you are evaluating a product in this portfolio or want to understand whether KaizenStrategy is the right fit for your situation — reach out directly. Conversations are private and without obligation.
+        </p>
+
+        <!-- Email block -->
+        <div style="border:1px solid var(--line); padding:32px; margin-bottom:40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+          <div>
+            <div class="label" style="margin-bottom:10px;">Direct email</div>
+            <a href="mailto:hello@kaizenstrategy.us" style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; color:var(--white); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white)'">
+              hello@kaizenstrategy.us
+            </a>
+            <p class="label" style="margin-top:10px; font-size:9px;">Response within 48 hours · US market only</p>
+          </div>
+          <a href="mailto:hello@kaizenstrategy.us" class="btn-primary">
+            Write to us
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <!-- Active holding CTA -->
+        <div style="background:var(--off); border:1px solid var(--line); padding:32px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+            <span class="dot"></span>
+            <span class="label-gold">Currently Active</span>
+          </div>
+          <h3 class="serif" style="font-size:22px; font-weight:300; color:var(--white); margin-bottom:12px; font-style:italic;">Paid Search Pod</h3>
+          <p style="font-size:13px; line-height:1.8; color:var(--mid); margin-bottom:24px;">
+            Google Ads execution for SEO agencies and founders who want paid search revenue without building a team. Direct entry point below.
+          </p>
+          <ul style="list-style:none; margin-bottom:28px; space-y:8px;">
+            <li style="display:flex; align-items:flex-start; gap:10px; margin-bottom:10px;">
+              <span style="color:var(--gold); font-size:10px; margin-top:3px;">◆</span>
+              <span style="font-size:12px; color:var(--mid); line-height:1.6;">Former Google Account Strategist (VIA Program) on every account</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; margin-bottom:10px;">
+              <span style="color:var(--gold); font-size:10px; margin-top:3px;">◆</span>
+              <span style="font-size:12px; color:var(--mid); line-height:1.6;">$6M+ in ad spend managed across engagements</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px; margin-bottom:10px;">
+              <span style="color:var(--gold); font-size:10px; margin-top:3px;">◆</span>
+              <span style="font-size:12px; color:var(--mid); line-height:1.6;">Built for SEO agencies, founders, and US operators</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:10px;">
+              <span style="color:var(--gold); font-size:10px; margin-top:3px;">◆</span>
+              <span style="font-size:12px; color:var(--mid); line-height:1.6;">Free audit available — no commitment required</span>
+            </li>
+          </ul>
+          <a href="https://tally.so/r/LZ098J" target="_blank" rel="noopener" class="btn-primary">
+            Get Free Audit
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer style="padding:48px 0;">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px; margin-bottom:40px;">
+
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.18em; color:var(--white); margin-bottom:6px;">KAIZEN<span style="color:var(--gold);">STRATEGY</span></div>
+        <div class="label">Private Portfolio · Privately Held</div>
+      </div>
+
+      <div style="display:flex; gap:32px; flex-wrap:wrap;">
+        <a href="#portfolio" class="label" style="transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Portfolio</a>
+        <a href="https://tally.so/r/LZ098J" target="_blank" rel="noopener" class="label" style="transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">Paid Search Pod →</a>
+        <a href="https://kaizenstrategy.us/brands/chiroflow" target="_blank" rel="noopener" class="label" style="transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">ChiroFlow →</a>
+        <a href="https://junkremovalads.com" target="_blank" rel="noopener" class="label" style="transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--muted)'">JunkRemovalAds →</a>
+      </div>
+    </div>
+
+    <hr class="rule" style="margin-bottom:32px;">
+
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+      <span class="label" style="font-size:9px;">© 2026 · Kaizen Strategy Solution LLC · All Rights Reserved · Privately Held</span>
+      <span class="label" style="font-size:9px;">US Market Only · hello@kaizenstrategy.us</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile responsive patches -->
+<style>
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    section { padding: 56px 0; }
+    div[style*="grid-template-columns:220px"] {
+      display: block !important;
+    }
+    div[style*="grid-template-columns:220px"] > div:first-child {
+      margin-bottom: 32px;
+    }
+    div[style*="grid-template-columns:repeat(4"] {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+  @media (max-width: 480px) {
+    div[style*="grid-template-columns:repeat(4"] {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+</style>
+
+</body>
+</html>
