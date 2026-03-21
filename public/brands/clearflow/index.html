@@ -1,0 +1,1370 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClearFlow | AI Workflow Automation for US Business Owners</title>
+  <meta name="description" content="Stop doing work your business should be doing itself. ClearFlow builds AI automation systems that handle your repetitive tasks, follow-ups, lead qualification, and content." />
+  <meta name="keywords" content="AI automation for business, workflow automation USA, automate business processes, Zapier automation agency, Make automation, n8n automation, AI business tools, small business automation, lead automation, CRM automation" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --cyan: #00e5cc;
+      --cyan-dim: #00b8a4;
+      --cyan-glow: rgba(0, 229, 204, 0.15);
+      --cyan-glow-strong: rgba(0, 229, 204, 0.3);
+      --bg: #080c10;
+      --bg-mid: #0d1420;
+      --bg-card: #0f1929;
+      --bg-card-hover: #142035;
+      --border: rgba(0, 229, 204, 0.12);
+      --border-hover: rgba(0, 229, 204, 0.35);
+      --text: #e8edf5;
+      --text-muted: #6b7a8f;
+      --text-dim: #94a3b8;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ── GRID BG ── */
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,229,204,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,204,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .grid-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,229,204,0.06) 0%, transparent 70%);
+    }
+
+    /* ── GLOW ORBS ── */
+    .orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(80px); pointer-events: none; z-index: 0;
+      animation: orbFloat 12s ease-in-out infinite;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,229,204,0.08), transparent 70%);
+      top: -100px; right: -100px;
+      animation-delay: 0s;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,100,255,0.07), transparent 70%);
+      bottom: 20%; left: -100px;
+      animation-delay: -6s;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -30px); }
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(8, 12, 16, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 32px; height: 32px;
+      border: 1.5px solid var(--cyan);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      box-shadow: 0 0 12px rgba(0,229,204,0.2);
+    }
+    .logo-mark svg { width: 16px; height: 16px; color: var(--cyan); }
+    .logo-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+    .logo-name span { color: var(--cyan); }
+
+    nav.desktop { display: none; gap: 2rem; align-items: center; }
+    nav.desktop a {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    nav.desktop a:hover { color: var(--cyan); }
+    @media (min-width: 900px) { nav.desktop { display: flex; } }
+
+    .btn-nav {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--bg);
+      background: var(--cyan);
+      border: none; padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      box-shadow: 0 0 16px rgba(0,229,204,0.25);
+      white-space: nowrap;
+    }
+    .btn-nav:hover {
+      background: #00fce0;
+      box-shadow: 0 0 24px rgba(0,229,204,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 5rem 1.5rem; position: relative; z-index: 1; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ── EYEBROW ── */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.2rem;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block; width: 18px; height: 1px;
+      background: var(--cyan);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--border);
+      background: rgba(0,229,204,0.04);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.72rem; font-weight: 500;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+      animation: fadeDown 0.6s ease both;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero h1 .accent { color: var(--cyan); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 400;
+      color: var(--text-dim);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+
+    .hero-cta-group {
+      display: flex; flex-wrap: wrap;
+      gap: 0.75rem; justify-content: center;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .btn-primary {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--bg);
+      background: var(--cyan);
+      border: none; padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 0 24px rgba(0,229,204,0.3);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      background: #00fce0;
+      box-shadow: 0 0 40px rgba(0,229,204,0.5);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .hero-note {
+      font-size: 0.72rem; color: var(--text-muted);
+      letter-spacing: 0.04em;
+      animation: fadeUp 0.7s ease 0.4s both;
+    }
+
+    /* Tech stack strip */
+    .stack-strip {
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap;
+      gap: 0.6rem 1.5rem;
+      justify-content: center; align-items: center;
+      animation: fadeUp 0.7s ease 0.5s both;
+    }
+    .stack-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-muted);
+      width: 100%; text-align: center;
+      margin-bottom: 0.4rem;
+    }
+    .stack-chip {
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.3rem 0.9rem;
+      background: rgba(0,229,204,0.03);
+    }
+
+    /* ── PROBLEM ── */
+    .problem-section { background: var(--bg-mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .problem-grid {
+      display: grid; gap: 3rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) { .problem-grid { grid-template-columns: 5fr 7fr; align-items: center; } }
+
+    .problem-stat-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .problem-stat {
+      background: var(--bg-card);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+    }
+    .problem-stat .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem; font-weight: 800;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .problem-stat .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid; gap: 1px;
+      grid-template-columns: 1fr;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    @media (min-width: 600px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .service-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .service-card:hover { background: var(--bg-card-hover); }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+      background: rgba(0,229,204,0.04);
+    }
+    .service-icon svg { width: 18px; height: 18px; color: var(--cyan); }
+    .service-card h3 {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .service-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how-steps {
+      display: grid; gap: 1.5rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 700px) { .how-steps { grid-template-columns: repeat(3, 1fr); } }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .step-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 30px rgba(0,229,204,0.08);
+    }
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem; font-weight: 800;
+      color: rgba(0,229,204,0.08);
+      position: absolute; top: 1rem; right: 1.2rem;
+      line-height: 1; user-select: none;
+    }
+    .step-card h3 {
+      font-size: 1rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.6rem;
+      position: relative; z-index: 1;
+    }
+    .step-card p {
+      font-size: 0.83rem; color: var(--text-muted);
+      line-height: 1.65; position: relative; z-index: 1;
+    }
+    .step-badge {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid rgba(0,229,204,0.2);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ── PRICING ── */
+    .pricing-toggle {
+      display: flex; gap: 0; align-items: center;
+      background: var(--bg-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px;
+      margin: 0 auto 3rem;
+      width: fit-content;
+    }
+    .toggle-btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1.4rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-muted);
+      background: transparent;
+    }
+    .toggle-btn.active {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: 0 0 16px rgba(0,229,204,0.25);
+    }
+
+    .pricing-track { display: none; }
+    .pricing-track.active { display: grid; }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 700px) { .project-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .retainer-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 700px) { .retainer-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      display: flex; flex-direction: column;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+    }
+    .pricing-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 8px 40px rgba(0,229,204,0.1);
+      transform: translateY(-3px);
+    }
+    .pricing-card.featured {
+      border-color: var(--cyan);
+      box-shadow: 0 0 40px rgba(0,229,204,0.15);
+    }
+    .pricing-badge {
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--bg);
+      background: var(--cyan);
+      padding: 0.25rem 0.9rem;
+      border-radius: 0 0 6px 6px;
+    }
+    .pricing-tier-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 0.5rem;
+    }
+    .pricing-card h3 {
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.3rem;
+    }
+    .pricing-card .tagline {
+      font-size: 0.78rem; color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .price-block {
+      display: flex; align-items: baseline; gap: 0.3rem;
+      margin-bottom: 0.4rem;
+    }
+    .price-amount {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem; font-weight: 800;
+      color: var(--white);
+    }
+    .price-period {
+      font-size: 0.8rem; color: var(--text-muted);
+    }
+    .price-note {
+      font-size: 0.72rem; color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .pricing-divider {
+      height: 1px; background: var(--border);
+      margin: 1.2rem 0;
+    }
+    .pricing-section-label {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 0.75rem;
+    }
+    .pricing-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    .pricing-list li {
+      display: flex; gap: 0.7rem; align-items: flex-start;
+      font-size: 0.8rem; color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .pricing-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      margin-top: 0.42em;
+    }
+    .pricing-list li.dim::before { background: var(--text-muted); }
+    .pricing-list li.dim { color: var(--text-muted); }
+
+    /* ── TIMELINE CHIP ── */
+    .timeline-chip {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      background: rgba(0,229,204,0.07);
+      border: 1px solid rgba(0,229,204,0.2);
+      border-radius: 100px;
+      padding: 0.28rem 0.75rem;
+      margin-bottom: 1rem;
+      width: fit-content;
+    }
+    .timeline-chip svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+    /* ── SCOPE NOTICE BANNER ── */
+    .scope-notice {
+      background: rgba(0,229,204,0.04);
+      border: 1px solid rgba(0,229,204,0.18);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2rem;
+      display: grid;
+      gap: 0.6rem 1.5rem;
+      grid-template-columns: auto 1fr;
+      align-items: flex-start;
+    }
+    .scope-notice-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(0,229,204,0.08);
+      border: 1px solid rgba(0,229,204,0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .scope-notice-icon svg { width: 16px; height: 16px; color: var(--cyan); }
+    .scope-notice-body { }
+    .scope-notice-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.35rem;
+      letter-spacing: 0.02em;
+    }
+    .scope-notice-text {
+      font-size: 0.78rem; color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .scope-notice-text strong { color: var(--text-dim); font-weight: 600; }
+    .scope-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 0.7rem;
+      grid-column: 1 / -1;
+    }
+    .scope-tag {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.22rem 0.6rem;
+    }
+
+    /* ── TIMELINE DISCLAIMER FOOTER (below cards) ── */
+    .timeline-disclaimer {
+      margin-top: 2rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; gap: 1rem; align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .timeline-disclaimer-icon { color: var(--cyan); flex-shrink: 0; margin-top: 0.1rem; }
+    .timeline-disclaimer-icon svg { width: 15px; height: 15px; }
+    .timeline-disclaimer p {
+      font-size: 0.75rem; color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .timeline-disclaimer p strong { color: var(--text-dim); font-weight: 600; }
+
+    .btn-pricing {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.06em;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      transition: all 0.2s;
+    }
+    .btn-pricing-outline {
+      border: 1px solid rgba(0,229,204,0.3);
+      color: var(--cyan);
+      background: transparent;
+    }
+    .btn-pricing-outline:hover {
+      border-color: var(--cyan);
+      background: rgba(0,229,204,0.05);
+      box-shadow: 0 0 16px rgba(0,229,204,0.1);
+    }
+    .btn-pricing-solid {
+      background: var(--cyan);
+      color: var(--bg);
+      border: none;
+      box-shadow: 0 0 20px rgba(0,229,204,0.25);
+    }
+    .btn-pricing-solid:hover {
+      background: #00fce0;
+      box-shadow: 0 0 32px rgba(0,229,204,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* ── FAQ ── */
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.4rem 0;
+    }
+    .faq-item:first-child { padding-top: 0; }
+    .faq-q {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.6rem;
+      display: flex; align-items: flex-start; gap: 0.8rem;
+    }
+    .faq-q::before {
+      content: '//';
+      color: var(--cyan); font-size: 0.8rem;
+      opacity: 0.7; flex-shrink: 0; margin-top: 0.1em;
+    }
+    .faq-a { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; padding-left: 1.6rem; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--bg-mid);
+      border-top: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 100%, rgba(0,229,204,0.07), transparent);
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative; z-index: 1;
+      text-align: center;
+    }
+    .cta-inner h2 {
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.15; margin-bottom: 1rem;
+    }
+    .cta-inner h2 .accent { color: var(--cyan); }
+    .cta-inner p { font-size: 1rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-wrap: wrap;
+      gap: 1rem; justify-content: space-between; align-items: center;
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-brand span { color: var(--cyan); }
+    .footer-links {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.78rem; color: var(--text-muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-copy {
+      font-size: 0.72rem; color: var(--text-muted);
+      width: 100%; text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── SCAN LINE ── */
+    .scan-line {
+      position: absolute; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--cyan) 50%, transparent 100%);
+      opacity: 0.4;
+      animation: scan 6s linear infinite;
+    }
+    @keyframes scan {
+      0% { top: 0%; }
+      100% { top: 100%; }
+    }
+
+    /* Terminal blink */
+    .blink {
+      animation: blink 1.2s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background effects -->
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <span class="logo-name">Clear<span>Flow</span></span>
+      </a>
+      <nav class="desktop">
+        <a href="#services">Services</a>
+        <a href="#how">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="https://cal.com/kaizenstrategy" class="btn-nav" target="_blank" rel="noopener">
+        Book Free Call →
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="scan-line"></div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        AI Workflow Automation for US Business Owners
+      </div>
+      <h1>
+        Stop Doing Work Your<br>
+        Business Should Be<br>
+        <span class="accent">Doing Itself</span>
+      </h1>
+      <p class="hero-sub">
+        ClearFlow builds AI automation systems that handle your repetitive tasks, follow-ups, lead qualification, and content — so you run your business instead of drowning in it.
+      </p>
+      <div class="hero-cta-group">
+        <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-primary">
+          Book a Free 15-Min Call
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a href="#pricing" class="btn-outline">View Pricing</a>
+      </div>
+      <p class="hero-note">No pitch. No commitment. 15 minutes to map what we'd automate first.</p>
+      <div class="stack-strip">
+        <p class="stack-label">Built on the platforms you already use</p>
+        <span class="stack-chip">Zapier</span>
+        <span class="stack-chip">Make</span>
+        <span class="stack-chip">n8n</span>
+        <span class="stack-chip">Power Automate</span>
+        <span class="stack-chip">GoHighLevel</span>
+        <span class="stack-chip">OpenAI</span>
+      </div>
+    </section>
+
+    <!-- ── PROBLEM ── -->
+    <section class="section problem-section">
+      <div class="container">
+        <div class="problem-grid">
+          <div class="reveal">
+            <p class="eyebrow">The Reality</p>
+            <h2 style="font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 1rem;">
+              You're running the business. And also doing everything <span style="color:var(--cyan)">inside</span> it.
+            </h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1rem;">
+              Most business owners we talk to spend 10–20 hours a week on tasks that could be automated today. Not someday. <strong style="color: var(--text);">Today.</strong>
+            </p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.75;">
+              Follow-up emails. Lead intake. Content repurposing. File management. CRM updates. Appointment reminders. None of it needs you. It just hasn't been set up yet.
+            </p>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <div class="problem-stat-block">
+              <div class="problem-stat">
+                <div class="num">20hrs</div>
+                <div class="label">Average weekly hours lost to manual tasks</div>
+              </div>
+              <div class="problem-stat">
+                <div class="num">80%</div>
+                <div class="label">Of repetitive work is automatable with today's AI tools</div>
+              </div>
+              <div class="problem-stat">
+                <div class="num">3–5</div>
+                <div class="label">Business days to go live on your first automation</div>
+              </div>
+              <div class="problem-stat">
+                <div class="num">$0</div>
+                <div class="label">Cost to find out what we'd automate first — 15-min call</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SERVICES ── -->
+    <section id="services" class="section">
+      <div class="container">
+        <div style="text-align:center; margin-bottom: 3rem;" class="reveal">
+          <p class="eyebrow" style="justify-content:center;">What Gets Automated</p>
+          <h2 style="font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 800; color: var(--white); max-width: 560px; margin: 0 auto; line-height: 1.2;">
+            The work that slows you down — <span style="color:var(--cyan)">handed to AI</span>
+          </h2>
+        </div>
+        <div class="services-grid reveal">
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Lead Qualification</h3>
+            <p>Inbound leads scored, tagged, and routed automatically. Your sales time goes to the ones that close — not the ones that don't.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>CRM Management</h3>
+            <p>Contacts updated, pipelines moved, follow-ups triggered. Your CRM stays accurate and active without anyone touching it.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <h3>AI Content Creation</h3>
+            <p>Repurpose one piece of content into ten. Blog posts, social content, email sequences — generated, formatted, and scheduled.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            </div>
+            <h3>File & Document Management</h3>
+            <p>Uploads named, sorted, and filed the moment they land. No more digging through folders or naming files manually.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3>Appointment & Follow-Up Flows</h3>
+            <p>Booking confirmations, reminders, no-show sequences, and post-appointment follow-ups — all triggered automatically.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <h3>Custom AI Workflows</h3>
+            <p>If you can describe the process, we can automate it. We scope the exact build on your discovery call — no guesswork, no generic templates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section id="how" class="section" style="background: var(--bg-mid); border-top: 1px solid var(--border);">
+      <div class="container">
+        <div style="text-align:center; margin-bottom: 3rem;" class="reveal">
+          <p class="eyebrow" style="justify-content:center;">The Process</p>
+          <h2 style="font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 800; color: var(--white); line-height: 1.2;">
+            From discovery call to running automation<br><span style="color:var(--cyan)">in days — not months</span>
+          </h2>
+        </div>
+        <div class="how-steps">
+          <div class="step-card reveal">
+            <span class="step-num">01</span>
+            <span class="step-badge">Step 01</span>
+            <h3>15-Minute Discovery Call</h3>
+            <p>Tell us what's eating your time. We identify the highest-ROI workflow to automate first. No homework required. No tech knowledge needed.</p>
+          </div>
+          <div class="step-card reveal reveal-delay-1">
+            <span class="step-num">02</span>
+            <span class="step-badge">Step 02</span>
+            <h3>We Build It</h3>
+            <p>Our team designs and builds your automation using the tools your business already uses — or the best ones for your stack. You're updated throughout.</p>
+          </div>
+          <div class="step-card reveal reveal-delay-2">
+            <span class="step-num">03</span>
+            <span class="step-badge">Step 03</span>
+            <h3>You Get Time Back</h3>
+            <p>Your workflow runs. You stop doing it. We monitor, maintain, and expand as your business grows. The automation works — you don't have to.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRICING ── -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <div style="text-align:center; margin-bottom: 2.5rem;" class="reveal">
+          <p class="eyebrow" style="justify-content:center;">Pricing</p>
+          <h2 style="font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 800; color: var(--white); margin-bottom: 0.75rem; line-height: 1.2;">
+            Start with one workflow.<br><span style="color:var(--cyan)">Scale as fast as you want.</span>
+          </h2>
+          <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 480px; margin: 0 auto;">
+            All tiers include a free 15-minute discovery call to confirm fit before any commitment.
+          </p>
+        </div>
+
+        <!-- Toggle -->
+        <div class="pricing-toggle reveal">
+          <button class="toggle-btn active" onclick="switchTrack('project', this)">Project-Based</button>
+          <button class="toggle-btn" onclick="switchTrack('retainer', this)">Monthly Retainer</button>
+        </div>
+
+        <!-- Scoping Notice -->
+        <div class="scope-notice reveal">
+          <div class="scope-notice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="scope-notice-body">
+            <p class="scope-notice-title">Heads Up: Completion Times Depend on Scope — and Scope Requires a Thorough Conversation</p>
+            <p class="scope-notice-text">
+              All estimated delivery timelines are contingent on a <strong>clear, detailed scope established before build begins</strong>. The more complex or interconnected your workflows, the more questions we'll ask upfront — and that's intentional. A thorough scoping call means fewer surprises, no rework, and a system that actually fits your business. <strong>Expect a lot of questions in advance.</strong> That's how we protect your timeline and your investment.
+            </p>
+          </div>
+          <div class="scope-tags">
+            <span class="scope-tag">⚡ Timelines start after scope is confirmed</span>
+            <span class="scope-tag">🔍 Complex workflows may require extended scoping</span>
+            <span class="scope-tag">📋 Third-party tool access required before build</span>
+            <span class="scope-tag">🔄 Revisions outside agreed scope may affect timeline</span>
+            <span class="scope-tag">⏱ Response time during build affects delivery date</span>
+          </div>
+        </div>
+        <div id="track-project" class="pricing-track active project-grid">
+
+          <!-- Starter -->
+          <div class="pricing-card reveal">
+            <p class="pricing-tier-label">Project · Tier 1</p>
+            <div class="timeline-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Est. 3–5 business days after scope confirmed
+            </div>
+            <h3>Starter Workflow</h3>
+            <p class="tagline">One process. Automated and delivered.</p>
+            <div class="price-block">
+              <span class="price-amount">$497</span>
+              <span class="price-period">one-time</span>
+            </div>
+            <p class="price-note">Best for: Solo founders automating their first workflow</p>
+            <div class="pricing-divider"></div>
+            <p class="pricing-section-label">Deliverables</p>
+            <ul class="pricing-list">
+              <li>1 custom automation workflow — built and deployed</li>
+              <li>Platform: Zapier, Make, or n8n (your choice)</li>
+              <li>Trigger + action mapping document</li>
+              <li>Loom video walkthrough of your automation</li>
+              <li>1 revision round within 7 days</li>
+              <li>7-day post-launch email support</li>
+              <li>Setup on your existing accounts</li>
+            </ul>
+            <p class="pricing-section-label">Typical Use Cases</p>
+            <ul class="pricing-list">
+              <li class="dim">Lead form → CRM entry</li>
+              <li class="dim">Appointment reminder sequence</li>
+              <li class="dim">Invoice trigger automation</li>
+              <li class="dim">Email follow-up flow</li>
+            </ul>
+            <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-pricing btn-pricing-outline">
+              Book Free Scoping Call
+            </a>
+          </div>
+
+          <!-- Bundle -->
+          <div class="pricing-card reveal reveal-delay-1">
+            <p class="pricing-tier-label">Project · Tier 2</p>
+            <div class="timeline-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Est. 7–10 business days after scope confirmed
+            </div>
+            <h3>Workflow Bundle</h3>
+            <p class="tagline">Three connected automations. Built as a system.</p>
+            <div class="price-block">
+              <span class="price-amount">$1,197</span>
+              <span class="price-period">one-time</span>
+            </div>
+            <p class="price-note">Best for: Business owners solving multiple bottlenecks at once</p>
+            <div class="pricing-divider"></div>
+            <p class="pricing-section-label">Deliverables</p>
+            <ul class="pricing-list">
+              <li>Up to 3 custom automation workflows</li>
+              <li>Full workflow architecture map (visual diagram)</li>
+              <li>Platform setup and cross-tool integration</li>
+              <li>Trigger + action documentation for each workflow</li>
+              <li>Loom walkthrough for each automation</li>
+              <li>2 revision rounds per workflow</li>
+              <li>14-day post-launch email support</li>
+              <li>1 live 30-min handoff call</li>
+            </ul>
+            <p class="pricing-section-label">Typical Use Cases</p>
+            <ul class="pricing-list">
+              <li class="dim">Lead intake + CRM + follow-up as one connected system</li>
+              <li class="dim">Content repurposing pipeline</li>
+              <li class="dim">New client onboarding automation</li>
+            </ul>
+            <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-pricing btn-pricing-outline">
+              Book Free Scoping Call
+            </a>
+          </div>
+
+          <!-- Full Build -->
+          <div class="pricing-card featured reveal reveal-delay-2">
+            <div class="pricing-badge">Best Value</div>
+            <p class="pricing-tier-label">Project · Tier 3</p>
+            <div class="timeline-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Est. 10–15 business days after scope confirmed
+            </div>
+            <h3>Full Operations Build</h3>
+            <p class="tagline">Your business backend. Automated end-to-end.</p>
+            <div class="price-block">
+              <span class="price-amount">$2,497</span>
+              <span class="price-period">one-time</span>
+            </div>
+            <p class="price-note">Best for: Owners ready to stop managing operational tasks entirely</p>
+            <div class="pricing-divider"></div>
+            <p class="pricing-section-label">Deliverables</p>
+            <ul class="pricing-list">
+              <li>Up to 6 custom automation workflows</li>
+              <li>Full operational automation audit included</li>
+              <li>Priority build — delivered in 10 business days</li>
+              <li>Full workflow architecture diagram</li>
+              <li>AI-enhanced workflows (lead scoring, content gen, file AI)</li>
+              <li>CRM automation setup and integration</li>
+              <li>Unlimited revisions within 30-day project window</li>
+              <li>30-day post-launch email support</li>
+              <li>2 live 30-min check-in calls during build</li>
+              <li>1 final handoff strategy call + next-steps roadmap</li>
+            </ul>
+            <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-pricing btn-pricing-solid">
+              Book Free Scoping Call →
+            </a>
+          </div>
+        </div>
+
+        <!-- Retainer Track -->
+        <div id="track-retainer" class="pricing-track retainer-grid">
+
+          <!-- Essentials -->
+          <div class="pricing-card reveal">
+            <p class="pricing-tier-label">Retainer · Essentials</p>
+            <div class="timeline-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Fix turnaround: 48–72 hrs after issue reported
+            </div>
+            <h3>Essentials</h3>
+            <p class="tagline">Basic maintenance. Your automations stay running.</p>
+            <div class="price-block">
+              <span class="price-amount">$297</span>
+              <span class="price-period">/ month</span>
+            </div>
+            <p class="price-note">Best for: Owners who have automations built and need someone watching over them</p>
+            <div class="pricing-divider"></div>
+            <p class="pricing-section-label">What's Included</p>
+            <ul class="pricing-list">
+              <li>Up to 2 active automations monitored</li>
+              <li>Basic troubleshooting and error fixes</li>
+              <li>Minor flow adjustments (triggers, filters, re-routing)</li>
+              <li>Platform update compatibility checks</li>
+              <li>Monthly health check report</li>
+              <li>Email support — 72-hour response window</li>
+            </ul>
+            <div style="margin-top: 1rem; padding: 0.8rem 1rem; background: rgba(0,229,204,0.04); border-left: 2px solid rgba(0,229,204,0.3); border-radius: 0 6px 6px 0;">
+              <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">A technician on retainer — not a strategist. When you're ready to grow, you upgrade.</p>
+            </div>
+            <ul class="pricing-list" style="margin-top: 0.8rem;">
+              <li class="dim">Does not include new workflow builds</li>
+            </ul>
+            <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-pricing btn-pricing-outline">
+              Book Free Discovery Call
+            </a>
+          </div>
+
+          <!-- Maintain -->
+          <div class="pricing-card reveal reveal-delay-1">
+            <p class="pricing-tier-label">Retainer · Maintain</p>
+            <div class="timeline-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              New builds: 5–7 days · Fixes: 48 hrs
+            </div>
+            <h3>Maintain</h3>
+            <p class="tagline">Maintained, optimized, and growing monthly.</p>
+            <div class="price-block">
+              <span class="price-amount">$997</span>
+              <span class="price-period">/ month</span>
+            </div>
+            <p class="price-note">Best for: Owners who want workflows improved monthly — plus one new automation per quarter</p>
+            <div class="pricing-divider"></div>
+            <p class="pricing-section-label">What's Included</p>
+            <ul class="pricing-list">
+              <li>Up to 3 active automations maintained and optimized</li>
+              <li>Monthly performance review — output quality, not just uptime</li>
+              <li>Bug fixes and platform update adjustments</li>
+              <li>1 new workflow build per quarter</li>
+              <li>Priority email support (48-hour response)</li>
+              <li>Monthly summary report and recommendations</li>
+            </ul>
+            <ul class="pricing-list" style="margin-top: 0.5rem;">
+              <li class="dim">Does not include dedicated strategist</li>
+              <li class="dim">Does not include unlimited builds</li>
+            </ul>
+            <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-pricing btn-pricing-outline">
+              Book Free Discovery Call
+            </a>
+          </div>
+
+          <!-- Scale -->
+          <div class="pricing-card featured reveal reveal-delay-2">
+            <div class="pricing-badge">Most Popular</div>
+            <p class="pricing-tier-label">Retainer · Scale</p>
+            <div class="timeline-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              New builds: 3–5 days · Fixes: same day
+            </div>
+            <h3>Scale</h3>
+            <p class="tagline">Unlimited automation. Dedicated strategist. Full operational partner.</p>
+            <div class="price-block">
+              <span class="price-amount">$1,997</span>
+              <span class="price-period">/ month</span>
+            </div>
+            <p class="price-note">Best for: Growing US businesses that want AI automation running across their entire operation</p>
+            <div class="pricing-divider"></div>
+            <p class="pricing-section-label">What's Included</p>
+            <ul class="pricing-list">
+              <li><strong style="color: var(--white);">Unlimited</strong> automation builds and revisions — no caps</li>
+              <li><strong style="color: var(--white);">Dedicated ClearFlow strategist</strong> assigned to your account</li>
+              <li>CRM + lead qualification + AI content + file management — all in scope</li>
+              <li>Weekly 30-min strategy and progress call</li>
+              <li>Weekly performance reporting with actionable recommendations</li>
+              <li><strong style="color: var(--white);">Same-day priority support</strong></li>
+              <li>Custom AI agent builds included</li>
+              <li>Quarterly full automation audit of your operations</li>
+              <li>Proactive expansion — we find what to automate next before you ask</li>
+            </ul>
+            <div style="margin-top: 1rem; padding: 0.8rem 1rem; background: rgba(0,229,204,0.06); border-left: 2px solid var(--cyan); border-radius: 0 6px 6px 0;">
+              <p style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.6;">At $297/month you get stability. At $997/month you get growth. At $1,997/month your business has a dedicated automation team running operations while you focus on revenue.</p>
+            </div>
+            <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-pricing btn-pricing-solid">
+              Book Free Discovery Call →
+            </a>
+          </div>
+        </div>
+
+        <!-- Timeline Disclaimer Footer -->
+        <div class="timeline-disclaimer reveal">
+          <div class="timeline-disclaimer-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <p>
+            <strong>Estimated timelines are guides, not guarantees.</strong> All delivery windows begin only after a complete scope has been agreed upon in writing. Timelines may be affected by: complexity discovered during build, delayed access to third-party tools or credentials, change requests outside the agreed scope, or slow client response during the build phase. The scoping call exists to prevent all of these — the more detail you bring, the faster and cleaner the build. <strong>We ask a lot of questions upfront because that's what protects your timeline.</strong>
+          </p>
+        </div>
+
+      </div>
+    </section>
+    <section id="faq" class="section" style="background: var(--bg-mid); border-top: 1px solid var(--border);">
+      <div class="container">
+        <div style="display:grid; gap: 3rem; grid-template-columns: 1fr;" class="faq-grid">
+          <div class="reveal" style="max-width: 400px;">
+            <p class="eyebrow">FAQ</p>
+            <h2 style="font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 0.8rem;">
+              Questions before<br><span style="color:var(--cyan)">you book?</span>
+            </h2>
+            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;">
+              The 15-minute call answers everything specific to your business. These cover the most common questions we get before that call happens.
+            </p>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <div class="faq-item">
+              <p class="faq-q">Is this only for tech companies?</p>
+              <p class="faq-a">No. Our clients are service businesses, e-commerce operators, agencies, consultants, healthcare practices, and local businesses. If you have a repeatable process that happens more than once a week, we can automate it.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Do I need to know how automation tools work?</p>
+              <p class="faq-a">Not at all. That's our job. You describe what happens in your business — the steps, the handoffs, the bottlenecks. We design and build the system. You get a walkthrough when it's done.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">How fast can you get something running?</p>
+              <p class="faq-a">Most single workflows are live within 3–5 business days of the scoping call. Larger builds (Full Operations, Scale retainer) have a 10-business-day priority window.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">What if I only have 15 minutes right now?</p>
+              <p class="faq-a">That's exactly the call. 15 minutes is enough for us to tell you what we'd automate first, what it would save you per week, and which tier makes sense for your situation. No deck. No pitch.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">What tools do you build on?</p>
+              <p class="faq-a">Zapier, Make, n8n, Power Automate, and GoHighLevel — depending on what fits your stack. We also integrate OpenAI and other AI models for content, scoring, and data enrichment workflows.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Can I start project-based and move to a retainer later?</p>
+              <p class="faq-a">Yes — and it's a natural progression. Most clients start with a Starter or Bundle project to see the work firsthand, then move to a retainer once they know they want ongoing builds and maintenance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="section cta-section">
+      <div class="container cta-inner reveal">
+        <p class="eyebrow" style="justify-content: center;">Initiate an Engagement</p>
+        <h2>
+          Your business should run better<br>
+          <span class="accent">without you doing more</span>
+        </h2>
+        <p>
+          One 15-minute call. No pressure. No proposal deck. Just a clear answer on what we'd automate first and what it's worth to your operation.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center; margin-bottom: 1rem;">
+          <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener" class="btn-primary" style="font-size:1rem; padding: 1rem 2.5rem;">
+            Book Your Free 15-Min Call
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+        <p style="font-size: 0.72rem; color: var(--text-muted);">Confidential · No obligation · Operator-to-operator</p>
+        <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.4rem; opacity: 0.6;">
+          Powered by ClearFlow — a <a href="https://kaizenstrategy.us" style="color: var(--cyan); text-decoration: none;">KaizenStrategy</a> Operating Brand
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#" class="footer-brand">
+        Clear<span>Flow</span>
+      </a>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#how">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://cal.com/kaizenstrategy" target="_blank" rel="noopener">Book a Call</a>
+        <a href="https://kaizenstrategy.us" target="_blank" rel="noopener">KaizenStrategy</a>
+      </div>
+      <p class="footer-copy">
+        © <span id="year"></span> ClearFlow · A KaizenStrategy Operating Brand · All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // FAQ grid responsive
+    const faqGrid = document.querySelector('.faq-grid');
+    function updateFaqGrid() {
+      if (window.innerWidth >= 900) {
+        faqGrid.style.gridTemplateColumns = '1fr 2fr';
+      } else {
+        faqGrid.style.gridTemplateColumns = '1fr';
+      }
+    }
+    updateFaqGrid();
+    window.addEventListener('resize', updateFaqGrid);
+
+    // Pricing toggle
+    function switchTrack(track, btn) {
+      // Update buttons
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Update tracks
+      document.querySelectorAll('.pricing-track').forEach(t => t.classList.remove('active'));
+      document.getElementById('track-' + track).classList.add('active');
+    }
+  </script>
+</body>
+</html>
