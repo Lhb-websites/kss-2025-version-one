@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Expert PPC Optimization Tips That Still Work in 2026 – KaizenStrategy.us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display:['Syne','sans-serif'], body:['DM Sans','sans-serif'] },
+          colors: { ink:'#0d0d0d', bone:'#f5f2ed', mist:'#e8e4de', accent:'#c8ff00', accentDark:'#a0cc00', subtle:'#6b6660', rule:'#d4cfc8' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family:'DM Sans',sans-serif; background:#f5f2ed; color:#0d0d0d; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne',sans-serif; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1.5px; background:#c8ff00; transition:width 0.2s; }
+    .nav-link:hover::after { width:100%; }
+    .cta-glow { animation:pulse-cta 2.5s infinite; }
+    @keyframes pulse-cta { 0%,100%{box-shadow:0 0 0 0 rgba(200,255,0,0.4)} 50%{box-shadow:0 0 0 10px rgba(200,255,0,0)} }
+    .tip-card { transition:transform 0.2s ease, box-shadow 0.2s ease; }
+    .tip-card:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(0,0,0,0.09); }
+    .toc-link { transition:color 0.15s, padding-left 0.15s; }
+    .toc-link:hover { color:#0d0d0d; padding-left:6px; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-bone/95 backdrop-blur border-b border-rule">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="kaizenstrategy-blog.html" class="font-display font-800 text-xl tracking-tight text-ink">
+        Kaizen<span class="text-accentDark">Strategy</span><span class="text-subtle">.us</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-subtle">
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 hover:text-ink transition-colors">Services <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-64 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">PPC Management & PMax Optimization</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">White-Label Paid Search Pods</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Fractional Paid Search Director</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Google Ads Audits & Builds</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Embedded Execution for Founders & Agencies</a>
+          </div>
+        </div>
+        <a href="why-us.html" class="nav-link hover:text-ink transition-colors">Why Us</a>
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 text-ink font-semibold transition-colors">Resources <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-48 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">Blog</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Guides & Templates</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Case Studies</a>
+          </div>
+        </div>
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 hover:text-ink transition-colors">Company <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-48 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">About KaizenStrategy</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Contact</a>
+          </div>
+        </div>
+      </nav>
+      <a href="#audit" class="hidden md:inline-flex items-center gap-2 bg-ink text-accent text-sm font-display font-700 px-5 py-2.5 rounded-full hover:bg-accent hover:text-ink transition-all duration-200 cta-glow">
+        Book a Profit Audit
+      </a>
+      <button class="md:hidden text-ink" onclick="document.getElementById('mob').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mob" class="hidden md:hidden bg-bone border-t border-rule px-6 py-4 space-y-3 text-sm text-subtle">
+      <a href="#" class="block hover:text-ink">Services</a>
+      <a href="why-us.html" class="block hover:text-ink">Why Us</a>
+      <a href="#" class="block text-ink font-semibold">Resources</a>
+      <a href="#" class="block hover:text-ink">Company</a>
+      <a href="#audit" class="block mt-2 bg-ink text-accent font-display font-700 px-4 py-2 rounded-full text-center">Book a Profit Audit</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ARTICLE HEADER -->
+    <section class="max-w-4xl mx-auto px-6 pt-16 pb-10">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="inline-block bg-ink text-accent text-xs font-display font-700 uppercase tracking-widest px-3 py-1 rounded-full">Guide</span>
+        <span class="text-subtle text-xs">PPC Optimization</span>
+      </div>
+      <h1 class="font-display font-800 text-4xl md:text-5xl lg:text-6xl leading-tight text-ink mb-6">
+        10 Expert PPC Optimization Tips That Still Work in 2026
+      </h1>
+      <div class="flex items-center gap-3 text-subtle text-sm mb-8">
+        <img src="https://ui-avatars.com/api/?name=Hans+Lacida&background=0d0d0d&color=c8ff00&size=40&font-size=0.4" alt="Hans Lacida" class="w-8 h-8 rounded-full" />
+        <span class="font-medium text-ink">By Hans Lacida</span>
+        <span>•</span>
+        <span>April 11, 2026</span>
+        <span>•</span>
+        <span>9 min read</span>
+      </div>
+      <p class="text-lg text-zinc-600 leading-relaxed border-l-4 border-accent pl-5 mb-10">
+        Automation didn't kill PPC strategy — it raised the stakes. Here are ten fundamentals that separate profitable accounts from money pits in 2026.
+      </p>
+    </section>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="max-w-7xl mx-auto px-6 pb-20 flex flex-col lg:flex-row gap-12">
+
+      <!-- TOC SIDEBAR -->
+      <aside class="hidden lg:block w-56 shrink-0">
+        <div class="sticky top-24">
+          <p class="font-display font-700 text-xs uppercase tracking-widest text-subtle mb-4">On this page</p>
+          <nav class="space-y-2 text-sm text-subtle border-l-2 border-rule pl-4">
+            <a href="#tip1" class="toc-link block hover:text-ink">1. Separate brand vs. non-brand</a>
+            <a href="#tip2" class="toc-link block hover:text-ink">2. Audit your negatives weekly</a>
+            <a href="#tip3" class="toc-link block hover:text-ink">3. Segment by intent</a>
+            <a href="#tip4" class="toc-link block hover:text-ink">4. Feed PMax audience signals</a>
+            <a href="#tip5" class="toc-link block hover:text-ink">5. Track margin, not ROAS</a>
+            <a href="#tip6" class="toc-link block hover:text-ink">6. Test RSA headlines in isolation</a>
+            <a href="#tip7" class="toc-link block hover:text-ink">7. Use asset group segmentation</a>
+            <a href="#tip8" class="toc-link block hover:text-ink">8. Leverage first-party data</a>
+            <a href="#tip9" class="toc-link block hover:text-ink">9. Monitor search impression share</a>
+            <a href="#tip10" class="toc-link block hover:text-ink">10. Review placement reports</a>
+            <a href="#audit" class="toc-link block hover:text-ink mt-4 font-medium">Get a free audit →</a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- ARTICLE BODY -->
+      <article class="flex-1 min-w-0 max-w-3xl space-y-6">
+
+        <div id="tip1" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">01</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Separate brand from non-brand — always</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">Mixing brand and non-brand in the same campaign inflates ROAS and hides poor performance on acquisition terms. Run brand in its own campaign with a separate budget and bidding strategy. This gives you clear visibility into what's actually growing your customer base versus capturing existing demand.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip2" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">02</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Audit your negative keywords every week</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">One of the fastest ways to reduce wasted spend. Pull your search terms report weekly, flag anything irrelevant or cannibalising brand, and add negatives at the campaign or account level. Most accounts have 20–40% of spend going to junk terms that a proper negative list would have blocked. This is especially critical after enabling Performance Max.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip3" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">03</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Segment campaigns by purchase intent</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">Top-of-funnel awareness terms, mid-funnel comparison terms, and bottom-of-funnel buy-now terms behave completely differently. Grouping them together means your bids and budgets serve a blended average that wins nothing. Segment campaigns by intent tier and let each find its own efficient CPA.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip4" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">04</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Feed PMax strong audience signals</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">PMax learns from signals — customer match lists, remarketing audiences, and custom segments based on search intent. Without them it starts cold and wastes weeks of budget. Upload your buyer list, build custom segments around your top converting search terms, and add your remarketing lists before you launch. The machine learns faster with better inputs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip5" class="tip-card bg-white border border-rule rounded-2xl p-8 border-l-4 border-l-accent">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">05</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Track contribution margin, not just ROAS</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm mb-3">Google's reported ROAS ignores COGS, shipping, returns, and platform fees. A 5x ROAS on a product with 20% margins is losing money. Build a simple margin tracker — even a spreadsheet — that maps ad spend to gross profit. Use this as your true north, and set tROAS targets based on what margin you actually need, not what looks good in the dashboard.</p>
+              <p class="text-xs text-accentDark font-display font-700 uppercase tracking-wider">Most impactful tip ↑</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip6" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">06</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Test RSA headlines in isolation</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">Don't pin all 15 headlines and call it done. Pin one or two headlines to control positions, then rotate test variants in the remaining slots. Use the asset performance report to identify low-rated assets and replace them systematically. RSA optimisation is an ongoing process, not a one-time setup.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip7" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">07</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Use asset group segmentation in PMax</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">One asset group for everything is the most common PMax mistake. Segment by product category, margin tier, or audience type. This gives you control over which assets serve which products, allows smarter budget allocation, and makes it possible to isolate what's actually performing versus what the algorithm is favouring.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip8" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">08</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Leverage first-party data every quarter</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">Upload fresh customer match lists at least quarterly. Segment by LTV — high-value buyers, one-time buyers, lapsed customers. Use these to bid more aggressively on look-alike segments and suppress irrelevant audiences. First-party data is your moat against the deprecation of third-party signals.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip9" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">09</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Monitor search impression share on brand terms</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">If competitors are running on your brand terms and your impression share drops below 90%, you're ceding your cheapest conversions. Keep a weekly eye on brand impression share and defend it aggressively — it's almost always the highest-ROAS traffic in the account.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tip10" class="tip-card bg-white border border-rule rounded-2xl p-8">
+          <div class="flex items-start gap-5">
+            <div class="font-display font-800 text-5xl text-mist leading-none shrink-0 select-none">10</div>
+            <div>
+              <h2 class="font-display font-700 text-xl text-ink mb-3">Review PMax placement reports monthly</h2>
+              <p class="text-zinc-600 leading-relaxed text-sm">PMax can serve ads across Gmail, YouTube, Display, Discover, and Maps. Many placements drive zero-intent clicks that burn budget. Pull the placement report monthly, exclude low-quality sites and apps, and use placement-level data to inform your asset strategy. This single step often recovers 10–20% of wasted spend.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RELATED RESOURCES -->
+        <div class="border-t border-rule pt-8 mt-4">
+          <p class="font-display font-700 text-subtle text-xs uppercase tracking-widest mb-5">Continue reading</p>
+          <div class="space-y-3">
+            <a href="pmax-steering.html" class="flex items-center gap-3 group">
+              <span class="text-accentDark font-display font-700">→</span>
+              <span class="text-zinc-700 group-hover:text-ink transition-colors text-sm underline underline-offset-2 decoration-rule group-hover:decoration-ink">How to Properly Steer Performance Max Campaigns</span>
+            </a>
+            <a href="shopify-audit-checklist.html" class="flex items-center gap-3 group">
+              <span class="text-accentDark font-display font-700">→</span>
+              <span class="text-zinc-700 group-hover:text-ink transition-colors text-sm underline underline-offset-2 decoration-rule group-hover:decoration-ink">Free Google Ads Audit Checklist for Shopify Brands</span>
+            </a>
+            <a href="kaizenstrategy-blog.html" class="flex items-center gap-3 group">
+              <span class="text-accentDark font-display font-700">→</span>
+              <span class="text-zinc-700 group-hover:text-ink transition-colors text-sm underline underline-offset-2 decoration-rule group-hover:decoration-ink">The 10 Best PPC Agencies for US Ecom Founders in 2026</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div id="audit" class="bg-ink rounded-3xl p-10 text-center mt-8">
+          <p class="font-display font-800 text-accent text-3xl md:text-4xl leading-tight mb-4">Want us to apply all 10 to your account?</p>
+          <p class="text-bone/70 leading-relaxed mb-8 max-w-lg mx-auto">Book a free Profit Leak Audit — I'll go through your account and show you exactly what's bleeding budget. No fluff, no sales deck.</p>
+          <a href="#" class="inline-flex items-center gap-2 bg-accent text-ink font-display font-800 px-8 py-4 rounded-full text-lg hover:bg-accentDark transition-colors duration-200">
+            Book your free Profit Leak Audit →
+          </a>
+        </div>
+
+        <!-- AUTHOR -->
+        <div class="bg-mist rounded-2xl p-8 flex items-start gap-6">
+          <img src="https://ui-avatars.com/api/?name=Hans+Lacida&background=0d0d0d&color=c8ff00&size=80&font-size=0.4" alt="Hans Lacida" class="w-16 h-16 rounded-full shrink-0" />
+          <div>
+            <p class="font-display font-700 text-ink text-lg">Hans Lacida</p>
+            <p class="text-subtle text-sm mb-3">Founder, KaizenStrategy.us</p>
+            <p class="text-zinc-600 text-sm leading-relaxed">10+ years hands-on PPC. $10M+ ad spend managed. Focused on clean structure, profit-first optimization, and embedded execution for US ecom founders & SEO agencies.</p>
+          </div>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="bg-ink text-bone/60 text-sm px-6 py-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="font-display font-700 text-bone">Kaizen<span class="text-accent">Strategy</span>.us</p>
+      <p>© 2026 KaizenStrategy.us</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-bone transition-colors">Privacy</a>
+        <a href="#" class="hover:text-bone transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

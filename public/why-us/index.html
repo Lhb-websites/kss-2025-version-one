@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Us – KaizenStrategy.us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ['Syne','sans-serif'], body: ['DM Sans','sans-serif'] },
+          colors: { ink:'#0d0d0d', bone:'#f5f2ed', mist:'#e8e4de', accent:'#c8ff00', accentDark:'#a0cc00', subtle:'#6b6660', rule:'#d4cfc8' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family:'DM Sans',sans-serif; background:#f5f2ed; color:#0d0d0d; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne',sans-serif; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1.5px; background:#c8ff00; transition:width 0.2s; }
+    .nav-link:hover::after { width:100%; }
+    .cta-glow { animation: pulse-cta 2.5s infinite; }
+    @keyframes pulse-cta { 0%,100%{box-shadow:0 0 0 0 rgba(200,255,0,0.4)} 50%{box-shadow:0 0 0 10px rgba(200,255,0,0)} }
+    .card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(0,0,0,0.09); }
+    .num { font-variant-numeric: tabular-nums; }
+    .fade-in { opacity:0; transform:translateY(18px); animation: fadein 0.6s forwards; }
+    @keyframes fadein { to { opacity:1; transform:translateY(0); } }
+    .fade-in:nth-child(1){animation-delay:0s}
+    .fade-in:nth-child(2){animation-delay:0.1s}
+    .fade-in:nth-child(3){animation-delay:0.2s}
+    .fade-in:nth-child(4){animation-delay:0.3s}
+    .fade-in:nth-child(5){animation-delay:0.4s}
+    .fade-in:nth-child(6){animation-delay:0.5s}
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-bone/95 backdrop-blur border-b border-rule">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="kaizenstrategy-blog.html" class="font-display font-800 text-xl tracking-tight text-ink">
+        Kaizen<span class="text-accentDark">Strategy</span><span class="text-subtle">.us</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-subtle">
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 hover:text-ink transition-colors">Services <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-64 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">PPC Management & PMax Optimization</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">White-Label Paid Search Pods</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Fractional Paid Search Director</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Google Ads Audits & Builds</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Embedded Execution for Founders & Agencies</a>
+          </div>
+        </div>
+        <a href="why-us.html" class="nav-link text-ink font-semibold transition-colors">Why Us</a>
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 hover:text-ink transition-colors">Resources <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-48 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">Blog</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Guides & Templates</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Case Studies</a>
+          </div>
+        </div>
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 hover:text-ink transition-colors">Company <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-48 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">About KaizenStrategy</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Contact</a>
+          </div>
+        </div>
+      </nav>
+      <a href="#audit" class="hidden md:inline-flex items-center gap-2 bg-ink text-accent text-sm font-display font-700 px-5 py-2.5 rounded-full hover:bg-accent hover:text-ink transition-all duration-200 cta-glow">
+        Book a Profit Audit
+      </a>
+      <button class="md:hidden text-ink" onclick="document.getElementById('mob').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mob" class="hidden md:hidden bg-bone border-t border-rule px-6 py-4 space-y-3 text-sm text-subtle">
+      <a href="#" class="block hover:text-ink">Services</a>
+      <a href="why-us.html" class="block text-ink font-semibold">Why Us</a>
+      <a href="#" class="block hover:text-ink">Resources</a>
+      <a href="#" class="block hover:text-ink">Company</a>
+      <a href="#audit" class="block mt-2 bg-ink text-accent font-display font-700 px-4 py-2 rounded-full text-center">Book a Profit Audit</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
+      <p class="font-display text-xs uppercase tracking-widest text-subtle mb-5">Why KaizenStrategy</p>
+      <h1 class="font-display font-800 text-5xl md:text-6xl lg:text-7xl leading-none text-ink mb-7">
+        Built for founders.<br/>
+        <span class="text-accentDark">Not boardrooms.</span>
+      </h1>
+      <p class="text-zinc-600 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+        Most agencies optimise for their own revenue — more accounts, more retainers, more junior hands. We optimise for one thing: your actual profit. Here's how we're different, and why that matters.
+      </p>
+      <a href="#audit" class="inline-flex items-center gap-2 bg-ink text-accent font-display font-700 px-7 py-3.5 rounded-full hover:bg-accent hover:text-ink transition-all duration-200 cta-glow text-sm">
+        Book a free Profit Leak Audit →
+      </a>
+    </section>
+
+    <!-- STAT STRIP -->
+    <section class="border-y border-rule bg-white">
+      <div class="max-w-5xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <p class="font-display font-800 text-4xl text-ink num">$10M+</p>
+          <p class="text-subtle text-sm mt-1">Ad spend managed</p>
+        </div>
+        <div>
+          <p class="font-display font-800 text-4xl text-ink num">10+</p>
+          <p class="text-subtle text-sm mt-1">Years hands-on PPC</p>
+        </div>
+        <div>
+          <p class="font-display font-800 text-4xl text-ink num">0</p>
+          <p class="text-subtle text-sm mt-1">Junior handoffs</p>
+        </div>
+        <div>
+          <p class="font-display font-800 text-4xl text-ink num">1%</p>
+          <p class="text-subtle text-sm mt-1">Better, every day</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFFERENTIATORS -->
+    <section class="max-w-5xl mx-auto px-6 py-20">
+      <p class="font-display text-xs uppercase tracking-widest text-subtle mb-12 text-center">What sets us apart</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <div class="card fade-in bg-white border border-rule rounded-2xl p-8">
+          <div class="w-10 h-10 bg-ink rounded-xl flex items-center justify-center mb-5">
+            <span class="text-accent text-lg">→</span>
+          </div>
+          <h3 class="font-display font-700 text-xl text-ink mb-3">Senior hands, every time</h3>
+          <p class="text-zinc-600 leading-relaxed text-sm">
+            No bait-and-switch. You get Hans — 10+ years, former Google Account Strategist, $10M+ managed — doing the actual work. Not a junior account manager three layers removed from strategy.
+          </p>
+        </div>
+
+        <div class="card fade-in bg-white border border-rule rounded-2xl p-8">
+          <div class="w-10 h-10 bg-ink rounded-xl flex items-center justify-center mb-5">
+            <span class="text-accent text-lg">$</span>
+          </div>
+          <h3 class="font-display font-700 text-xl text-ink mb-3">Profit-first, not ROAS-first</h3>
+          <p class="text-zinc-600 leading-relaxed text-sm">
+            Google's reported ROAS is a vanity number. We track contribution margin, blended ROAS after returns, and CAC payback. If it doesn't improve your cash position, it doesn't count.
+          </p>
+        </div>
+
+        <div class="card fade-in bg-white border border-rule rounded-2xl p-8">
+          <div class="w-10 h-10 bg-ink rounded-xl flex items-center justify-center mb-5">
+            <span class="text-accent text-lg">⚙</span>
+          </div>
+          <h3 class="font-display font-700 text-xl text-ink mb-3">We steer PMax — we don't worship it</h3>
+          <p class="text-zinc-600 leading-relaxed text-sm">
+            Most agencies hand the keys to Google's automation and call it a day. We build clean structure, strong negatives, brand segmentation, and proper audience signals so the machine works for you, not against you.
+          </p>
+        </div>
+
+        <div class="card fade-in bg-white border border-rule rounded-2xl p-8">
+          <div class="w-10 h-10 bg-ink rounded-xl flex items-center justify-center mb-5">
+            <span class="text-accent text-lg">◎</span>
+          </div>
+          <h3 class="font-display font-700 text-xl text-ink mb-3">Embedded, not outsourced</h3>
+          <p class="text-zinc-600 leading-relaxed text-sm">
+            Whether you're a founder running your own brand or an SEO agency adding paid search, we plug in as an invisible extension of your team — full white-label available, zero drama.
+          </p>
+        </div>
+
+        <div class="card fade-in bg-white border border-rule rounded-2xl p-8">
+          <div class="w-10 h-10 bg-ink rounded-xl flex items-center justify-center mb-5">
+            <span class="text-accent text-lg">∞</span>
+          </div>
+          <h3 class="font-display font-700 text-ink text-xl mb-3">Continuous improvement (Kaizen)</h3>
+          <p class="text-zinc-600 leading-relaxed text-sm">
+            Kaizen means 1% better, every day. Not a big quarterly review — constant iteration on structure, bids, assets, and creative. Small compounding improvements that show up on your P&L.
+          </p>
+        </div>
+
+        <div class="card fade-in bg-white border border-rule rounded-2xl p-8">
+          <div class="w-10 h-10 bg-ink rounded-xl flex items-center justify-center mb-5">
+            <span class="text-accent text-lg">✓</span>
+          </div>
+          <h3 class="font-display font-700 text-xl text-ink mb-3">No fluff. Straight talk.</h3>
+          <p class="text-zinc-600 leading-relaxed text-sm">
+            No vanity decks, no buzzword strategy sessions, no hiding behind dashboards. You get honest numbers, clear explanations, and direct communication — exactly what founders need.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VS TABLE -->
+    <section class="max-w-4xl mx-auto px-6 pb-20">
+      <h2 class="font-display font-800 text-3xl text-ink mb-8 text-center">KaizenStrategy vs. the alternatives</h2>
+      <div class="bg-white border border-rule rounded-2xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-rule">
+              <th class="text-left p-5 font-display font-700 text-ink w-1/3">What matters</th>
+              <th class="text-center p-5 font-display font-700 text-accentDark w-1/3">KaizenStrategy</th>
+              <th class="text-center p-5 font-display font-700 text-subtle w-1/3">Big agencies</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-rule text-zinc-600">
+            <tr>
+              <td class="p-5">Who touches your account</td>
+              <td class="p-5 text-center text-ink font-medium">Senior operator</td>
+              <td class="p-5 text-center text-subtle">Junior AM</td>
+            </tr>
+            <tr class="bg-mist/40">
+              <td class="p-5">Primary KPI</td>
+              <td class="p-5 text-center text-ink font-medium">Profit margin</td>
+              <td class="p-5 text-center text-subtle">Reported ROAS</td>
+            </tr>
+            <tr>
+              <td class="p-5">PMax approach</td>
+              <td class="p-5 text-center text-ink font-medium">Steered & structured</td>
+              <td class="p-5 text-center text-subtle">Set & forget</td>
+            </tr>
+            <tr class="bg-mist/40">
+              <td class="p-5">White-label capability</td>
+              <td class="p-5 text-center text-ink font-medium">Full, seamless</td>
+              <td class="p-5 text-center text-subtle">Rarely</td>
+            </tr>
+            <tr>
+              <td class="p-5">Communication</td>
+              <td class="p-5 text-center text-ink font-medium">Direct, no layers</td>
+              <td class="p-5 text-center text-subtle">Account manager relay</td>
+            </tr>
+            <tr class="bg-mist/40">
+              <td class="p-5">Overhead cost</td>
+              <td class="p-5 text-center text-ink font-medium">Lean</td>
+              <td class="p-5 text-center text-subtle">High (priced in)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL PLACEHOLDER -->
+    <section class="bg-ink text-bone py-20 px-6 mb-0">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-bone/40 font-display text-xs uppercase tracking-widest mb-8">What founders say</p>
+        <blockquote class="font-display font-700 text-2xl md:text-3xl text-bone leading-snug mb-6">
+          "Finally someone who talks about margin, not just ROAS. Hans found $4k/mo in wasted spend in the first week."
+        </blockquote>
+        <p class="text-bone/50 text-sm">— DTC Supplement Brand, US</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="audit" class="max-w-3xl mx-auto px-6 py-24 text-center">
+      <h2 class="font-display font-800 text-4xl md:text-5xl text-ink mb-5 leading-tight">
+        See where you're<br/><span class="text-accentDark">leaking money.</span>
+      </h2>
+      <p class="text-zinc-600 leading-relaxed mb-10 max-w-xl mx-auto">
+        Book a free Profit Leak Audit. I'll review your Google Ads account and tell you exactly what's wasting budget and what to fix — straight talk, no sales deck.
+      </p>
+      <a href="#" class="inline-flex items-center gap-2 bg-ink text-accent font-display font-700 px-8 py-4 rounded-full hover:bg-accent hover:text-ink transition-all duration-200 cta-glow text-base">
+        Book your free Profit Leak Audit →
+      </a>
+      <p class="text-subtle text-xs mt-5">No pitch deck. No obligation. Just honest feedback.</p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-bone/60 text-sm px-6 py-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="font-display font-700 text-bone">Kaizen<span class="text-accent">Strategy</span>.us</p>
+      <p>© 2026 KaizenStrategy.us</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-bone transition-colors">Privacy</a>
+        <a href="#" class="hover:text-bone transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
