@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Google Ads Audit Checklist for Shopify Brands – KaizenStrategy.us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display:['Syne','sans-serif'], body:['DM Sans','sans-serif'] },
+          colors: { ink:'#0d0d0d', bone:'#f5f2ed', mist:'#e8e4de', accent:'#c8ff00', accentDark:'#a0cc00', subtle:'#6b6660', rule:'#d4cfc8' }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family:'DM Sans',sans-serif; background:#f5f2ed; color:#0d0d0d; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne',sans-serif; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1.5px; background:#c8ff00; transition:width 0.2s; }
+    .nav-link:hover::after { width:100%; }
+    .cta-glow { animation:pulse-cta 2.5s infinite; }
+    @keyframes pulse-cta { 0%,100%{box-shadow:0 0 0 0 rgba(200,255,0,0.4)} 50%{box-shadow:0 0 0 10px rgba(200,255,0,0)} }
+    .check-item { transition: background 0.15s; }
+    .check-item:hover { background: #e8e4de; }
+    .check-input:checked + label { text-decoration: line-through; color: #a0a09a; }
+    .check-input:checked ~ .check-badge { background: #c8ff00; color: #0d0d0d; }
+    .section-card { transition:transform 0.2s ease, box-shadow 0.2s ease; }
+    .section-card:hover { box-shadow:0 4px 24px rgba(0,0,0,0.07); }
+    .progress-bar { transition: width 0.4s ease; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-bone/95 backdrop-blur border-b border-rule">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="kaizenstrategy-blog.html" class="font-display font-800 text-xl tracking-tight text-ink">
+        Kaizen<span class="text-accentDark">Strategy</span><span class="text-subtle">.us</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-subtle">
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 hover:text-ink transition-colors">Services <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-64 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">PPC Management & PMax Optimization</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">White-Label Paid Search Pods</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Fractional Paid Search Director</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Google Ads Audits & Builds</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Embedded Execution for Founders & Agencies</a>
+          </div>
+        </div>
+        <a href="why-us.html" class="nav-link hover:text-ink transition-colors">Why Us</a>
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 text-ink font-semibold transition-colors">Resources <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-48 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">Blog</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Guides & Templates</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Case Studies</a>
+          </div>
+        </div>
+        <div class="relative group">
+          <button class="nav-link flex items-center gap-1 hover:text-ink transition-colors">Company <span class="text-xs">▾</span></button>
+          <div class="absolute top-6 left-0 bg-ink text-bone rounded-lg shadow-xl p-4 w-48 hidden group-hover:block text-xs space-y-2 z-50">
+            <a href="#" class="block hover:text-accent transition-colors py-1">About KaizenStrategy</a>
+            <a href="#" class="block hover:text-accent transition-colors py-1">Contact</a>
+          </div>
+        </div>
+      </nav>
+      <a href="#audit" class="hidden md:inline-flex items-center gap-2 bg-ink text-accent text-sm font-display font-700 px-5 py-2.5 rounded-full hover:bg-accent hover:text-ink transition-all duration-200 cta-glow">
+        Book a Profit Audit
+      </a>
+      <button class="md:hidden text-ink" onclick="document.getElementById('mob').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mob" class="hidden md:hidden bg-bone border-t border-rule px-6 py-4 space-y-3 text-sm text-subtle">
+      <a href="#" class="block hover:text-ink">Services</a>
+      <a href="why-us.html" class="block hover:text-ink">Why Us</a>
+      <a href="#" class="block text-ink font-semibold">Resources</a>
+      <a href="#" class="block hover:text-ink">Company</a>
+      <a href="#audit" class="block mt-2 bg-ink text-accent font-display font-700 px-4 py-2 rounded-full text-center">Book a Profit Audit</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HEADER -->
+    <section class="max-w-4xl mx-auto px-6 pt-16 pb-10">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="inline-block bg-accent text-ink text-xs font-display font-700 uppercase tracking-widest px-3 py-1 rounded-full">Free Checklist</span>
+        <span class="text-subtle text-xs">Shopify · Google Ads</span>
+      </div>
+      <h1 class="font-display font-800 text-4xl md:text-5xl lg:text-6xl leading-tight text-ink mb-6">
+        Free Google Ads Audit Checklist for Shopify Brands
+      </h1>
+      <div class="flex items-center gap-3 text-subtle text-sm mb-8">
+        <img src="https://ui-avatars.com/api/?name=Ronald+B.+Smith&background=0d0d0d&color=c8ff00&size=40&font-size=0.4" alt="Hans Lacida" class="w-8 h-8 rounded-full" />
+        <span class="font-medium text-ink">By Hans Lacida</span>
+        <span>•</span>
+        <span>April 11, 2026</span>
+        <span>•</span>
+        <span>Interactive checklist · 7 sections · 35 items</span>
+      </div>
+      <p class="text-lg text-zinc-600 leading-relaxed border-l-4 border-accent pl-5 mb-6">
+        Use this checklist to find profit leaks in your Google Ads account in under 60 minutes. Check off each item as you go — the most common issues are flagged with a ⚠ warning label.
+      </p>
+
+      <!-- PROGRESS BAR -->
+      <div class="bg-white border border-rule rounded-2xl p-6 mb-4">
+        <div class="flex items-center justify-between mb-3">
+          <p class="font-display font-700 text-ink text-sm">Your audit progress</p>
+          <p class="font-display font-700 text-accentDark text-sm" id="progress-label">0 / 35 complete</p>
+        </div>
+        <div class="h-2 bg-mist rounded-full overflow-hidden">
+          <div id="progress-bar" class="h-full bg-accent rounded-full progress-bar" style="width:0%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <div class="max-w-4xl mx-auto px-6 pb-20 space-y-6">
+
+      <!-- SECTION: TRACKING -->
+      <div class="section-card bg-white border border-rule rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-4 px-8 py-5 border-b border-rule bg-mist/50">
+          <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-accent font-display font-800 text-sm shrink-0">A</div>
+          <h2 class="font-display font-700 text-lg text-ink">Conversion Tracking & Data Foundation</h2>
+          <span class="ml-auto text-subtle text-xs font-display">6 items</span>
+        </div>
+        <div class="divide-y divide-rule">
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div>
+              <span class="text-sm text-zinc-700">Google Ads conversion tag is firing on the thank you page (not the cart or add-to-cart)</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div>
+              <span class="text-sm text-zinc-700">Enhanced conversions are configured and passing first-party data (email, phone)</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div>
+              <span class="text-sm text-zinc-700">No duplicate conversion actions — only one "Purchase" conversion counting per order</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div>
+              <span class="text-sm text-zinc-700">Conversion value is passing dynamic revenue (not a flat $1 placeholder)</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div>
+              <span class="text-sm text-zinc-700">Google tag is deployed via GTM (not hardcoded in theme — prevents Shopify update conflicts)</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div>
+              <span class="text-sm text-zinc-700">Google Analytics 4 is linked and importing conversions consistently with Google Ads data</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION: CAMPAIGN STRUCTURE -->
+      <div class="section-card bg-white border border-rule rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-4 px-8 py-5 border-b border-rule bg-mist/50">
+          <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-accent font-display font-800 text-sm shrink-0">B</div>
+          <h2 class="font-display font-700 text-lg text-ink">Campaign Structure</h2>
+          <span class="ml-auto text-subtle text-xs font-display">5 items</span>
+        </div>
+        <div class="divide-y divide-rule">
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Brand terms are in a separate Search campaign (not mixed with non-brand)</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">PMax is NOT running on brand terms (brand exclusion submitted to Google)</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Campaigns are segmented by product category or margin tier (not all products in one campaign)</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Bidding strategy aligns with campaign maturity (manual or tCPA for new, tROAS for mature with enough data)</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Budget allocation reflects margin tier — highest margin products get the most budget</span></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION: KEYWORDS & NEGATIVES -->
+      <div class="section-card bg-white border border-rule rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-4 px-8 py-5 border-b border-rule bg-mist/50">
+          <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-accent font-display font-800 text-sm shrink-0">C</div>
+          <h2 class="font-display font-700 text-lg text-ink">Keywords & Negative Keywords</h2>
+          <span class="ml-auto text-subtle text-xs font-display">5 items</span>
+        </div>
+        <div class="divide-y divide-rule">
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Search terms report reviewed in the last 7 days — irrelevant terms identified</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Account-level negative keyword list exists and is applied to all campaigns</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Competitor brand terms are negated (unless you have a deliberate conquest campaign)</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Broad match keywords have audience signals or are tightly monitored (not running uncontrolled)</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">No duplicate keywords across campaigns at the same match type (internal keyword cannibalization)</span></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION: PMAX -->
+      <div class="section-card bg-white border border-rule rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-4 px-8 py-5 border-b border-rule bg-mist/50">
+          <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-accent font-display font-800 text-sm shrink-0">D</div>
+          <h2 class="font-display font-700 text-lg text-ink">Performance Max</h2>
+          <span class="ml-auto text-subtle text-xs font-display">6 items</span>
+        </div>
+        <div class="divide-y divide-rule">
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Multiple asset groups exist — segmented by product category or audience type (not one group for everything)</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Audience signals are populated — Customer Match list, remarketing lists, and custom search intent segments</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Asset quality ratings reviewed — "Low" rated assets identified and queued for replacement</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Placement report reviewed in the last 30 days — low-quality app and site placements excluded</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Video assets included (even a simple product slideshow) — without video PMax limits YouTube placements</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Search themes are set in the asset group to guide Google toward your most relevant search queries</span></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION: SHOPPING FEED -->
+      <div class="section-card bg-white border border-rule rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-4 px-8 py-5 border-b border-rule bg-mist/50">
+          <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-accent font-display font-800 text-sm shrink-0">E</div>
+          <h2 class="font-display font-700 text-lg text-ink">Merchant Center & Shopping Feed</h2>
+          <span class="ml-auto text-subtle text-xs font-display">5 items</span>
+        </div>
+        <div class="divide-y divide-rule">
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">No active product disapprovals in Merchant Center — check Diagnostics tab</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Product titles include primary keyword + brand + key attribute (size, color, material) in the first 70 characters</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">GTINs are populated for all branded products (missing GTINs limit Shopping impression eligibility)</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Feed syncs automatically (Shopify → Merchant Center connection is active and refreshing daily)</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Custom labels are set on products (e.g., margin tier: high/mid/low) to enable budget segmentation in campaigns</span></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION: ADS & CREATIVE -->
+      <div class="section-card bg-white border border-rule rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-4 px-8 py-5 border-b border-rule bg-mist/50">
+          <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-accent font-display font-800 text-sm shrink-0">F</div>
+          <h2 class="font-display font-700 text-lg text-ink">Ad Creative & Copy</h2>
+          <span class="ml-auto text-subtle text-xs font-display">4 items</span>
+        </div>
+        <div class="divide-y divide-rule">
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">RSAs have at least 10 headlines and 4 descriptions — "Poor" ad strength is not acceptable</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Ad copy includes a specific benefit or number (not generic "Shop Now. High Quality. Free Shipping.")</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Sitelink, callout, structured snippet, and promotion extensions are active and up to date</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Final URLs lead to the correct, fast-loading product or collection page (not the homepage)</span></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION: REPORTING -->
+      <div class="section-card bg-white border border-rule rounded-2xl overflow-hidden">
+        <div class="flex items-center gap-4 px-8 py-5 border-b border-rule bg-mist/50">
+          <div class="w-8 h-8 bg-ink rounded-lg flex items-center justify-center text-accent font-display font-800 text-sm shrink-0">G</div>
+          <h2 class="font-display font-700 text-lg text-ink">Reporting & Profit Measurement</h2>
+          <span class="ml-auto text-subtle text-xs font-display">4 items</span>
+        </div>
+        <div class="divide-y divide-rule">
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">You are tracking blended ROAS after returns — not just Google's in-platform ROAS number</span>
+              <span class="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-display font-700">⚠ Common miss</span>
+            </div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">CAC (customer acquisition cost) is being tracked by campaign — not just overall</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">A weekly reporting cadence is in place — someone reviews performance data at least once per week</span></div>
+          </label>
+          <label class="check-item flex items-start gap-4 px-8 py-4 cursor-pointer">
+            <input type="checkbox" class="check-input mt-0.5 w-4 h-4 accent-[#c8ff00] shrink-0" onchange="updateProgress()">
+            <div><span class="text-sm text-zinc-700">Brand impression share is monitored — brand campaigns are defending 85%+ impression share</span></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- SCORE RESULT -->
+      <div id="score-box" class="hidden bg-ink text-bone rounded-2xl p-8 text-center">
+        <p class="font-display font-800 text-accent text-4xl mb-2" id="score-text">35/35</p>
+        <p class="text-bone/70 mb-5">Great work — your account has a solid foundation. The next step is optimizing for continuous improvement.</p>
+        <a href="#audit" class="inline-flex items-center gap-2 bg-accent text-ink font-display font-700 px-6 py-3 rounded-full hover:bg-accentDark transition-colors text-sm">
+          Have an expert review what you might have missed →
+        </a>
+      </div>
+
+      <!-- CTA -->
+      <div id="audit" class="bg-ink rounded-3xl p-10 text-center">
+        <p class="font-display font-800 text-accent text-3xl md:text-4xl leading-tight mb-4">Found issues you can't fix alone?</p>
+        <p class="text-bone/70 leading-relaxed mb-8 max-w-lg mx-auto">Book a free Profit Leak Audit and I'll go through your account item by item — no fluff, straight diagnosis, clear next steps.</p>
+        <a href="#" class="inline-flex items-center gap-2 bg-accent text-ink font-display font-800 px-8 py-4 rounded-full text-lg hover:bg-accentDark transition-colors duration-200">
+          Book your free Profit Leak Audit →
+        </a>
+        <p class="text-bone/40 text-xs mt-4">No pitch deck. No obligation. Just straight feedback.</p>
+      </div>
+
+      <!-- RELATED -->
+      <div class="border-t border-rule pt-8">
+        <p class="font-display font-700 text-subtle text-xs uppercase tracking-widest mb-5">Continue reading</p>
+        <div class="space-y-3">
+          <a href="ppc-tips.html" class="flex items-center gap-3 group">
+            <span class="text-accentDark font-display font-700">→</span>
+            <span class="text-zinc-700 group-hover:text-ink transition-colors text-sm underline underline-offset-2 decoration-rule group-hover:decoration-ink">10 Expert PPC Optimization Tips That Still Work in 2026</span>
+          </a>
+          <a href="pmax-steering.html" class="flex items-center gap-3 group">
+            <span class="text-accentDark font-display font-700">→</span>
+            <span class="text-zinc-700 group-hover:text-ink transition-colors text-sm underline underline-offset-2 decoration-rule group-hover:decoration-ink">How to Properly Steer Performance Max Campaigns</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- AUTHOR -->
+      <div class="bg-mist rounded-2xl p-8 flex items-start gap-6">
+        <img src="https://ui-avatars.com/api/?name=Ronald+B.+Smith&background=0d0d0d&color=c8ff00&size=80&font-size=0.4" alt="Ronald B. Smith" class="w-16 h-16 rounded-full shrink-0" />
+        <div>
+          <p class="font-display font-700 text-ink text-lg">Ronald B. Smith</p>
+          <p class="text-subtle text-sm mb-3">PPC SEM Enthusiast, Practitioner & Writer</p>
+          <p class="text-zinc-600 text-sm leading-relaxed">5+ years hands-on in Google Ads & Pay-Per-Click platforms. $1M+ ad spend managed. Focused on clean structure, profit-first optimization, and embedded execution for US ecom founders & SEO agencies.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-ink text-bone/60 text-sm px-6 py-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="font-display font-700 text-bone">Kaizen<span class="text-accent">Strategy</span>.us</p>
+      <p>© 2026 KaizenStrategy.us</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-bone transition-colors">Privacy</a>
+        <a href="#" class="hover:text-bone transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const TOTAL = 35;
+    function updateProgress() {
+      const checked = document.querySelectorAll('.check-input:checked').length;
+      const pct = Math.round((checked / TOTAL) * 100);
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = checked + ' / ' + TOTAL + ' complete';
+      if (checked === TOTAL) {
+        document.getElementById('score-box').classList.remove('hidden');
+        document.getElementById('score-text').textContent = checked + '/' + TOTAL;
+      }
+    }
+  </script>
+
+</body>
+</html>
