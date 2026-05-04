@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Paid Ads Operator Room — Private Membership</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8A6E32;
+    --obsidian: #0D0D0D;
+    --charcoal: #141414;
+    --surface: #1A1A1A;
+    --surface-2: #222222;
+    --border: rgba(201,168,76,0.15);
+    --border-subtle: rgba(255,255,255,0.06);
+    --text-primary: #F5F0E8;
+    --text-secondary: #9A9488;
+    --text-muted: #5A5550;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .serif { font-family: 'Cormorant Garamond', serif; }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* Gold line accent */
+  .gold-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .gold-text { color: var(--gold); }
+  .gold-text-light { color: var(--gold-light); }
+
+  /* Fade in animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .fade-up { animation: fadeUp 0.9s ease forwards; }
+  .fade-up-1 { animation: fadeUp 0.9s 0.1s ease both; }
+  .fade-up-2 { animation: fadeUp 0.9s 0.25s ease both; }
+  .fade-up-3 { animation: fadeUp 0.9s 0.4s ease both; }
+  .fade-up-4 { animation: fadeUp 0.9s 0.55s ease both; }
+  .fade-in { animation: fadeIn 1.2s 0.2s ease both; }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px);
+    background: rgba(13,13,13,0.85);
+  }
+
+  /* Hero */
+  .hero-bg {
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 50%, rgba(201,168,76,0.04) 0%, transparent 60%),
+                var(--obsidian);
+  }
+
+  /* Section */
+  section { position: relative; }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    transition: border-color 0.3s ease;
+  }
+  .card:hover { border-color: var(--border); }
+
+  /* Tier cards */
+  .tier-card {
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .tier-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .tier-card:hover { border-color: var(--border); transform: translateY(-2px); }
+  .tier-card:hover::before { opacity: 1; }
+  .tier-featured {
+    border-color: var(--border) !important;
+    background: linear-gradient(160deg, rgba(201,168,76,0.05) 0%, var(--surface) 50%);
+  }
+  .tier-featured::before { opacity: 1 !important; }
+
+  /* Check mark */
+  .check { color: var(--gold); font-size: 12px; }
+  .cross { color: var(--text-muted); font-size: 12px; }
+
+  /* CTA button */
+  .btn-gold {
+    background: var(--gold);
+    color: #0D0D0D;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    display: inline-block;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 13px 32px;
+    display: inline-block;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    background: transparent;
+    text-decoration: none;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-1px); }
+
+  /* Label */
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  /* Stats */
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  /* Divider */
+  .divider { border-color: var(--border-subtle); }
+
+  /* FAQ */
+  details summary { cursor: pointer; list-style: none; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] summary .faq-icon { transform: rotate(45deg); }
+  .faq-icon { transition: transform 0.25s ease; color: var(--gold); }
+
+  /* Founding badge */
+  .founding-badge {
+    background: rgba(201,168,76,0.12);
+    border: 1px solid var(--border);
+    color: var(--gold-light);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    display: inline-block;
+  }
+
+  /* Horizontal rule ornament */
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--gold-dim);
+    font-size: 18px;
+  }
+  .ornament::before, .ornament::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Price */
+  .price-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 48px;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .tier-grid { grid-template-columns: 1fr !important; }
+    .stats-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;">
+    <div>
+      <span class="label" style="color:var(--text-secondary);letter-spacing:0.2em;">The</span>
+      <span class="serif" style="font-size:18px;font-weight:400;margin-left:6px;color:var(--text-primary);">Paid Ads Operator Room</span>
+    </div>
+    <a href="#tiers" class="btn-gold" style="padding:10px 24px;font-size:11px;">Join Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-bg" style="min-height:100vh;display:flex;align-items:center;padding:120px 32px 80px;">
+  <div style="max-width:1200px;margin:0 auto;width:100%;">
+    <div style="max-width:760px;">
+      <p class="label fade-up-1" style="margin-bottom:24px;">Private membership · Limited to 30 members</p>
+      <h1 class="serif fade-up-2" style="font-size:clamp(48px,7vw,88px);font-weight:300;line-height:1.08;margin-bottom:32px;color:var(--text-primary);">
+        Stop guessing<br>
+        <em style="color:var(--gold);font-style:italic;">with your ad spend.</em>
+      </h1>
+      <p class="fade-up-3" style="font-size:18px;color:var(--text-secondary);max-width:520px;margin-bottom:48px;line-height:1.8;">
+        Get expert eyes on your campaigns every week. Not a course. Direct access to someone who has managed $550M+ in attributed revenue across Google, YouTube, Meta, Amazon, and TikTok.
+      </p>
+      <div class="fade-up-4" style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="#tiers" class="btn-gold">View membership tiers</a>
+        <a href="#about" class="btn-outline">About Hans</a>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="fade-in" style="margin-top:96px;padding-top:48px;border-top:1px solid var(--border-subtle);display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:48px;" class="stats-grid">
+      <div>
+        <p class="stat-num">$550M<span style="font-size:28px;">+</span></p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:8px;letter-spacing:0.04em;">Attributed revenue managed</p>
+      </div>
+      <div>
+        <p class="stat-num">10<span style="font-size:28px;">+</span></p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:8px;letter-spacing:0.04em;">Years in paid acquisition</p>
+      </div>
+      <div>
+        <p class="stat-num">70<span style="font-size:28px;">×</span></p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:8px;letter-spacing:0.04em;">Peak ROAS achieved</p>
+      </div>
+      <div>
+        <p class="stat-num">30</p>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:8px;letter-spacing:0.04em;">Maximum members, ever</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- WHO THIS IS FOR -->
+<section style="padding:96px 32px;background:var(--charcoal);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="reveal">
+      <div>
+        <p class="label" style="margin-bottom:20px;">Who this is for</p>
+        <h2 class="serif" style="font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.2;margin-bottom:32px;">Built for operators,<br><em style="color:var(--gold);">not beginners.</em></h2>
+        <p style="color:var(--text-secondary);font-size:15px;line-height:1.9;">
+          This is a room for e-commerce brand owners who are already in the arena — spending real budget, running real campaigns, and knowing enough to know something isn't working.
+        </p>
+      </div>
+      <div style="padding-top:8px;">
+        <div style="margin-bottom:0;">
+          <div style="display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border-subtle);">
+            <span style="color:var(--gold);font-size:20px;margin-top:2px;">—</span>
+            <p style="color:var(--text-secondary);font-size:15px;">You're running your own Google, Meta, YouTube, TikTok, or Amazon ads</p>
+          </div>
+          <div style="display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border-subtle);">
+            <span style="color:var(--gold);font-size:20px;margin-top:2px;">—</span>
+            <p style="color:var(--text-secondary);font-size:15px;">You're spending $3k–$50k/month and not confident you're getting the most out of it</p>
+          </div>
+          <div style="display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border-subtle);">
+            <span style="color:var(--gold);font-size:20px;margin-top:2px;">—</span>
+            <p style="color:var(--text-secondary);font-size:15px;">You've watched courses but you need someone to look at your actual account</p>
+          </div>
+          <div style="display:flex;gap:20px;padding:24px 0;">
+            <span style="color:var(--gold);font-size:20px;margin-top:2px;">—</span>
+            <p style="color:var(--text-secondary);font-size:15px;">You're tired of agency retainers where no one answers your questions directly</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- TIERS -->
+<section id="tiers" style="padding:96px 32px;background:var(--obsidian);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;" class="reveal">
+      <p class="label" style="margin-bottom:20px;">Membership tiers</p>
+      <h2 class="serif" style="font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.2;">
+        Choose your level of<br><em style="color:var(--gold);">access.</em>
+      </h2>
+    </div>
+
+    <!-- Founding banner -->
+    <div class="reveal" style="background:rgba(201,168,76,0.06);border:1px solid var(--border);padding:20px 32px;margin-bottom:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <span class="founding-badge">Founding offer</span>
+        <p style="font-size:14px;color:var(--text-secondary);">Founding spots are open at half price — locked in for life. Once they fill, they're gone.</p>
+      </div>
+      <p style="font-size:13px;color:var(--gold);white-space:nowrap;margin-left:24px;">Limited availability</p>
+    </div>
+
+    <!-- Tier grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:48px;" class="tier-grid reveal">
+
+      <!-- Operator -->
+      <div class="tier-card" style="padding:40px 32px;">
+        <p class="label" style="color:var(--text-muted);margin-bottom:24px;">The Operator</p>
+        <div style="margin-bottom:8px;">
+          <span style="font-size:11px;color:var(--text-muted);text-decoration:line-through;">$397/mo</span>
+          <span class="founding-badge" style="margin-left:8px;font-size:9px;">Founding</span>
+        </div>
+        <p class="price-num" style="margin-bottom:4px;">$197</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:32px;letter-spacing:0.04em;">per month · 5 founding spots</p>
+        <div class="gold-line" style="margin-bottom:32px;"></div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:40px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Community chat access</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Async Q&A — 48hr response</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Weekly office hours (observer)</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="cross" style="margin-top:2px;">○</span><span style="font-size:14px;color:var(--text-muted);">Hot seat on office hours calls</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="cross" style="margin-top:2px;">○</span><span style="font-size:14px;color:var(--text-muted);">Monthly private 1-on-1 call</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="cross" style="margin-top:2px;">○</span><span style="font-size:14px;color:var(--text-muted);">Direct WhatsApp access</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="cross" style="margin-top:2px;">○</span><span style="font-size:14px;color:var(--text-muted);">Done-with-you account audit</span>
+          </div>
+        </div>
+        <a href="https://whop.com/checkout/plan_vDpWWCkFP9GFQ?utm_source=website-kss&utm_campaign=kaizenstrategy+brand+page" class="btn-outline" style="width:100%;text-align:center;">Join as Operator</a>
+        <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:12px;">Max 20 members</p>
+      </div>
+
+      <!-- Strategist (featured) -->
+      <div class="tier-card tier-featured" style="padding:40px 32px;margin:-16px 0;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+          <p class="label" style="color:var(--gold);">The Strategist</p>
+          <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:var(--gold);color:#0D0D0D;padding:4px 10px;font-weight:500;">Most Popular</span>
+        </div>
+        <div style="margin-bottom:8px;">
+          <span style="font-size:11px;color:var(--text-muted);text-decoration:line-through;">$597/mo</span>
+          <span class="founding-badge" style="margin-left:8px;font-size:9px;">Founding</span>
+        </div>
+        <p class="price-num" style="margin-bottom:4px;color:var(--gold-light);">$297</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:32px;letter-spacing:0.04em;">per month · 3 founding spots</p>
+        <div class="gold-line" style="margin-bottom:32px;"></div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:40px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Community chat access</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Async Q&A — 24hr response</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Weekly office hours + hot seat</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Your account reviewed live</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="cross" style="margin-top:2px;">○</span><span style="font-size:14px;color:var(--text-muted);">Monthly private 1-on-1 call</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="cross" style="margin-top:2px;">○</span><span style="font-size:14px;color:var(--text-muted);">Direct WhatsApp access</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="cross" style="margin-top:2px;">○</span><span style="font-size:14px;color:var(--text-muted);">Done-with-you account audit</span>
+          </div>
+        </div>
+        <a href="https://whop.com/checkout/plan_iaD244mCsphgK?utm_source=website-kss&utm_campaign=kaizenstrategy+brand+page" class="btn-gold" style="width:100%;text-align:center;display:block;">Join as Strategist</a>
+        <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:12px;">Max 15 members</p>
+      </div>
+
+      <!-- Inner Circle -->
+      <div class="tier-card" style="padding:40px 32px;">
+        <p class="label" style="color:var(--text-muted);margin-bottom:24px;">The Inner Circle</p>
+        <div style="margin-bottom:8px;">
+          <span style="font-size:11px;color:var(--text-muted);text-decoration:line-through;">$997/mo</span>
+          <span class="founding-badge" style="margin-left:8px;font-size:9px;">Founding</span>
+        </div>
+        <p class="price-num" style="margin-bottom:4px;">$597</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:32px;letter-spacing:0.04em;">per month · 2 founding spots only</p>
+        <div class="gold-line" style="margin-bottom:32px;"></div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:40px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Everything in Strategist</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Async Q&A — same-day priority</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Monthly private 60-min call</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Direct WhatsApp / DM access</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);">Quarterly account audit (done-with-you)</span>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span class="check">✦</span><span style="font-size:14px;color:var(--text-secondary);font-style:italic;">Priority on all deliverables</span>
+          </div>
+        </div>
+        <a href="https://whop.com/checkout/plan_VnRM0YKsivFDJ?utm_source=website-kss&utm_campaign=kaizenstrategy+brand+page" class="btn-outline" style="width:100%;text-align:center;">Join Inner Circle</a>
+        <p style="font-size:11px;color:var(--gold-dim);text-align:center;margin-top:12px;">Hard cap: 5 members — never expands</p>
+      </div>
+
+    </div>
+
+    <p class="reveal" style="text-align:center;font-size:13px;color:var(--text-muted);">All memberships are monthly. Cancel before your next billing date. Founding rates are locked as long as you remain subscribed.</p>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- PLATFORMS -->
+<section style="padding:80px 32px;background:var(--charcoal);">
+  <div style="max-width:1200px;margin:0 auto;text-align:center;" class="reveal">
+    <p class="label" style="margin-bottom:32px;">Platforms covered</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+      <span style="border:1px solid var(--border-subtle);padding:10px 24px;font-size:13px;color:var(--text-secondary);letter-spacing:0.06em;">Google Search</span>
+      <span style="border:1px solid var(--border-subtle);padding:10px 24px;font-size:13px;color:var(--text-secondary);letter-spacing:0.06em;">YouTube Ads</span>
+      <span style="border:1px solid var(--border-subtle);padding:10px 24px;font-size:13px;color:var(--text-secondary);letter-spacing:0.06em;">Microsoft / Bing Ads</span>
+      <span style="border:1px solid var(--border-subtle);padding:10px 24px;font-size:13px;color:var(--text-secondary);letter-spacing:0.06em;">Meta / Instagram</span>
+      <span style="border:1px solid var(--border-subtle);padding:10px 24px;font-size:13px;color:var(--text-secondary);letter-spacing:0.06em;">Amazon Ads</span>
+      <span style="border:1px solid var(--border-subtle);padding:10px 24px;font-size:13px;color:var(--text-secondary);letter-spacing:0.06em;">TikTok Ads</span>
+    </div>
+    <p style="margin-top:24px;font-size:14px;color:var(--text-muted);">Primary expertise: paid search. All paid media welcome.</p>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- ABOUT -->
+<section id="about" style="padding:96px 32px;background:var(--obsidian);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="reveal">
+      <div>
+        <p class="label" style="margin-bottom:20px;">About Hans</p>
+        <h2 class="serif" style="font-size:clamp(28px,3.5vw,46px);font-weight:300;line-height:1.25;margin-bottom:32px;">
+          I don't sell a course.<br><em style="color:var(--gold);">I work on accounts.</em>
+        </h2>
+        <p style="color:var(--text-secondary);font-size:15px;line-height:1.9;margin-bottom:24px;">
+          I've spent 10+ years in paid search — including time as a Google Account Strategist — and have managed campaigns responsible for over $550M in attributed revenue across e-commerce, B2B, healthcare, and home services.
+        </p>
+        <p style="color:var(--text-secondary);font-size:15px;line-height:1.9;">
+          This membership gives you access to that experience — applied directly to your account, your numbers, your specific problem. Not frameworks. Not theory. Your dashboard.
+        </p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+        <div class="card" style="padding:32px 24px;">
+          <p class="stat-num" style="margin-bottom:8px;">70×</p>
+          <p style="font-size:13px;color:var(--text-muted);">Peak ROAS achieved</p>
+        </div>
+        <div class="card" style="padding:32px 24px;">
+          <p class="stat-num" style="margin-bottom:8px;">50%<span style="font-size:24px;">+</span></p>
+          <p style="font-size:13px;color:var(--text-muted);">Avg CPA reduction</p>
+        </div>
+        <div class="card" style="padding:32px 24px;">
+          <p class="stat-num" style="margin-bottom:8px;">$550M<span style="font-size:24px;">+</span></p>
+          <p style="font-size:13px;color:var(--text-muted);">Revenue attributed</p>
+        </div>
+        <div class="card" style="padding:32px 24px;">
+          <p class="stat-num" style="margin-bottom:8px;">10<span style="font-size:24px;">+</span></p>
+          <p style="font-size:13px;color:var(--text-muted);">Years in paid search</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- FAQ -->
+<section style="padding:96px 32px;background:var(--charcoal);">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;" class="reveal">
+      <p class="label" style="margin-bottom:20px;">Frequently asked</p>
+      <h2 class="serif" style="font-size:clamp(28px,3.5vw,46px);font-weight:300;">Questions.</h2>
+    </div>
+    <div class="reveal">
+      <details style="border-bottom:1px solid var(--border-subtle);padding:0;">
+        <summary style="padding:28px 0;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:15px;color:var(--text-primary);">Do I need to be spending a certain amount on ads?</span>
+          <span class="faq-icon" style="font-size:20px;flex-shrink:0;margin-left:16px;">+</span>
+        </summary>
+        <p style="color:var(--text-secondary);font-size:14px;padding-bottom:28px;line-height:1.8;">No hard minimum, but you'll get the most value if you're actively running campaigns with real budget and real problems to solve. If you're pre-launch or spending under $1k/month, the timing may not be right yet.</p>
+      </details>
+      <details style="border-bottom:1px solid var(--border-subtle);">
+        <summary style="padding:28px 0;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:15px;color:var(--text-primary);">What if my question is about Meta or TikTok, not Google?</span>
+          <span class="faq-icon" style="font-size:20px;flex-shrink:0;margin-left:16px;">+</span>
+        </summary>
+        <p style="color:var(--text-secondary);font-size:14px;padding-bottom:28px;line-height:1.8;">Ask it. Primary expertise is paid search but the room covers Meta, Amazon, and TikTok Ads as well. If it's paid media, it's fair game. Other members may also have direct experience with your specific platform.</p>
+      </details>
+      <details style="border-bottom:1px solid var(--border-subtle);">
+        <summary style="padding:28px 0;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:15px;color:var(--text-primary);">How fast are async questions answered?</span>
+          <span class="faq-icon" style="font-size:20px;flex-shrink:0;margin-left:16px;">+</span>
+        </summary>
+        <p style="color:var(--text-secondary);font-size:14px;padding-bottom:28px;line-height:1.8;">Operator tier: within 48 hours. Strategist: within 24 hours. Inner Circle: same day. All Monday–Friday. Complex questions get detailed answers. Quick questions get quick answers.</p>
+      </details>
+      <details style="border-bottom:1px solid var(--border-subtle);">
+        <summary style="padding:28px 0;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:15px;color:var(--text-primary);">What's the real difference between Strategist and Inner Circle?</span>
+          <span class="faq-icon" style="font-size:20px;flex-shrink:0;margin-left:16px;">+</span>
+        </summary>
+        <p style="color:var(--text-secondary);font-size:14px;padding-bottom:28px;line-height:1.8;">Strategist gets you full group access including hot seats on office hours calls. Inner Circle adds a monthly private 60-min call, direct WhatsApp access, and a quarterly deep-dive audit of your actual account. Inner Circle is capped at 5 members permanently — it never expands.</p>
+      </details>
+      <details style="border-bottom:1px solid var(--border-subtle);">
+        <summary style="padding:28px 0;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:15px;color:var(--text-primary);">Can I cancel anytime?</span>
+          <span class="faq-icon" style="font-size:20px;flex-shrink:0;margin-left:16px;">+</span>
+        </summary>
+        <p style="color:var(--text-secondary);font-size:14px;padding-bottom:28px;line-height:1.8;">Yes. Monthly membership, cancel before your next billing date. Founding member pricing is locked as long as you stay subscribed — if you cancel, the rate resets to full price on return.</p>
+      </details>
+      <details>
+        <summary style="padding:28px 0;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:15px;color:var(--text-primary);">Why is the group capped at 30 members?</span>
+          <span class="faq-icon" style="font-size:20px;flex-shrink:0;margin-left:16px;">+</span>
+        </summary>
+        <p style="color:var(--text-secondary);font-size:14px;padding-bottom:28px;line-height:1.8;">Because the value of direct access degrades with scale. At 30 members, Q&A response quality, office hours depth, and community signal-to-noise are all at their best. When the cap fills, a waitlist opens — next available spot goes to the waitlist first.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="gold-line"></div>
+
+<!-- FINAL CTA -->
+<section style="padding:120px 32px;background:var(--obsidian);text-align:center;">
+  <div style="max-width:640px;margin:0 auto;" class="reveal">
+    <div class="ornament" style="margin-bottom:48px;">✦</div>
+    <h2 class="serif" style="font-size:clamp(36px,5vw,64px);font-weight:300;line-height:1.1;margin-bottom:24px;">
+      Founding spots are<br><em style="color:var(--gold);">open now.</em>
+    </h2>
+    <p style="color:var(--text-secondary);font-size:16px;margin-bottom:48px;line-height:1.8;">
+      Half price, locked in for life. Once they fill, they're gone — and full price is permanent from that point forward.
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;">
+      <a href="#tiers" class="btn-gold">View all tiers</a>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);letter-spacing:0.06em;">Maximum 30 members · Monthly · Cancel anytime</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top:1px solid var(--border-subtle);padding:40px 32px;background:var(--obsidian);">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div>
+      <span class="serif" style="font-size:16px;font-weight:400;color:var(--text-secondary);">The Paid Ads Operator Room</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);">Operated by Hans Lacida · zeldigital.com</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('details').forEach(detail => {
+    detail.addEventListener('toggle', () => {
+      if (detail.open) {
+        document.querySelectorAll('details').forEach(other => {
+          if (other !== detail) other.removeAttribute('open');
+        });
+      }
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
