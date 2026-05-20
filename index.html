@@ -74,7 +74,7 @@
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
       }
 
-      /* ─── HEADER ─── */
+      /* HEADER */
       header {
         position: sticky; top: 0; z-index: 100;
         background: rgba(10, 22, 40, 0.97);
@@ -137,12 +137,12 @@
 
       @media (min-width: 900px) { nav { display: flex; } }
 
-      /* ─── HERO ─── */
+      /* HERO */
       .hero {
         background: var(--navy);
         position: relative;
         overflow: hidden;
-        padding: 5rem 2rem 5rem;
+        padding: 5rem 2rem 0;
       }
       .hero::before {
         content: '';
@@ -152,7 +152,6 @@
           radial-gradient(ellipse 600px 400px at 10% 80%, rgba(26, 48, 85, 0.8), transparent);
         pointer-events: none;
       }
-      /* Decorative grid lines */
       .hero::after {
         content: '';
         position: absolute; inset: 0;
@@ -167,6 +166,7 @@
         position: relative; z-index: 1;
         display: grid; gap: 3.5rem;
         grid-template-columns: 1fr;
+        padding-bottom: 4rem;
       }
       @media (min-width: 1000px) {
         .hero-inner { grid-template-columns: 7fr 5fr; align-items: start; }
@@ -286,7 +286,47 @@
         line-height: 1.5;
       }
 
-      /* ─── SECTION COMMON ─── */
+      /* HERO VIDEO BLOCK */
+      .hero-video-wrap {
+        position: relative; z-index: 1;
+        max-width: 1200px; margin: 0 auto;
+        padding: 0 2rem 0;
+      }
+      .hero-video-label {
+        font-size: 0.62rem; font-weight: 700;
+        letter-spacing: 0.2em; text-transform: uppercase;
+        color: var(--gold);
+        display: flex; align-items: center; gap: 0.6rem;
+        margin-bottom: 1rem;
+        opacity: 0.8;
+      }
+      .hero-video-label::before {
+        content: '';
+        display: inline-block; width: 16px; height: 1px;
+        background: var(--gold);
+      }
+      .hero-video-frame {
+        position: relative;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        padding-bottom: min(56.25%, 95vh);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        border-radius: 4px;
+        /* Bottom corners open into the gold divider below */
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: 0 -1px 0 0 rgba(201,168,76,0.15), 0 40px 80px rgba(0,0,0,0.5);
+      }
+      .hero-video-frame iframe {
+        border: 0;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* SECTION COMMON */
       .section {
         padding: 5rem 2rem;
       }
@@ -328,7 +368,7 @@
       }
       .section-dark .section-body { color: rgba(255,255,255,0.6); }
 
-      /* ─── WHO WE WORK WITH ─── */
+      /* WHO WE WORK WITH */
       .client-cards {
         display: grid; gap: 1px;
         background: var(--gray-200);
@@ -337,7 +377,6 @@
         overflow: hidden;
       }
       @media (min-width: 600px) { .client-cards { grid-template-columns: repeat(2, 1fr); } }
-      @media (min-width: 900px) { .client-cards { grid-template-columns: repeat(2, 1fr); } }
       .client-card {
         background: var(--white);
         padding: 1.8rem 1.5rem;
@@ -370,7 +409,7 @@
         width: fit-content;
       }
 
-      /* ─── THE PROBLEM ─── */
+      /* THE PROBLEM */
       .problem-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
       .problem-list li {
         display: flex; gap: 1rem; align-items: flex-start;
@@ -401,7 +440,7 @@
       }
       .problem-closing strong { color: var(--white); font-weight: 600; }
 
-      /* ─── OUR ROLE ─── */
+      /* OUR ROLE */
       .role-items { display: flex; flex-direction: column; gap: 0; }
       .role-item {
         display: flex; gap: 1.4rem; align-items: flex-start;
@@ -431,7 +470,7 @@
         font-size: 0.82rem; color: var(--gray-700);
       }
 
-      /* ─── HOW WE WORK ─── */
+      /* HOW WE WORK */
       .how-grid {
         display: grid; gap: 1px;
         background: var(--gray-200);
@@ -482,7 +521,7 @@
       }
       .how-closing-text p { font-size: 0.78rem; color: var(--gray-500); line-height: 1.5; }
 
-      /* ─── WHEN TO TALK ─── */
+      /* WHEN TO TALK */
       .when-items { display: flex; flex-direction: column; gap: 0; }
       .when-item {
         display: flex; gap: 1.2rem; align-items: center;
@@ -497,7 +536,7 @@
       }
       .when-item p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
 
-      /* ─── CTA ─── */
+      /* CTA */
       .cta-section {
         background: var(--navy);
         padding: 5rem 2rem;
@@ -553,7 +592,7 @@
         letter-spacing: 0.04em;
       }
 
-      /* ─── DIVIDER ─── */
+      /* DIVIDER */
       .gold-divider {
         height: 1px;
         background: linear-gradient(to right, transparent, var(--gold), transparent);
@@ -562,7 +601,7 @@
         border: none;
       }
 
-      /* ─── FOOTER ─── */
+      /* FOOTER */
       footer {
         background: var(--navy);
         border-top: 1px solid rgba(201,168,76,0.15);
@@ -596,7 +635,7 @@
         letter-spacing: 0.04em;
       }
 
-      /* ─── BRANDS ─── */
+      /* BRANDS */
       .brands-grid {
         display: grid; gap: 1.5rem;
         grid-template-columns: 1fr;
@@ -612,7 +651,6 @@
         display: flex; flex-direction: column;
         position: relative; overflow: hidden;
         transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
-        group: true;
       }
       .brand-card::before {
         content: '';
@@ -676,14 +714,12 @@
       .brand-card:hover .brand-link { gap: 0.75rem; color: var(--gold); }
       .brand-link svg { width: 12px; height: 12px; }
 
-      /* ─── SCROLL ANIMATIONS ─── */
+      /* SCROLL ANIMATIONS */
       .fade-up {
         opacity: 0; transform: translateY(22px);
         transition: opacity 0.55s ease, transform 0.55s ease;
       }
       .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-      /* Stagger */
       .fade-up:nth-child(2) { transition-delay: 0.08s; }
       .fade-up:nth-child(3) { transition-delay: 0.16s; }
       .fade-up:nth-child(4) { transition-delay: 0.24s; }
@@ -766,6 +802,22 @@
               <p>Firm Position</p>
               <p>Every engagement begins with evidence. Execution follows only what the data confirms.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- Hero Video — full width, flush to bottom of hero -->
+        <div class="hero-video-wrap fade-up">
+          <p class="hero-video-label">Market Discussion · On Record</p>
+          <div class="hero-video-frame">
+            <iframe
+              allowfullscreen
+              mozallowfullscreen
+              webkitallowfullscreen
+              playsinline
+              allow="autoplay; fullscreen; picture-in-picture"
+              src="https://kommodo.ai/embed/recordings/XDUK09tTyTvxthOKbOYQ?onlyRecording=1"
+              title="KaizenStrategy Market Discussion Recording"
+            ></iframe>
           </div>
         </div>
       </section>
@@ -973,8 +1025,6 @@
             </p>
           </div>
           <div class="brands-grid">
-
-            <!-- Chiroflow -->
             <a href="https://kaizenstrategy.us/public/brands/chiroflow/" class="brand-card fade-up" aria-label="Chiroflow — Chiropractic Clinic Services">
               <span class="brand-sector">Healthcare · Clinic Growth</span>
               <p class="brand-name">Chiroflow</p>
@@ -992,7 +1042,6 @@
               </span>
             </a>
 
-            <!-- PaidPod -->
             <a href="https://kaizenstrategy.us/public/brands/paidpod" class="brand-card fade-up" aria-label="PaidPod — Paid Search Advisory White Label">
               <span class="brand-sector">Agencies · White-Label Advisory</span>
               <p class="brand-name">PaidPod</p>
@@ -1010,7 +1059,6 @@
               </span>
             </a>
 
-            <!-- PaidSearchPod -->
             <a href="https://kaizenstrategy.us/public/brands/white-label-ppc-for-agency-owners-global" class="brand-card fade-up" aria-label="PaidSearchPod — White Label Paid Search Pod">
               <span class="brand-sector">Founders · Agencies · Embedded Execution</span>
               <p class="brand-name">PaidSearchPod</p>
@@ -1028,7 +1076,6 @@
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
               </span>
             </a>
-
           </div>
         </div>
       </section>
@@ -1075,7 +1122,6 @@
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
 
-      // Intersection Observer for fade-up animations
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1087,7 +1133,6 @@
 
       document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-      // Make hero fade-up elements visible immediately
       document.querySelectorAll('.hero .fade-up').forEach(el => {
         el.classList.add('visible');
       });
